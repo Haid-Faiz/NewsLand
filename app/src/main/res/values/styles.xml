@@ -17,4 +17,19 @@
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
+    <style name="CustomToast">
+        <item name="stTextBold">true</item>
+        <item name="stTextColor">@color/blackColor</item>
+<!--        <item name="stFont">@font/retrofont</item>-->
+        <item name="stTextSize">14sp</item>
+        <item name="stColorBackground">#ffffff</item>
+        <item name="stSolidBackground">true</item>
+        <item name="stStrokeWidth">3dp</item>
+        <item name="stStrokeColor">@color/blackColor</item>
+<!--        <item name="stIconStart">@drawable/ic</item>-->
+<!--        <item name="stIconEnd">@drawable/ic</item>-->
+        <item name="stGravity">top</item>
+        <item name="stRadius">12dp</item>
+    </style>
+
 </resources>

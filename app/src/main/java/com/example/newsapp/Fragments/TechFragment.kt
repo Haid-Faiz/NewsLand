@@ -22,11 +22,11 @@ import com.example.newsapp.Mdodel.NewsData
 import com.example.newsapp.MySingleton
 import com.example.newsapp.R
 import com.muddzdev.styleabletoast.StyleableToast
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_science.*
+import kotlinx.android.synthetic.main.fragment_tech.*
 import org.json.JSONArray
 
-class ScienceFragment : Fragment() {
+class TechFragment : Fragment() {
 
     lateinit var mAdapter: MyAdapter
     lateinit var mContext: Context
@@ -37,22 +37,23 @@ class ScienceFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_science, container, false)
+        return inflater.inflate(R.layout.fragment_tech, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mProgress = view.findViewById(R.id.progress_bar_science)
+        mProgress = view.findViewById(R.id.progress_bar_tech)
         setUpRecyclerView()
     }
 
     fun setUpRecyclerView() {
         val linearLayoutManager = LinearLayoutManager(mContext)
         linearLayoutManager.orientation = RecyclerView.VERTICAL
-        recycler_view_science.layoutManager = linearLayoutManager
+        recycler_view_tech.layoutManager = linearLayoutManager
 
         fetchData()
+
         var newsItemClicked = object : NewsItemClicked {
             override fun onItemClick(newsUrl: String) {
                 // TODO: handle click listener
@@ -77,13 +78,13 @@ class ScienceFragment : Fragment() {
         }
 
         mAdapter = MyAdapter(newsItemClicked)
-        recycler_view_science.adapter = mAdapter
+        recycler_view_tech.adapter = mAdapter
     }
 
     fun fetchData() {
         mProgress.visibility = View.VISIBLE
         val newsURL =
-            "https://newsapi.org/v2/top-headlines?country=us&category=science&apiKey=730a60dec330429c8fc1a2d3eeec28fd"
+            "https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=730a60dec330429c8fc1a2d3eeec28fd"
 
         val jsonObjectRequest = JsonObjectRequest(
             Request.Method.GET,
@@ -109,7 +110,7 @@ class ScienceFragment : Fragment() {
                 }
                 mProgress.visibility = View.GONE
                 mAdapter.updateNews(newsList)
-                StyleableToast.makeText(mContext, "Showing Science news", Toast.LENGTH_SHORT, R.style.CustomToast).show()
+                StyleableToast.makeText(mContext, "Showing Technology news", Toast.LENGTH_SHORT, R.style.CustomToast).show()
             },
 //           Response.ErrorListener {
             {

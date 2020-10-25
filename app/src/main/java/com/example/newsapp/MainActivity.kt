@@ -8,11 +8,13 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
@@ -20,86 +22,67 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.example.newsapp.Adapter.MyAdapter
 import com.example.newsapp.Adapter.NewsItemClicked
+import com.example.newsapp.Fragments.BBCFragment
+import com.example.newsapp.Fragments.HomeFragment
+import com.example.newsapp.Fragments.ScienceFragment
+import com.example.newsapp.Fragments.TechFragment
 import com.example.newsapp.Mdodel.NewsData
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.ismaeldivita.chipnavigation.ChipNavigationBar
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONArray
 import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var mAdapter: MyAdapter
-    val MY_PERMISSION_CODE: Int = 12
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setUpRecyclerView()
-    }
 
-    private fun setUpRecyclerView() {
-        val linearLayoutManager = LinearLayoutManager(this)
-        linearLayoutManager.orientation = RecyclerView.VERTICAL
-        recycler_view.layoutManager = linearLayoutManager
+        var homeFragment = HomeFragment()
 
-        fetchData()
-        var newsItemClicked = object : NewsItemClicked {
-            override fun onItemClick(newsUrl: String) {
-                // TODO: handle click listener
-                var builder: CustomTabsIntent.Builder = CustomTabsIntent.Builder()
-                builder.setToolbarColor(ContextCompat.getColor(this@MainActivity, R.color.blackColor))
-                builder.setShowTitle(true)
-                var customTabsIntent = builder.build()
-                customTabsIntent.launchUrl(this@MainActivity, Uri.parse(newsUrl))
-            }
+//        supportFragmentManager.beginTransaction().replace(R.id.container, homeFragment).commit()
 
-            override fun onShareClick(newsUrl: String) {
-                val shareIntent = Intent(Intent.ACTION_SEND).setType("text/plain")
-                shareIntent.putExtra(Intent.EXTRA_TEXT, newsUrl)
-                val chooser: Intent = Intent.createChooser(shareIntent, "Share it with...")
-                startActivity(chooser)
-            }
-        }
 
-        mAdapter = MyAdapter(newsItemClicked)
-        recycler_view.adapter = mAdapter
-    }
+        // This code is of google material libarary
+//        bottom_nav.setOnNavigationItemSelectedListener { item ->
+//            lateinit var currentFrag: Fragment
+//
+//            when (item.itemId) {
+//                R.id.menu_headline -> currentFrag = HomeFragment()
+//                R.id.menu_science -> currentFrag = ScienceFragment()
+//                R.id.menu_tech -> currentFrag = TechFragment()
+//                R.id.menu_bbc -> currentFrag = BBCFragment()
+//            }
+//
+//            supportFragmentManager.beginTransaction().replace(R.id.container, currentFrag).commit()
+//
+//            true
+//        }
+//        bottom_nav.selectedItemId = R.id.menu_headline
 
-    fun fetchData() {
-        progress_bar.visibility = View.VISIBLE
-        val newsURL =
-            "https://newsapi.org/v2/top-headlines?country=in&apiKey=730a60dec330429c8fc1a2d3eeec28fd"
 
-        val jsonObjectRequest = JsonObjectRequest(
-            Request.Method.GET,
-            newsURL,
-            null,
-//           Response.Listener {
-            {
-                val newsArray: JSONArray = it.getJSONArray("articles")
-                val newsList = ArrayList<NewsData>()
-                for (i in 0 until newsArray.length()) {
-                    val jsonObject = newsArray.getJSONObject(i)
-                    val jsonObjectSource = jsonObject.getJSONObject("source")
+        // & this code is of external library we added for bottom navigation bar
+        bottom_nav.setOnItemSelectedListener(object : ChipNavigationBar.OnItemSelectedListener {
+            override fun onItemSelected(id: Int) {
 
-                    var news = NewsData(
-                        jsonObject.getString("title"),
-                        jsonObject.getString("description"),
-                        jsonObjectSource.getString("name"),
-                        jsonObject.getString("url"),
-                        jsonObject.getString("urlToImage"),
-                        jsonObject.getString("publishedAt")
-                    )
-                    newsList.add(news)
+                lateinit var currentFrag: Fragment
+
+                when (id) {
+                    R.id.menu_headline -> currentFrag = HomeFragment()
+                    R.id.menu_science -> currentFrag = ScienceFragment()
+                    R.id.menu_tech -> currentFrag = TechFragment()
+                    R.id.menu_bbc -> currentFrag = BBCFragment()
                 }
-                progress_bar.visibility = View.GONE
-                mAdapter.updateNews(newsList)
-            },
-//           Response.ErrorListener {
-            {
+                supportFragmentManager.beginTransaction().replace(R.id.container, currentFrag).commit()
             }
-        )
-        MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest)
+        })
+
+        bottom_nav.setItemSelected(R.id.menu_headline)
+
     }
+
 
 //    override fun onStart() {
 //        super.onStart()
@@ -151,4 +134,5 @@ class MainActivity : AppCompatActivity() {
 //            }
 //        }
 //    }
+
 }

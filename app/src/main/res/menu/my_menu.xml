@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_headline"
+        android:icon="@drawable/ic_whatshot"
+        android:title="Indian News"
+        app:cnb_backgroundColor="@color/blackColor"
+        app:cnb_iconColor="@color/whiteColor"
+        app:cnb_textColor="@color/whiteColor" />
+
+    <item
+        android:id="@+id/menu_science"
+        android:icon="@drawable/ic_science"
+        android:title="Science"
+        app:cnb_backgroundColor="@color/blackColor"
+        app:cnb_iconColor="@color/whiteColor"
+        app:cnb_textColor="@color/whiteColor" />
+
+    <item
+        android:id="@+id/menu_tech"
+        android:icon="@drawable/ic_tech"
+        android:title="Tech"
+        app:cnb_backgroundColor="@color/blackColor"
+        app:cnb_iconColor="@color/whiteColor"
+        app:cnb_textColor="@color/whiteColor" />
+
+    <item
+        android:id="@+id/menu_bbc"
+        android:icon="@drawable/ic_bbc"
+        android:title="News"
+        app:cnb_backgroundColor="@color/blackColor"
+        app:cnb_iconColor="@color/whiteColor"
+        app:cnb_textColor="@color/whiteColor" />
+</menu>
