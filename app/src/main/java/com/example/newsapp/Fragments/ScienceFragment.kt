@@ -1,9 +1,12 @@
 package com.example.newsapp.Fragments
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.icu.text.SimpleDateFormat
 import android.net.Uri
 import android.os.Bundle
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -60,7 +63,7 @@ class ScienceFragment : Fragment() {
                 builder.setToolbarColor(
                     ContextCompat.getColor(
                         mContext,
-                        R.color.blackColor
+                        R.color.primary_background
                     )
                 )
                 builder.setShowTitle(true)
@@ -80,10 +83,11 @@ class ScienceFragment : Fragment() {
         recycler_view_science.adapter = mAdapter
     }
 
+    @SuppressLint("NewApi")
     fun fetchData() {
         mProgress.visibility = View.VISIBLE
         val newsURL =
-            "https://newsapi.org/v2/top-headlines?country=us&category=science&apiKey=730a60dec330429c8fc1a2d3eeec28fd"
+            "https://newsapi.org/v2/top-headlines?country=in&category=science&apiKey=730a60dec330429c8fc1a2d3eeec28fd"
 
         val jsonObjectRequest = JsonObjectRequest(
             Request.Method.GET,
@@ -97,13 +101,24 @@ class ScienceFragment : Fragment() {
                     val jsonObject = newsArray.getJSONObject(i)
                     val jsonObjectSource = jsonObject.getJSONObject("source")
 
+                    // time from API call
+                    val timeFromAPI = jsonObject.getString("publishedAt")
+                    // here we are Using Incoming time format i.e.  yyyy-MM-dd'T'HH:mm:ss'Z'  for ex. 2020-10-25T08:13:17Z
+                    val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+                    // this will give something like this:  1603593272000
+                    val time = simpleDateFormat.parse(timeFromAPI).time
+                    // getting system current time
+                    val now = System.currentTimeMillis()
+                    // this wil give difference in string with ago added
+                    val timeAgo = DateUtils.getRelativeTimeSpanString(time, now, DateUtils.MINUTE_IN_MILLIS)
+
                     var news = NewsData(
                         jsonObject.getString("title"),
                         jsonObject.getString("description"),
                         jsonObjectSource.getString("name"),
                         jsonObject.getString("url"),
                         jsonObject.getString("urlToImage"),
-                        jsonObject.getString("publishedAt")
+                        timeAgo.toString()
                     )
                     newsList.add(news)
                 }

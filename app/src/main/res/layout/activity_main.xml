@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/primary_background">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/tool_bar"
@@ -23,10 +24,16 @@
             android:rotationX="0"
             android:rotationY="0"
             android:text="@string/app_name"
-            android:textColor="#212121"
+            android:textColor="@color/primary_text"
             android:textSize="24sp"
             tools:layout_editor_absoluteX="176dp"
             tools:layout_editor_absoluteY="18dp" />
+
+        <ImageButton
+            android:id="@+id/night_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_day_24" />
 
     </com.google.android.material.appbar.MaterialToolbar>
 
@@ -46,6 +53,8 @@
         app:cnb_menuResource="@menu/my_menu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:cnb_unselectedColor="@color/sec_text"
+        android:background="@color/sec_background"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,31 +6,31 @@
         android:id="@+id/menu_headline"
         android:icon="@drawable/ic_whatshot"
         android:title="Indian News"
-        app:cnb_backgroundColor="@color/blackColor"
-        app:cnb_iconColor="@color/whiteColor"
-        app:cnb_textColor="@color/whiteColor" />
+        app:cnb_backgroundColor="@color/primary_text"
+        app:cnb_iconColor="@color/sec_background"
+        app:cnb_textColor="@color/sec_background" />
 
     <item
         android:id="@+id/menu_science"
         android:icon="@drawable/ic_science"
         android:title="Science"
-        app:cnb_backgroundColor="@color/blackColor"
-        app:cnb_iconColor="@color/whiteColor"
-        app:cnb_textColor="@color/whiteColor" />
+        app:cnb_backgroundColor="@color/primary_text"
+        app:cnb_iconColor="@color/sec_background"
+        app:cnb_textColor="@color/sec_background" />
 
     <item
         android:id="@+id/menu_tech"
         android:icon="@drawable/ic_tech"
         android:title="Tech"
-        app:cnb_backgroundColor="@color/blackColor"
-        app:cnb_iconColor="@color/whiteColor"
-        app:cnb_textColor="@color/whiteColor" />
+        app:cnb_backgroundColor="@color/primary_text"
+        app:cnb_iconColor="@color/sec_background"
+        app:cnb_textColor="@color/sec_background" />
 
     <item
         android:id="@+id/menu_bbc"
         android:icon="@drawable/ic_bbc"
         android:title="News"
-        app:cnb_backgroundColor="@color/blackColor"
-        app:cnb_iconColor="@color/whiteColor"
-        app:cnb_textColor="@color/whiteColor" />
+        app:cnb_backgroundColor="@color/primary_text"
+        app:cnb_iconColor="@color/sec_background"
+        app:cnb_textColor="@color/sec_background" />
 </menu>

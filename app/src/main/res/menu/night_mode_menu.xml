@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/button_night_mode"
+        android:icon="@drawable/ic_day_24"
+        android:title="nightMode"
+        app:showAsAction="always" />
+</menu>

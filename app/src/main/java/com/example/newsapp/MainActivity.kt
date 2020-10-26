@@ -8,9 +8,11 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -39,7 +41,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        
         var homeFragment = HomeFragment()
 
 //        supportFragmentManager.beginTransaction().replace(R.id.container, homeFragment).commit()
@@ -81,6 +83,21 @@ class MainActivity : AppCompatActivity() {
 
         bottom_nav.setItemSelected(R.id.menu_headline)
 
+        night_button.setOnClickListener(View.OnClickListener {
+
+            Log.d("TAG", "onCreate:  hello")
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        })
+    }
+
+    private fun appIntro() {
+        val alertDialog = AlertDialog.Builder(this)
+            .setView(R.layout.intro_layout)
+            .setCancelable(false)
+            .setPositiveButton("Okay", DialogInterface.OnClickListener { dialogInterface, i ->
+                dialogInterface.dismiss()
+            })
+        alertDialog.show()
     }
 
 
@@ -134,5 +151,6 @@ class MainActivity : AppCompatActivity() {
 //            }
 //        }
 //    }
+
 
 }

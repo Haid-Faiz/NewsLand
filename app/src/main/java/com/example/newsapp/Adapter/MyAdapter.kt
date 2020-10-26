@@ -31,6 +31,9 @@ class MyAdapter(val listener: NewsItemClicked) : RecyclerView.Adapter<MyAdapter.
         holder.titleView.text = currentNewsData.title
         holder.descriptionView.text = currentNewsData.description
         holder.authorView.text = currentNewsData.author
+
+
+
         holder.timeStampview.text = currentNewsData.timeStamp
 
         Glide.with(holder.imageView.context).load(currentNewsData.imageUrl).into(holder.imageView)

@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.ScienceFragment">
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_science"
         android:layout_width="0dp"
