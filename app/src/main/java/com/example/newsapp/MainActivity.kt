@@ -3,6 +3,7 @@ package com.example.newsapp
 import android.Manifest
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +12,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.browser.customtabs.CustomTabsIntent
@@ -37,16 +39,19 @@ import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
 
+    lateinit var nightModePref: SharedPreferences
+    var isNightOnn: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        
+        setSupportActionBar(tool_bar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+
         var homeFragment = HomeFragment()
 
 //        supportFragmentManager.beginTransaction().replace(R.id.container, homeFragment).commit()
-
-
+        
         // This code is of google material libarary
 //        bottom_nav.setOnNavigationItemSelectedListener { item ->
 //            lateinit var currentFrag: Fragment
@@ -70,25 +75,38 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(id: Int) {
 
                 lateinit var currentFrag: Fragment
-
                 when (id) {
                     R.id.menu_headline -> currentFrag = HomeFragment()
                     R.id.menu_science -> currentFrag = ScienceFragment()
                     R.id.menu_tech -> currentFrag = TechFragment()
                     R.id.menu_bbc -> currentFrag = BBCFragment()
                 }
-                supportFragmentManager.beginTransaction().replace(R.id.container, currentFrag).commit()
+                supportFragmentManager.beginTransaction().replace(R.id.container, currentFrag)
+                    .commit()
             }
         })
 
         bottom_nav.setItemSelected(R.id.menu_headline)
 
-        night_button.setOnClickListener(View.OnClickListener {
-
-            Log.d("TAG", "onCreate:  hello")
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        })
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.night_mode_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        return when(item.itemId){
+
+            R.id.button_night_mode -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
 
     private fun appIntro() {
         val alertDialog = AlertDialog.Builder(this)
