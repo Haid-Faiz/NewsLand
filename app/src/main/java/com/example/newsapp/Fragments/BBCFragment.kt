@@ -32,7 +32,7 @@ class BBCFragment : Fragment() {
 
     lateinit var mAdapter: MyAdapter
     lateinit var mContext: Context
-    lateinit var mProgress: ProgressBar
+//    lateinit var mProgress: ProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,7 +45,7 @@ class BBCFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mProgress = view.findViewById(R.id.progress_bar_bbc)
+//        mProgress = view.findViewById(R.id.progress_bar_bbc)
         setUpRecyclerView()
     }
 
@@ -85,11 +85,11 @@ class BBCFragment : Fragment() {
 
     @SuppressLint("NewApi")
     fun fetchData() {
-        mProgress.visibility = View.VISIBLE
+//        mProgress.visibility = View.VISIBLE
         val newsURL =
             "https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=730a60dec330429c8fc1a2d3eeec28fd"
 
-        val jsonObjectRequest = JsonObjectRequest(
+        val jsonObjectRequest = object : JsonObjectRequest(
             Request.Method.GET,
             newsURL,
             null,
@@ -123,7 +123,8 @@ class BBCFragment : Fragment() {
                     )
                     newsList.add(news)
                 }
-                mProgress.visibility = View.GONE
+//                mProgress.visibility = View.GONE
+                mAdapter.isShimming = false
                 mAdapter.updateNews(newsList)
                 StyleableToast.makeText(
                     mContext,
@@ -134,9 +135,15 @@ class BBCFragment : Fragment() {
             },
 //           Response.ErrorListener {
             {
-                Toast.makeText(mContext, it.message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(mContext, it.toString(), Toast.LENGTH_SHORT).show()
             }
-        )
+        ){
+            override fun getHeaders(): MutableMap<String, String> {
+                val headers = HashMap<String, String>()
+                headers["User-Agent"] = "Mozilla/5.0"
+                return headers
+            }
+        }
         MySingleton.getInstance(mContext).addToRequestQueue(jsonObjectRequest)
     }
 

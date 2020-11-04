@@ -33,7 +33,7 @@ class ScienceFragment : Fragment() {
 
     lateinit var mAdapter: MyAdapter
     lateinit var mContext: Context
-    lateinit var mProgress: ProgressBar
+//    lateinit var mProgress: ProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,7 +46,7 @@ class ScienceFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mProgress = view.findViewById(R.id.progress_bar_science)
+//        mProgress = view.findViewById(R.id.progress_bar_science)
         setUpRecyclerView()
     }
 
@@ -85,11 +85,11 @@ class ScienceFragment : Fragment() {
 
     @SuppressLint("NewApi")
     fun fetchData() {
-        mProgress.visibility = View.VISIBLE
+//        mProgress.visibility = View.VISIBLE
         val newsURL =
             "https://newsapi.org/v2/top-headlines?country=in&category=science&apiKey=730a60dec330429c8fc1a2d3eeec28fd"
 
-        val jsonObjectRequest = JsonObjectRequest(
+        val jsonObjectRequest = object : JsonObjectRequest(
             Request.Method.GET,
             newsURL,
             null,
@@ -122,14 +122,22 @@ class ScienceFragment : Fragment() {
                     )
                     newsList.add(news)
                 }
-                mProgress.visibility = View.GONE
+//                mProgress.visibility = View.GONE
+                mAdapter.isShimming = false
                 mAdapter.updateNews(newsList)
                 StyleableToast.makeText(mContext, "Showing Science news", Toast.LENGTH_SHORT, R.style.CustomToast).show()
             },
 //           Response.ErrorListener {
             {
+                Toast.makeText(mContext, it.toString(), Toast.LENGTH_SHORT).show()
             }
-        )
+        ) {
+            override fun getHeaders(): MutableMap<String, String> {
+                val headers = HashMap<String, String>()
+                headers["User-Agent"] = "Mozilla/5.0"
+                return headers
+            }
+        }
         MySingleton.getInstance(mContext).addToRequestQueue(jsonObjectRequest)
     }
 

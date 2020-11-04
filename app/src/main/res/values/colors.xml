@@ -4,10 +4,12 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#050505</color>
     <color name="whiteColor">#ffffff</color>
+    <color name="unSelectedColor">#E30D0D</color>
 
     <color name="primary_background">#ffffff</color>
     <color name="sec_background">#ffffff</color>
     <color name="primary_text">#050505</color>
     <color name="sec_text">#636466</color>
+    <color name="shimmerColor">#A3DFDFDF</color>
 
 </resources>

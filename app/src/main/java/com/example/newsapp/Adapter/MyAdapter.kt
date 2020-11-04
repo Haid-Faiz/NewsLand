@@ -16,10 +16,12 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.example.newsapp.Mdodel.NewsData
 import com.example.newsapp.R
+import com.facebook.shimmer.ShimmerFrameLayout
 
 class MyAdapter(val listener: NewsItemClicked) : RecyclerView.Adapter<MyAdapter.ViewHolder>() {
 
     val newsList: ArrayList<NewsData> = ArrayList()
+    var isShimming = true
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyAdapter.ViewHolder {
         var view = LayoutInflater.from(parent.context).inflate(R.layout.item_row, parent, false)
@@ -27,31 +29,76 @@ class MyAdapter(val listener: NewsItemClicked) : RecyclerView.Adapter<MyAdapter.
     }
 
     override fun onBindViewHolder(holder: MyAdapter.ViewHolder, position: Int) {
-        val currentNewsData = newsList[position]
-        holder.titleView.text = currentNewsData.title
-        holder.descriptionView.text = currentNewsData.description
-        holder.authorView.text = currentNewsData.author
 
 
+        if (isShimming) {
+            holder.shimmerLay.startShimmer()
+        } else {
+            holder.shimmerLay.stopShimmer()
+            holder.shimmerLay.setShimmer(null)
 
-        holder.timeStampview.text = currentNewsData.timeStamp
+            val currentNewsData = newsList[position]
+            holder.titleView.background = null
+            holder.titleView.text = currentNewsData.title
+            holder.descriptionView.background = null
+            holder.descriptionView.text = currentNewsData.description
+            holder.authorView.background = null
+            holder.authorView.text = currentNewsData.author
+            holder.timeStampview.background = null
+            holder.timeStampview.text = currentNewsData.timeStamp
 
-        Glide.with(holder.imageView.context).load(currentNewsData.imageUrl).into(holder.imageView)
+            holder.progressBarImage.visibility = View.VISIBLE
+//            holder.shimmerImage.startShimmer()
+            Glide.with(holder.imageView.context).load(currentNewsData.imageUrl)
+                .listener(object : RequestListener<Drawable> {
+                    override fun onLoadFailed(
+                        e: GlideException?,
+                        model: Any?,
+                        target: Target<Drawable>?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                    holder.progressBarImage.visibility = View.GONE
+//                    holder.shimmerImage.stopShimmer()
+//                    holder.shimmerImage.setShimmer(null)
+                        return false
+                    }
 
-        holder.itemView.setOnClickListener {
-            listener.onItemClick(currentNewsData.newsUrl)
+                    override fun onResourceReady(
+                        resource: Drawable?,
+                        model: Any?,
+                        target: Target<Drawable>?,
+                        dataSource: DataSource?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        holder.progressBarImage.visibility = View.GONE
+//                    holder.shimmerImage.stopShimmer()
+//                    holder.shimmerImage.setShimmer(null)
+                        return false
+                    }
+
+                })
+                .into(holder.imageView)
+
+            holder.itemView.setOnClickListener {
+                listener.onItemClick(currentNewsData.newsUrl)
+            }
+
+            holder.shareButton.setOnClickListener {
+                listener.onShareClick(currentNewsData.newsUrl)
+            }
+
         }
 
-        holder.shareButton.setOnClickListener{
-            listener.onShareClick(currentNewsData.newsUrl)
-        }
     }
 
     override fun getItemCount(): Int {
-        return newsList.size
+        return if (isShimming)
+            return 5
+        else
+            newsList.size
     }
 
-    fun updateNews(updatedNews: ArrayList<NewsData>){
+    fun updateNews(updatedNews: ArrayList<NewsData>) {
         newsList.clear()
         newsList.addAll(updatedNews)
         notifyDataSetChanged()
@@ -64,11 +111,13 @@ class MyAdapter(val listener: NewsItemClicked) : RecyclerView.Adapter<MyAdapter.
         val timeStampview = itemView.findViewById<TextView>(R.id.time_stamp)
         val imageView = itemView.findViewById<ImageView>(R.id.imageView)
         val progressBarImage = itemView.findViewById<ProgressBar>(R.id.progress_bar_image)
+//        val shimmerImage = itemView.findViewById<ShimmerFrameLayout>(R.id.shimmer_image)
         val shareButton = itemView.findViewById<ImageButton>(R.id.share_button)
+        val shimmerLay = itemView.findViewById<ShimmerFrameLayout>(R.id.shimmer_layout)
     }
 }
 
-interface NewsItemClicked{
+interface NewsItemClicked {
     fun onItemClick(item: String)
     fun onShareClick(newsUrl: String)
 }

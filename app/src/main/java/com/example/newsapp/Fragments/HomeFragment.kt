@@ -23,6 +23,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
+import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.example.newsapp.Adapter.MyAdapter
 import com.example.newsapp.Adapter.NewsItemClicked
@@ -37,7 +38,7 @@ class HomeFragment : Fragment() {
 
     lateinit var mAdapter: MyAdapter
     lateinit var mContext: Context
-    lateinit var mProgress: ProgressBar
+//    lateinit var mProgress: ProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,7 +51,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mProgress = view.findViewById(R.id.progress_bar_home)
+//        mProgress = view.findViewById(R.id.progress_bar_home)
         setUpRecyclerView()
     }
 
@@ -60,8 +61,6 @@ class HomeFragment : Fragment() {
         recycler_view_home.layoutManager = linearLayoutManager
 
         fetchData()
-
-
 
         var newsItemClicked = object : NewsItemClicked {
             override fun onItemClick(newsUrl: String) {
@@ -93,16 +92,20 @@ class HomeFragment : Fragment() {
 
     @SuppressLint("NewApi")
     fun fetchData() {
-        mProgress.visibility = View.VISIBLE
+//        mProgress.visibility = View.VISIBLE
         val newsURL =
             "https://newsapi.org/v2/top-headlines?country=in&apiKey=730a60dec330429c8fc1a2d3eeec28fd"
+        // My New API  ->  f95c36ef152b4180833e911e855b0222
+        // My Old API  ->  730a60dec330429c8fc1a2d3eeec28fd
+        // Anuj's API -> 1f4a12d2698e432ea9cf18126dcc7acd
+        //09b4495143d14205bf044ca1784d6f3e
 
-        val jsonObjectRequest = JsonObjectRequest(
+        val jsonObjectRequest = object : JsonObjectRequest(
             Request.Method.GET,
-            newsURL,
-            null,
-//           Response.Listener {
+            newsURL, null,
+//           Response {
             {
+
                 val newsArray: JSONArray = it.getJSONArray("articles")
                 val newsList = ArrayList<NewsData>()
                 for (i in 0 until newsArray.length()) {
@@ -118,7 +121,8 @@ class HomeFragment : Fragment() {
                     // getting system current time
                     val now = System.currentTimeMillis()
                     // this wil give difference in string with ago added
-                    val timeAgo = DateUtils.getRelativeTimeSpanString(time, now, DateUtils.MINUTE_IN_MILLIS)
+                    val timeAgo =
+                        DateUtils.getRelativeTimeSpanString(time, now, DateUtils.MINUTE_IN_MILLIS)
 
                     val news = NewsData(
                         jsonObject.getString("title"),
@@ -128,9 +132,11 @@ class HomeFragment : Fragment() {
                         jsonObject.getString("urlToImage"),
                         timeAgo.toString()
                     )
+                    Log.d("monty", "fetchData: " + jsonObjectSource.getString("name"))
                     newsList.add(news)
                 }
-                mProgress.visibility = View.GONE
+//                mProgress.visibility = View.GONE
+                mAdapter.isShimming = false
                 mAdapter.updateNews(newsList)
                 StyleableToast.makeText(
                     mContext,
@@ -141,9 +147,16 @@ class HomeFragment : Fragment() {
             },
 //           Response.ErrorListener {
             {
-                Toast.makeText(mContext, it.message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(mContext, it.toString(), Toast.LENGTH_SHORT).show()
+                mAdapter.isShimming = false
             }
-        )
+        ) {
+            override fun getHeaders(): MutableMap<String, String> {
+                val headers = HashMap<String, String>()
+                headers["User-Agent"] = "Mozilla/5.0"
+                return headers
+            }
+        }
         MySingleton.getInstance(mContext).addToRequestQueue(jsonObjectRequest)
     }
 

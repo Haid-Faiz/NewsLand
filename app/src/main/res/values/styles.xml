@@ -17,6 +17,14 @@
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
+    <style name="IntroTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:statusBarColor">@color/whiteColor</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
     <style name="CustomToast">
         <item name="stTextBold">true</item>
         <item name="stTextColor">@color/primary_text</item>
