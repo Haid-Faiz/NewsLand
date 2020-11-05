@@ -13,4 +13,5 @@ News app made using Volley Library and news data is fetched from NewsApi.
 - **Volley Library**
 - **NewsApi**
 - **Broadcast Receiver**
+- **Shimmer Effect**
 - **AppIntro Library**
