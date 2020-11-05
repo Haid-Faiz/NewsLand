@@ -53,6 +53,7 @@ class HomeFragment : Fragment() {
 
 //        mProgress = view.findViewById(R.id.progress_bar_home)
         setUpRecyclerView()
+//        Toast.makeText(mContext, "onViewCreated called Home", Toast.LENGTH_SHORT).show()
     }
 
     fun setUpRecyclerView() {
@@ -147,7 +148,7 @@ class HomeFragment : Fragment() {
             },
 //           Response.ErrorListener {
             {
-                Toast.makeText(mContext, it.toString(), Toast.LENGTH_SHORT).show()
+//                Toast.makeText(mContext, it.toString(), Toast.LENGTH_SHORT).show()
                 mAdapter.isShimming = false
             }
         ) {

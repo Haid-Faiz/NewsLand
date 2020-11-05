@@ -46,7 +46,7 @@
         android:id="@+id/no_internet_anim"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+
         app:layout_constraintBottom_toTopOf="@id/bottom_nav"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,22 +54,35 @@
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/internet_anim"
-            android:layout_width="312dp"
-            android:layout_height="312dp"
+            android:layout_width="302dp"
+            android:layout_height="302dp"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/no_connection" />
 
         <TextView
+            android:id="@+id/connection_error"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/internet_anim"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="4dp"
             android:fontFamily="@font/amiko"
-            android:text="Please check your 4G/WIFI connection"
+            android:textStyle="bold"
+            android:text="Connection Error"
             android:textColor="@color/primary_text"
-            android:textSize="16dp" />
+            android:textSize="18dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/connection_error"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/amiko"
+            android:text="Please check your 4G/WIFI connection"
+            android:textColor="@color/sec_text"
+            android:textSize="12dp" />
 
     </RelativeLayout>
 

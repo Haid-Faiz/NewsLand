@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.example.newsapp.BroadCast.MyBroadcastReceiver
@@ -16,6 +17,7 @@ import com.example.newsapp.Fragments.HomeFragment
 import com.example.newsapp.Fragments.ScienceFragment
 import com.example.newsapp.Fragments.TechFragment
 import com.example.newsapp.R
+import com.google.android.material.snackbar.Snackbar
 import com.ismaeldivita.chipnavigation.ChipNavigationBar
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -31,19 +33,10 @@ class MainActivity : AppCompatActivity(), MyBroadcastReceiver.ConnectivityListen
         setContentView(R.layout.activity_main)
         setSupportActionBar(tool_bar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-        // Instantiating MyBroadcastReceiver
+//         Instantiating MyBroadcastReceiver
         myBroadcastReceiver = MyBroadcastReceiver()
 
-        nightModePref = getSharedPreferences("NightModePref", MODE_PRIVATE)
-        editor = nightModePref.edit()
-        isNightModeOn = nightModePref.getBoolean("NightMode", false)
-
-        if (isNightModeOn)
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        else
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-
-
+        checkNightMode()
 //        supportFragmentManager.beginTransaction().replace(R.id.container, homeFragment).commit()
 
         // This code is of google material libarary
@@ -74,13 +67,13 @@ class MainActivity : AppCompatActivity(), MyBroadcastReceiver.ConnectivityListen
                     R.id.menu_tech -> currentFrag = TechFragment()
                     R.id.menu_bbc -> currentFrag = BBCFragment()
                 }
+
                 supportFragmentManager.beginTransaction().replace(R.id.container, currentFrag)
                     .commit()
             }
         })
 
         bottom_nav.setItemSelected(R.id.menu_headline)
-
     }
 
     override fun onStart() {
@@ -124,9 +117,23 @@ class MainActivity : AppCompatActivity(), MyBroadcastReceiver.ConnectivityListen
         if (isConnected) {
             container.visibility = View.VISIBLE
             no_internet_anim.visibility = View.GONE
+            bottom_nav.setItemSelected(R.id.menu_headline)
+            supportFragmentManager.beginTransaction().replace(R.id.container, HomeFragment())
+                .commit()
         } else {
             container.visibility = View.GONE
             no_internet_anim.visibility = View.VISIBLE
         }
+    }
+
+    private fun checkNightMode(){
+        nightModePref = getSharedPreferences("NightModePref", MODE_PRIVATE)
+        editor = nightModePref.edit()
+        isNightModeOn = nightModePref.getBoolean("NightMode", false)
+
+        if (isNightModeOn)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        else
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
     }
 }

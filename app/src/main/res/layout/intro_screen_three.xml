@@ -11,7 +11,7 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="74dp"
+        android:layout_marginTop="96dp"
         android:text="Don't worry about your eyes"
         android:fontFamily="@font/amiko"
         android:textColor="@color/primary_text"

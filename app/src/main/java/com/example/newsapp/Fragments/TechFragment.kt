@@ -47,6 +47,7 @@ class TechFragment : Fragment() {
 
 //        mProgress = view.findViewById(R.id.progress_bar_tech)
         setUpRecyclerView()
+//        Toast.makeText(mContext, "onViewCreated called Tech", Toast.LENGTH_SHORT).show()
     }
 
     fun setUpRecyclerView() {
@@ -135,7 +136,8 @@ class TechFragment : Fragment() {
             },
 //           Response.ErrorListener {
             {
-                Toast.makeText(mContext, it.toString(), Toast.LENGTH_SHORT).show()
+//                Toast.makeText(mContext, it.toString(), Toast.LENGTH_SHORT).show()
+                mAdapter.isShimming = false
             }
         ) {
             override fun getHeaders(): MutableMap<String, String> {

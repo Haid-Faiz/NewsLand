@@ -135,7 +135,8 @@ class BBCFragment : Fragment() {
             },
 //           Response.ErrorListener {
             {
-                Toast.makeText(mContext, it.toString(), Toast.LENGTH_SHORT).show()
+//                Toast.makeText(mContext, it.toString(), Toast.LENGTH_SHORT).show()
+                mAdapter.isShimming = false
             }
         ){
             override fun getHeaders(): MutableMap<String, String> {

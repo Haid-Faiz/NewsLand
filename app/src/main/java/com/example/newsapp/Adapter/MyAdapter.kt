@@ -57,7 +57,7 @@ class MyAdapter(val listener: NewsItemClicked) : RecyclerView.Adapter<MyAdapter.
                         target: Target<Drawable>?,
                         isFirstResource: Boolean
                     ): Boolean {
-                    holder.progressBarImage.visibility = View.GONE
+                        holder.progressBarImage.visibility = View.GONE
 //                    holder.shimmerImage.stopShimmer()
 //                    holder.shimmerImage.setShimmer(null)
                         return false
@@ -93,7 +93,7 @@ class MyAdapter(val listener: NewsItemClicked) : RecyclerView.Adapter<MyAdapter.
 
     override fun getItemCount(): Int {
         return if (isShimming)
-            return 5
+            2                                // in Kotlin if else return their last expresssion
         else
             newsList.size
     }
@@ -111,7 +111,8 @@ class MyAdapter(val listener: NewsItemClicked) : RecyclerView.Adapter<MyAdapter.
         val timeStampview = itemView.findViewById<TextView>(R.id.time_stamp)
         val imageView = itemView.findViewById<ImageView>(R.id.imageView)
         val progressBarImage = itemView.findViewById<ProgressBar>(R.id.progress_bar_image)
-//        val shimmerImage = itemView.findViewById<ShimmerFrameLayout>(R.id.shimmer_image)
+
+        //        val shimmerImage = itemView.findViewById<ShimmerFrameLayout>(R.id.shimmer_image)
         val shareButton = itemView.findViewById<ImageButton>(R.id.share_button)
         val shimmerLay = itemView.findViewById<ShimmerFrameLayout>(R.id.shimmer_layout)
     }
