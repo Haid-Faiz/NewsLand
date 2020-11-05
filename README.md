@@ -7,3 +7,10 @@ News app made using Volley Library and news data is fetched from NewsApi.
 - Science News
 - Technology News
 - BBC News
+
+## Used:
+
+- **Volley Library**
+- **NewsApi**
+- **Broadcast Receiver**
+- **AppIntro Library**
