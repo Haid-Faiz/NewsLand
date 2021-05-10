@@ -10,7 +10,7 @@ News app made using Volley Library and news data is fetched from NewsApi.
 
 ## Used:
 
-- **Volley Library**
+- **Retrofit Library**
 - **NewsApi**
 - **Broadcast Receiver**
 - **Shimmer Effect**
