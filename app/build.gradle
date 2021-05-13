@@ -1,10 +1,16 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
 
 android {
     compileSdkVersion 30
-    buildToolsVersion "30.0.2"
+    buildToolsVersion "30.0.3"
+
+    buildFeatures {
+        viewBinding true
+    }
 
     defaultConfig {
         applicationId "com.example.newsapp"
@@ -24,8 +30,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility 1.8
-        targetCompatibility 1.8
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
     }
 }
 
@@ -34,30 +44,46 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.3.2'
     implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'androidx.recyclerview:recyclerview:1.2.0'
+    implementation 'com.google.android.material:material:1.3.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-    // Volley Libaray
-    implementation 'com.android.volley:volley:1.1.1'
-    // Glide Library
-    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    // Coil for image loading
+    implementation "io.coil-kt:coil:$coil_version"
+    // LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_Version"
+    // ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_Version"
+    // JetPack Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    // JetPack DataStore
+    implementation 'androidx.datastore:datastore-preferences:1.0.0-beta01'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.0-alpha01'
+
+    // Kotlin Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
+
     // Crome Custom Tabs
-    implementation "androidx.browser:browser:1.2.0"
+    implementation "androidx.browser:browser:$chrome_custom_tabs"
+
     // Custom Bottom Navigation bar
     implementation 'com.ismaeldivita.chipnavigation:chip-navigation-bar:1.3.4'
-    // Custom Toast Library
-    implementation 'com.muddzdev:styleabletoast:2.2.4'
+
     // Lottie Animation Library
-    def lottieVersion = "3.4.4"
-    implementation "com.airbnb.android:lottie:$lottieVersion"
+    implementation "com.airbnb.android:lottie:$lottie_version"
+
     // Facebook shimmer effect
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
+
     // App Intro Library
     implementation 'com.github.AppIntro:AppIntro:6.0.0'
+
+    // Testing
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 }
