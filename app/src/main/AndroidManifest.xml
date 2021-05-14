@@ -19,7 +19,7 @@
 <!--            android:exported="true"></receiver>-->
 
         <activity
-            android:name=".Activities.SplashScreen"
+            android:name=".activities.SplashScreen"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,9 +27,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.IntroScreen"
+        <activity android:name=".activities.IntroScreen"
             android:theme="@style/IntroTheme"/>
-        <activity android:name=".Activities.MainActivity" />
+        <activity android:name=".activities.MainActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

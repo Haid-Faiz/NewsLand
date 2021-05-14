@@ -1,4 +1,4 @@
-package com.example.newsapp.BroadCast
+package com.example.newsapp.broadcast
 
 import android.content.BroadcastReceiver
 import android.content.Context
