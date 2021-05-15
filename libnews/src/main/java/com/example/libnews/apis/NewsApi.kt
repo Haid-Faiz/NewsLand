@@ -12,17 +12,17 @@ interface NewsApi {
 
     @GET("top-headlines")
     suspend fun getNewsByCountry(
-        @Query("country") country: String
+        @Query("country") country: Country
     ): Response<News>
 
     @GET("top-headlines?country=in")
     suspend fun getNewsByCategory(
-        @Query("category") category: String
+        @Query("category") category: Category
     ): Response<News>
 
     @GET("top-headlines")
     suspend fun getNewsBySources(
-        @Query("sources") source: String
+        @Query("sources") source: Source
     ) : Response<News>
 }
 
