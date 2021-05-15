@@ -1,10 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/main_navigation"
-    app:startDestination="@id/topHeadlinesFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/nav_top_headlines">
 
     <fragment
-        android:id="@+id/topHeadlinesFragment"
-        android:name="com.example.newsapp.top_headlines.TopHeadlinesFragment"
-        android:label="TopHeadlinesFragment" />
+        android:id="@+id/nav_top_headlines"
+        android:name="com.example.newsapp.ui.news_feed.NewsFeedFragment"
+        android:label="Top Headlines">
+        <argument
+            android:name="news_feed"
+            android:defaultValue="top_headlines"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_category"
+        android:name="com.example.newsapp.ui.news_feed.NewsFeedFragment"
+        android:label="Category" >
+        <argument
+            android:name="news_feed"
+            android:defaultValue="category"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_sources"
+        android:name="com.example.newsapp.ui.news_feed.NewsFeedFragment"
+        android:label="Sources" >
+        <argument
+            android:name="news_feed"
+            android:defaultValue="sources"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_search"
+        android:name="com.example.newsapp.ui.search.SearchFragment"
+        android:label="Search" />
+    <fragment
+        android:id="@+id/nav_saved"
+        android:name="com.example.newsapp.ui.saved.SavedFragment"
+        android:label="Bookmarked" />
+
 </navigation>

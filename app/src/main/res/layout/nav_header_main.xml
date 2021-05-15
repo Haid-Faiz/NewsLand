@@ -23,7 +23,7 @@
         android:fontFamily="@font/paytone_one"
         android:text="@string/app_name"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-        android:textColor="@color/primary_background"
+        android:textColor="@color/primary_text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -31,9 +31,9 @@
         android:id="@+id/night_mode_Button"
         android:layout_width="@dimen/night_mode_button_size"
         android:layout_height="@dimen/night_mode_button_size"
+        android:src="@drawable/ic_day_24"
         android:layout_marginEnd="16dp"
         android:layout_gravity="end"
-        tools:src="@tools:sample/avatars"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/app_name_text"/>
 
@@ -42,8 +42,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/nav_header_subtitle"
+        android:textColor="@color/sec_text"
         android:textSize="16sp"
-        android:layout_marginTop="@dimen/nav_header_vertical_spacing"
         app:layout_constraintStart_toStartOf="@id/app_name_text"
         app:layout_constraintTop_toBottomOf="@id/app_name_text"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

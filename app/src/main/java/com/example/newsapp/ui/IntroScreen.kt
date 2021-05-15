@@ -1,4 +1,4 @@
-package com.example.newsapp.activities
+package com.example.newsapp.ui
 
 import android.content.Intent
 import android.content.SharedPreferences

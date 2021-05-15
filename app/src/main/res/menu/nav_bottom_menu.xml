@@ -3,34 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu_headline"
+        android:id="@+id/nav_top_headlines"
         android:icon="@drawable/ic_whatshot"
-        android:title="Indian News"
+        android:title="@string/menu_top_headlines"
         app:cnb_backgroundColor="@color/primary_text"
         app:cnb_iconColor="@color/sec_background"
         app:cnb_textColor="@color/sec_background" />
 
     <item
-        android:id="@+id/menu_science"
+        android:id="@+id/nav_category"
         android:icon="@drawable/ic_science"
-        android:title="Science"
+        android:title="@string/menu_category"
         app:cnb_backgroundColor="@color/primary_text"
         app:cnb_iconColor="@color/sec_background"
         app:cnb_textColor="@color/sec_background" />
 
     <item
-        android:id="@+id/menu_tech"
+        android:id="@+id/nav_sources"
         android:icon="@drawable/ic_tech"
-        android:title="Tech"
+        android:title="@string/menu_sources"
         app:cnb_backgroundColor="@color/primary_text"
         app:cnb_iconColor="@color/sec_background"
         app:cnb_textColor="@color/sec_background" />
 
-    <item
-        android:id="@+id/menu_bbc"
-        android:icon="@drawable/ic_bbc"
-        android:title="News"
-        app:cnb_backgroundColor="@color/primary_text"
-        app:cnb_iconColor="@color/sec_background"
-        app:cnb_textColor="@color/sec_background" />
 </menu>
