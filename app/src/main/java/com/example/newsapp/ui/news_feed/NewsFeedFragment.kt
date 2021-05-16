@@ -1,32 +1,80 @@
 package com.example.newsapp.ui.news_feed
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
+import androidx.navigation.fragment.navArgs
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.newsapp.R
+import com.example.newsapp.Utils
+import com.example.newsapp.databinding.FragmentNewsFeedBinding
+import com.google.android.material.tabs.TabLayoutMediator
 
 class NewsFeedFragment : Fragment() {
+
+    private var _binding: FragmentNewsFeedBinding? = null
+    private var name: String? = "top_headlines"
+    private var tabPosition: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_news_feed, container, false)
+        _binding = FragmentNewsFeedBinding.inflate(inflater, container, false)
+        return _binding!!.root
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val name = arguments?.getString("name", "Default")
+        name = arguments?.getString("news_feed", "top_headlines")
         view.findViewById<TextView>(R.id.frag_text).text = name
+        val titleList: ArrayList<String>? = Utils.getTabsTitle(name)
+
+        val newsPagerAdapter = NewsPagerAdapter(childFragmentManager)
+        _binding?.viewPager?.adapter = newsPagerAdapter
+
+        // Attaching TabLayout with ViewPager2
+        TabLayoutMediator(_binding!!.tabLayout, _binding!!.viewPager) { tab, position ->
+            // Setting title to the tabs of TabLayout
+            tab.text = titleList?.get(position)
+//            tabPosition = position
+        }.attach()
+
+        tabPosition = _binding!!.tabLayout.selectedTabPosition
+        Log.d("tabPos", "onViewCreated: $tabPosition")
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
+    inner class NewsPagerAdapter(fm: FragmentManager) : FragmentStateAdapter(fm, lifecycle) {
+
+        override fun getItemCount(): Int = 5
+
+        override fun createFragment(position: Int): Fragment {
+
+            val fragment = NewsListFragment()
+            fragment.arguments = Bundle().apply {
+                putString("news", name)
+                putInt("tab_position", tabPosition)
+            }
+            Log.d("hello", "createFragment: $name  /// pos: $tabPosition")
+            return fragment
+        }
+    }
+
 }
-
-
 
 
 //                    // time from API call
@@ -40,11 +88,6 @@ class NewsFeedFragment : Fragment() {
 //                    // this wil give difference in string with ago added
 //                    val timeAgo =
 //                        DateUtils.getRelativeTimeSpanString(time, now, DateUtils.MINUTE_IN_MILLIS)
-
-
-
-
-
 
 
 //

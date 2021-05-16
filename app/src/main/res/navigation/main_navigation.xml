@@ -27,7 +27,7 @@
     <fragment
         android:id="@+id/nav_sources"
         android:name="com.example.newsapp.ui.news_feed.NewsFeedFragment"
-        android:label="Sources" >
+        android:label="sources" >
         <argument
             android:name="news_feed"
             android:defaultValue="sources"

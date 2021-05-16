@@ -1,17 +1,13 @@
 package com.example.newsapp.ui
 
 import android.content.IntentFilter
-import android.content.SharedPreferences
 import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -35,12 +31,25 @@ class MainActivity : AppCompatActivity(), MyBroadcastReceiver.ConnectivityListen
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(_binding!!.root)
         setSupportActionBar(_binding?.appBarMain?.toolbar)
-
+        setUpNav()
 //         Instantiating MyBroadcastReceiver
 //        myBroadcastReceiver = MyBroadcastReceiver()
+        val navHeaderView = _binding?.navView?.getHeaderView(0)
+        navHeaderView?.findViewById<ImageView>(R.id.night_mode_Button)?.setOnClickListener {
+            if (isNightModeOn) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+//                    bottom_nav.setItemSelected(R.id.menu_headline)
+//                    editor.putBoolean("NightMode", false).apply()
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+//                    bottom_nav.setItemSelected(R.id.menu_headline)
+//                    editor.putBoolean("NightMode", true).apply()
+            }
+        }
+    }
 
+    private fun setUpNav() {
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
-
         appBarConfiguration = AppBarConfiguration(
             setOf(
 //                R.id.nav_search,
@@ -54,20 +63,6 @@ class MainActivity : AppCompatActivity(), MyBroadcastReceiver.ConnectivityListen
         setupActionBarWithNavController(navController, appBarConfiguration)
         _binding?.appBarMain?.contentMain?.navBottom?.setupWithNavController(navController)
         _binding?.navView?.setupWithNavController(navController)
-
-        val navHeaderView = _binding?.navView?.getHeaderView(0)
-
-        navHeaderView?.findViewById<ImageView>(R.id.night_mode_Button)?.setOnClickListener {
-            if (isNightModeOn) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-//                    bottom_nav.setItemSelected(R.id.menu_headline)
-//                    editor.putBoolean("NightMode", false).apply()
-            } else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-//                    bottom_nav.setItemSelected(R.id.menu_headline)
-//                    editor.putBoolean("NightMode", true).apply()
-            }
-        }
     }
 
 //    override fun onStart() {
