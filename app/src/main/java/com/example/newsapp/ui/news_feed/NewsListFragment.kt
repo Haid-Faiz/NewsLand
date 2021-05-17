@@ -6,19 +6,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.newsapp.Utils
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.libnews.models.Article
+import com.example.newsapp.utils.Util
 import com.example.newsapp.databinding.FragmentNewsListBinding
 
 class NewsListFragment : Fragment() {
 
-    private var _binding : FragmentNewsListBinding? = null
-//    private lateinit var newsListAdapter: NewsListAdapter
+    private var _binding: FragmentNewsListBinding? = null
+
+    //    private lateinit var newsListAdapter: NewsListAdapter
+    private val newsFeedViewModel by activityViewModels<NewsFeedViewModel>()
+    private lateinit var newsListAdapter: NewsListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentNewsListBinding.inflate(inflater, container, false)
         return _binding!!.root
     }
@@ -26,17 +33,36 @@ class NewsListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        _binding!!.newsListRecyclerview.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        newsListAdapter = NewsListAdapter()
+
+        val util = Util(requireContext())
         val news = arguments?.getString("news", "top_headlines")!!
-        val tabPosition: Int = arguments?.getInt("tab_position", 0)!!
-        val endPoint: String? = Utils.getTabsTitle(news)?.get(tabPosition)
 
-        Log.d("check", "onViewCreated: newsArg-> $news / tabPosition: $tabPosition / endPoint: $endPoint")
+        newsFeedViewModel.tabPosition.observe(requireActivity()) { position ->
 
-//        when(news) {
-//            "top_headlines" -> // TODO viewModel.getCountryNews(endPoint)
-//            "category" -> // TODO viewModel.getCategoryNews(endPoint)
-//            "sources" -> // TODO viewModel.getSourcesNews(endPoint)
-//        }
+            Log.d("tabPosNewsList0", "onViewCreated: $position")
+
+            when (news) {
+                "top_headlines" -> newsFeedViewModel.getNewsByCountry(
+                    util.toEnumCountry(util.getTabsTitle(news)?.get(position))
+                )
+                "category" -> newsFeedViewModel.getNewsByCategory(
+                    util.toEnumCategory(util.getTabsTitle(news)?.get(position))
+                )
+                "sources" -> newsFeedViewModel.getNewsBySources(
+                    util.toEnumSource(util.getTabsTitle(news)?.get(position))
+                )
+            }
+        }
+
+        newsFeedViewModel.article.observe(viewLifecycleOwner) { it: List<Article>? ->
+
+            Log.d("check", "onViewCreated: $it")
+            newsListAdapter.submitList(it)
+            _binding!!.newsListRecyclerview.adapter = newsListAdapter
+        }
     }
 
 }

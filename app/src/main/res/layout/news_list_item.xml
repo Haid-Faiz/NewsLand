@@ -17,9 +17,9 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/article_image_view"
             android:layout_width="0dp"
-            android:layout_height="214dp"
+            android:layout_height="196dp"
             android:background="@color/shimmerColor"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
@@ -31,10 +31,10 @@
             android:layout_width="42sp"
             android:layout_height="42sp"
             android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="@id/imageView"
-            app:layout_constraintEnd_toEndOf="@id/imageView"
-            app:layout_constraintStart_toStartOf="@id/imageView"
-            app:layout_constraintTop_toTopOf="@id/imageView" />
+            app:layout_constraintBottom_toBottomOf="@id/article_image_view"
+            app:layout_constraintEnd_toEndOf="@id/article_image_view"
+            app:layout_constraintStart_toStartOf="@id/article_image_view"
+            app:layout_constraintTop_toTopOf="@id/article_image_view" />
 
         <TextView
             android:id="@+id/title"
@@ -43,26 +43,27 @@
             android:layout_marginTop="14sp"
             android:ellipsize="end"
             android:fontFamily="@font/amiko"
-            android:maxLines="3"
+            android:maxLines="2"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            tools:text="This is news from ndtv india."
+            tools:text="This is news of GTA 6, it might get released in next year by June. Fans are waiting for it"
             android:textColor="@color/primary_text"
             android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@id/imageView"
-            app:layout_constraintStart_toStartOf="@id/imageView"
-            app:layout_constraintTop_toBottomOf="@id/imageView" />
+            app:layout_constraintEnd_toEndOf="@id/article_image_view"
+            app:layout_constraintStart_toStartOf="@id/article_image_view"
+            app:layout_constraintTop_toBottomOf="@id/article_image_view" />
 
         <TextView
             android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12sp"
+            android:layout_marginTop="8dp"
             android:ellipsize="end"
-            android:maxLines="2"
+            android:maxLines="3"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            tools:text="This is news from Ndtv india"
+            tools:text="According to the sources, GTA 6 is just about to launch and it is a good news for the peoples who are big fan of the game.
+GTA 5 was a success game for the rockstar company and now gta6 might be the next one."
             android:textColor="@color/sec_text"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="@id/title"
@@ -70,13 +71,12 @@
             app:layout_constraintTop_toBottomOf="@id/title" />
 
         <TextView
-            android:id="@+id/author_name"
+            android:id="@+id/source_name"
             android:layout_width="wrap_content"
             android:layout_height="16dp"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="14dp"
             android:layout_marginBottom="12dp"
             android:paddingStart="16dp"
-            android:paddingBottom="0dp"
             tools:text="NDTV India"
             android:textColor="@color/sec_text"
             android:textSize="12sp"
@@ -92,9 +92,9 @@
             android:text="7 hours ago"
             android:textColor="@color/sec_text"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@id/author_name"
-            app:layout_constraintStart_toEndOf="@id/author_name"
-            app:layout_constraintTop_toTopOf="@id/author_name" />
+            app:layout_constraintBottom_toBottomOf="@id/source_name"
+            app:layout_constraintStart_toEndOf="@id/source_name"
+            app:layout_constraintTop_toTopOf="@id/source_name" />
 
         <ImageButton
             android:id="@+id/share_button"
@@ -102,10 +102,21 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/sec_background"
             android:paddingEnd="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/author_name"
+            app:layout_constraintBottom_toBottomOf="@+id/source_name"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/author_name"
-            app:srcCompat="@drawable/ic_share" />
+            app:layout_constraintTop_toTopOf="@+id/source_name"
+            app:srcCompat="@drawable/ic_baseline_share_24" />
+
+        <ImageButton
+            android:id="@+id/bookmark_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/sec_background"
+            android:paddingEnd="12dp"
+            app:layout_constraintBottom_toBottomOf="@+id/source_name"
+            app:layout_constraintEnd_toStartOf="@+id/share_button"
+            app:layout_constraintTop_toTopOf="@+id/source_name"
+            app:srcCompat="@drawable/ic_nav_saved_24" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
