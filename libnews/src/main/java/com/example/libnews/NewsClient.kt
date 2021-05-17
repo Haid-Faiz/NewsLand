@@ -21,6 +21,7 @@ object NewsClient {
             .baseUrl(BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(EnumConverterFactory())
             .build()
     }
 

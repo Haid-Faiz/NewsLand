@@ -63,6 +63,12 @@ dependencies {
     implementation 'androidx.datastore:datastore-preferences:1.0.0-beta01'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.0-alpha01'
 
+    // Room components
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    // Kotlin extensions & coroutines support for Room
+    implementation "androidx.room:room-ktx:$room_version"
+
     // Module dependency (libnews library)
     implementation project(path: ':libnews')
 

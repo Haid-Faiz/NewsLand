@@ -1,6 +1,6 @@
 package com.example.libnews.apis
 
-import com.example.libnews.models.News
+import com.example.libnews.models.NewsResponse
 import com.example.libnews.params.Category
 import com.example.libnews.params.Country
 import com.example.libnews.params.Source
@@ -13,17 +13,17 @@ interface NewsApi {
     @GET("top-headlines")
     suspend fun getNewsByCountry(
         @Query("country") country: Country
-    ): Response<News>
+    ): Response<NewsResponse>
 
     @GET("top-headlines?country=in")
     suspend fun getNewsByCategory(
         @Query("category") category: Category
-    ): Response<News>
+    ): Response<NewsResponse>
 
     @GET("top-headlines")
     suspend fun getNewsBySources(
         @Query("sources") source: Source
-    ) : Response<News>
+    ) : Response<NewsResponse>
 }
 
 

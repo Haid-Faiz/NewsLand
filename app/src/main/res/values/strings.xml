@@ -11,4 +11,25 @@
     <string name="menu_category">Category</string>
     <string name="menu_sources">Source</string>
 
+    <!-- Countries   -->
+    <string name="india">India</string>
+    <string name="usa">USA</string>
+    <string name="united_kingdom">United Kingdom</string>
+    <string name="canada">Canada</string>
+    <string name="singapore">Singapore</string>
+
+    <!-- Categories   -->
+    <string name="technology">Tech</string>
+    <string name="health">Health</string>
+    <string name="entertainment">Entertainment</string>
+    <string name="science">Science</string>
+    <string name="business">Business</string>
+
+    <!-- Sources   -->
+    <string name="bbc">BBC</string>
+    <string name="times_of_india">Times of India</string>
+    <string name="the_hindu">The Hindu</string>
+    <string name="cnn">CNN</string>
+    <string name="al_jazeera">Al-Jazeera</string>
+
 </resources>
