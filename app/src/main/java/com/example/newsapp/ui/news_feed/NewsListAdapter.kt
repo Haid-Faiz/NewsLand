@@ -19,7 +19,8 @@ import java.util.*
 class NewsListAdapter : ListAdapter<Article, NewsListAdapter.ViewHolder>(NewsListCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = NewsListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            NewsListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -33,7 +34,12 @@ class NewsListAdapter : ListAdapter<Article, NewsListAdapter.ViewHolder>(NewsLis
         holder.setUpListeners(article)
     }
 
-    class ViewHolder(val binding: NewsListItemBinding) : RecyclerView.ViewHolder(binding.root) {
+
+
+    inner class ViewHolder(val binding: NewsListItemBinding) : RecyclerView.ViewHolder(binding.root) {
+
+
+
         fun setUpListeners(article: Article) {
             // Click listener for chrome custom tabs
             binding.root.apply {
@@ -53,7 +59,7 @@ class NewsListAdapter : ListAdapter<Article, NewsListAdapter.ViewHolder>(NewsLis
 
             // Click listener for bookmark button
             binding.bookmarkButton.setOnClickListener {
-
+                onItemBookMarkListener?.let { it(article) }
             }
 
             // Click listener for share button
@@ -66,6 +72,13 @@ class NewsListAdapter : ListAdapter<Article, NewsListAdapter.ViewHolder>(NewsLis
                 }
             }
         }
+    }
+
+    private var onItemBookMarkListener: ((article: Article) -> Unit)? = null
+    // private variable can have access in inner class
+
+    fun setOnItemBookMarkListener(bookMarkListener: (article: Article) -> Unit) {
+        onItemBookMarkListener = bookMarkListener
     }
 
     private class NewsListCallback : DiffUtil.ItemCallback<Article>() {
