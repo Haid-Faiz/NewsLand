@@ -9,15 +9,19 @@ import com.example.newsapp.ui.Resource
 
 class NewsRepo(private val newsApi: NewsApi) : BaseRepo() {
 
-    suspend fun getNewsByCountry(country: Country): Resource<NewsResponse> =
-        safeApiCall { newsApi.getNewsByCountry(country) }
+    suspend fun getNewsByCountry(country: Country, pageNum: Int): Resource<NewsResponse> =
+        safeApiCall { newsApi.getNewsByCountry(country, pageNum) }
 
 
-    suspend fun getNewsByCategory(category: Category): Resource<NewsResponse> =
-        safeApiCall { newsApi.getNewsByCategory(category) }
+    suspend fun getNewsByCategory(category: Category, pageNum: Int): Resource<NewsResponse> =
+        safeApiCall { newsApi.getNewsByCategory(category, pageNum) }
 
 
-    suspend fun getNewsBySources(source: Source): Resource<NewsResponse> =
-        safeApiCall { newsApi.getNewsBySources(source) }
+    suspend fun getNewsBySources(source: Source, pageNum: Int): Resource<NewsResponse> =
+        safeApiCall { newsApi.getNewsBySources(source, pageNum) }
+
+
+    suspend fun searchNews(searchQuery: String, pageNum: Int): Resource<NewsResponse> =
+        safeApiCall { newsApi.searchNews(searchQuery, pageNum) }
 
 }

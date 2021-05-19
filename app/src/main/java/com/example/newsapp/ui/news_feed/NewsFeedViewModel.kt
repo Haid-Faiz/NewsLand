@@ -41,4 +41,9 @@ class NewsFeedViewModel(private val newsRepo: NewsRepo) : ViewModel() {
         _article.postValue(newsRepo.getNewsBySources(source, pageNum))
     }
 
+    fun searchNews(searchQuery: String) = viewModelScope.launch {
+        Log.d("callerrrr4", "getSearchNews: ")
+        _article.postValue(Resource.Loading)
+        _article.postValue(newsRepo.searchNews(searchQuery, pageNum))
+    }
 }

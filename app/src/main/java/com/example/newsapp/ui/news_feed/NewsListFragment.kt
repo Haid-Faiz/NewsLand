@@ -116,6 +116,5 @@ class NewsListFragment : Fragment() {
         _binding!!.newsListRecyclerview.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         newsListAdapter = NewsListAdapter()
-        _binding!!.newsListRecyclerview.adapter = newsListAdapter
     }
 }
