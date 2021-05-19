@@ -1,6 +1,7 @@
 package com.example.newsapp.utils
 
 import android.text.format.DateUtils
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -11,14 +12,14 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 fun TextView.formatDate(article: Article) {
-
-    val pattern = when (article.source.id) {
-        "bbc-news" -> "yyyy-MM-dd'T'HH:mm:ss.SSSSSSS'Z'"
-        "cnn" -> "yyyy-MM-dd'T'HH:mm:ss.SSSSS'Z'"
-        "al-jazeera-english" -> "yyyy-MM-dd'T'HH:mm:ss.SSSSSSS'Z'"
-        else -> "yyyy-MM-dd'T'HH:mm:ss'Z'"
-    }
-
+//    val pattern = when (article.source.id) {
+//        "bbc-news" -> "yyyy-MM-dd'T'HH:mm:ss.SSSSSSS'Z'"
+//        "cnn" -> "yyyy-MM-dd'T'HH:mm:ss.SSSSS'Z'"
+//        "al-jazeera-english" -> "yyyy-MM-dd'T'HH:mm:ss.SSSSSSS'Z'"
+//        else -> "yyyy-MM-dd'T'HH:mm:ss'Z'"
+//    }
+    val pattern = "${article.publishedAt.subSequence(0,21)}'Z'"
+    Log.d("pattern", "formattedDate: $pattern")
     val simpleDateFormat = SimpleDateFormat(pattern, Locale.getDefault())
     val parsedDate: Date? = simpleDateFormat.parse(article.publishedAt)
     val time: Long = parsedDate?.time!!

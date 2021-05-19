@@ -17,6 +17,8 @@ import com.example.libnews.NewsClient
 import com.example.libnews.apis.NewsApi
 import com.example.libnews.models.Article
 import com.example.newsapp.data.repositories.NewsRepo
+import com.example.newsapp.data.room.ArticleEntity
+import com.example.newsapp.data.room.NewsDatabase
 import com.example.newsapp.utils.Util
 import com.example.newsapp.databinding.FragmentNewsListBinding
 import com.example.newsapp.ui.Resource
@@ -36,7 +38,6 @@ class NewsListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentNewsListBinding.inflate(inflater, container, false)
         return _binding!!.root
     }
@@ -45,7 +46,12 @@ class NewsListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val factory = ViewModelFactory(NewsRepo(NewsClient.buildApi<NewsApi>(NewsApi::class.java)))
+        val factory = ViewModelFactory(
+            NewsRepo(
+                NewsClient.buildApi<NewsApi>(NewsApi::class.java),
+                NewsDatabase.invoke(requireContext())
+            )
+        )
         newsFeedViewModel = ViewModelProvider(
             requireParentFragment(),
             factory

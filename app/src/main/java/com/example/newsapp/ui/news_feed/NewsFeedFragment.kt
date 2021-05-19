@@ -7,13 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.libnews.NewsClient
 import com.example.libnews.apis.NewsApi
 import com.example.newsapp.data.repositories.NewsRepo
+import com.example.newsapp.data.room.NewsDatabase
 import com.example.newsapp.databinding.FragmentNewsFeedBinding
 import com.example.newsapp.utils.Util
 import com.example.newsapp.utils.ViewModelFactory
@@ -38,7 +37,12 @@ class NewsFeedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val factory = ViewModelFactory(NewsRepo(NewsClient.buildApi(NewsApi::class.java)))
+        val factory = ViewModelFactory(
+            NewsRepo(
+                NewsClient.buildApi(NewsApi::class.java),
+                NewsDatabase.invoke(requireContext())
+            )
+        )
         newsFeedViewModel = ViewModelProvider(this, factory).get(NewsFeedViewModel::class.java)
 
         val util = Util(requireContext())
@@ -75,7 +79,7 @@ class NewsFeedFragment : Fragment() {
         override fun getItemCount(): Int = 5
 
         override fun createFragment(position: Int): Fragment {
-            val fragment = NewsListFragment()
+            val fragment by lazy { NewsListFragment() }
             fragment.arguments = Bundle().apply {
                 putString("news", name)
             }

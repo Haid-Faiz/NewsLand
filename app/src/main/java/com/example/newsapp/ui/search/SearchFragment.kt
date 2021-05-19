@@ -14,6 +14,7 @@ import com.example.libnews.NewsClient
 import com.example.libnews.apis.NewsApi
 import com.example.newsapp.R
 import com.example.newsapp.data.repositories.NewsRepo
+import com.example.newsapp.data.room.NewsDatabase
 import com.example.newsapp.databinding.FragmentNewsListBinding
 import com.example.newsapp.databinding.FragmentSearchBinding
 import com.example.newsapp.ui.Resource
@@ -51,7 +52,12 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val factory = ViewModelFactory(NewsRepo(NewsClient.buildApi(NewsApi::class.java)))
+        val factory = ViewModelFactory(
+            NewsRepo(
+                NewsClient.buildApi(NewsApi::class.java),
+                NewsDatabase.invoke(requireContext())
+            )
+        )
         newsFeedViewModel = ViewModelProvider(this, factory).get(NewsFeedViewModel::class.java)
         setUpRecyclerView()
 

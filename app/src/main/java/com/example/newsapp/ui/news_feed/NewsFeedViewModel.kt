@@ -10,6 +10,7 @@ import com.example.libnews.params.Category
 import com.example.libnews.params.Country
 import com.example.libnews.params.Source
 import com.example.newsapp.data.repositories.NewsRepo
+import com.example.newsapp.data.room.ArticleEntity
 import com.example.newsapp.ui.Resource
 import com.example.newsapp.utils.SingleLiveEvent
 import kotlinx.coroutines.launch
@@ -46,4 +47,17 @@ class NewsFeedViewModel(private val newsRepo: NewsRepo) : ViewModel() {
         _article.postValue(Resource.Loading)
         _article.postValue(newsRepo.searchNews(searchQuery, pageNum))
     }
+
+//----------------------------------- RoomDatabase Calls -------------------------------------------
+
+    fun insert(articleEntity: ArticleEntity) = viewModelScope.launch {
+        newsRepo.insert(articleEntity)
+    }
+
+    fun getAllNewsList(): LiveData<List<ArticleEntity>> = newsRepo.getAllNewsList()
+
+    fun delete(articleEntity: ArticleEntity) = viewModelScope.launch {
+        newsRepo.delete(articleEntity)
+    }
+
 }
