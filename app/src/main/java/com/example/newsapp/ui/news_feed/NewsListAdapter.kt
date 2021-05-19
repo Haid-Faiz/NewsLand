@@ -28,7 +28,7 @@ class NewsListAdapter : ListAdapter<Article, NewsListAdapter.ViewHolder>(NewsLis
         holder.binding.description.text = article.description
         holder.binding.sourceName.text = article.source.name
         holder.binding.articleImageView.load(article.urlToImage)
-//        holder.binding.timeStamp.formatDate(article)
+        holder.binding.timeStamp.formatDate(article)
         holder.setUpListeners(article)
     }
 
