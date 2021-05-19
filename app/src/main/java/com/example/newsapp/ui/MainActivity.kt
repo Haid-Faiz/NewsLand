@@ -1,7 +1,5 @@
 package com.example.newsapp.ui
 
-import android.content.IntentFilter
-import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
@@ -12,11 +10,12 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.newsapp.broadcast.MyBroadcastReceiver
 import com.example.newsapp.R
 import com.example.newsapp.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(), MyBroadcastReceiver.ConnectivityListener {
+class MainActivity : AppCompatActivity() {
+//    , MyBroadcastReceiver.ConnectivityListener
+
     //
 //    lateinit var nightModePref: SharedPreferences
 //    lateinit var editor: SharedPreferences.Editor
@@ -77,18 +76,18 @@ class MainActivity : AppCompatActivity(), MyBroadcastReceiver.ConnectivityListen
 //        this.unregisterReceiver(myBroadcastReceiver)
 //    }
 
-    override fun checkConnection(isConnected: Boolean) {
-//        if (isConnected) {
-//            container.visibility = View.VISIBLE
-//            no_internet_anim.visibility = View.GONE
-//            bottom_nav.setItemSelected(R.id.menu_headline)
-//            supportFragmentManager.beginTransaction().replace(R.id.container, HomeFragment())
-//                .commit()
-//        } else {
-//            container.visibility = View.GONE
-//            no_internet_anim.visibility = View.VISIBLE
-//        }
-    }
+//    override fun checkConnection(isConnected: Boolean) {
+////        if (isConnected) {
+////            container.visibility = View.VISIBLE
+////            no_internet_anim.visibility = View.GONE
+////            bottom_nav.setItemSelected(R.id.menu_headline)
+////            supportFragmentManager.beginTransaction().replace(R.id.container, HomeFragment())
+////                .commit()
+////        } else {
+////            container.visibility = View.GONE
+////            no_internet_anim.visibility = View.VISIBLE
+////        }
+//    }
 
 //    private fun checkNightMode() {
 //        nightModePref = getSharedPreferences("NightModePref", MODE_PRIVATE)

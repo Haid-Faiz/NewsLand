@@ -6,13 +6,11 @@ import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.browser.customtabs.CustomTabsIntent
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.libnews.models.Article
-import com.example.newsapp.R
 import com.example.newsapp.databinding.NewsListItemBinding
 import java.text.SimpleDateFormat
 import java.util.*
@@ -20,29 +18,17 @@ import java.util.*
 class NewsListAdapter : ListAdapter<Article, NewsListAdapter.ViewHolder>(NewsListCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding =
-            NewsListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = NewsListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val article = getItem(position)
-
         holder.binding.title.text = article.title
         holder.binding.description.text = article.description
         holder.binding.sourceName.text = article.source.name
         holder.binding.articleImageView.load(article.urlToImage)
-        // Formatting time in 'hour ago' format
-        val simpleDateFormat: SimpleDateFormat = SimpleDateFormat(
-            "yyyy-MM-dd'T'HH:mm:ss'Z'",
-            Locale.getDefault()
-        )
-        val date: Date? = simpleDateFormat.parse(article.publishedAt)
-        val time: Long = date!!.time
-        val now: Long = System.currentTimeMillis()
-        val timeAgo = DateUtils.getRelativeTimeSpanString(time, now, DateUtils.MINUTE_IN_MILLIS)
-        holder.binding.timeStamp.text = timeAgo
-
+//        holder.binding.timeStamp.formatDate(article)
         holder.setUpListeners(article)
     }
 
@@ -51,7 +37,7 @@ class NewsListAdapter : ListAdapter<Article, NewsListAdapter.ViewHolder>(NewsLis
             // Click listener for chrome custom tabs
             binding.root.apply {
                 setOnClickListener {
-                    var builder: CustomTabsIntent.Builder = CustomTabsIntent.Builder()
+                    val builder: CustomTabsIntent.Builder = CustomTabsIntent.Builder()
 //                    builder.setToolbarColor(
 //                        ContextCompat.getColor(
 //                            context,
@@ -59,7 +45,7 @@ class NewsListAdapter : ListAdapter<Article, NewsListAdapter.ViewHolder>(NewsLis
 //                        )
 //                    )
                     builder.setShowTitle(true)
-                    var customTabsIntent = builder.build()
+                    val customTabsIntent = builder.build()
                     customTabsIntent.launchUrl(context, Uri.parse(article.url))
                 }
             }

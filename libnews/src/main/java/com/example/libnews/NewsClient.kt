@@ -14,7 +14,11 @@ object NewsClient {
 //        // Anuj's API -> 1f4a12d2698e432ea9cf18126dcc7acd
 
     private const val BASE_URL = "https://newsapi.org/v2/"
-    private const val API_KEY = "730a60dec330429c8fc1a2d3eeec28fd"
+    private const val API_KEY = "f95c36ef152b4180833e911e855b0222"
+
+
+//    val logging = HttpLoggingInterceptor()
+//    logging.setLevel(HttpLoggingInterceptor.Level.BODY)
 
     private val retrofit by lazy {
         Retrofit.Builder()
