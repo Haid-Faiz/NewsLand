@@ -16,26 +16,29 @@ import kotlinx.coroutines.launch
 
 class NewsFeedViewModel(private val newsRepo: NewsRepo) : ViewModel() {
 
-    var tabPosition: MutableLiveData<Int> = MutableLiveData()
+    var tabPosition: MutableLiveData<Int> = SingleLiveEvent()
 
     private var _article: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
     var article: LiveData<Resource<NewsResponse>> = _article
 
+    val pageNum = 1
+
     fun getNewsByCountry(country: Country) = viewModelScope.launch {
-        Log.d("callerrrr", "getNewsByCountry: ")
+        Log.d("callerrrr1", "getNewsByCountry: ")
         _article.postValue(Resource.Loading)
-        _article.postValue(newsRepo.getNewsByCountry(country))
+        _article.postValue(newsRepo.getNewsByCountry(country, pageNum))
     }
 
     fun getNewsByCategory(category: Category) = viewModelScope.launch {
-        Log.d("callerrrr", "getNewsByCategory: ")
+        Log.d("callerrrr2", "getNewsByCategory: ")
         _article.postValue(Resource.Loading)
-        _article.postValue(newsRepo.getNewsByCategory(category))
+        _article.postValue(newsRepo.getNewsByCategory(category, pageNum))
     }
 
     fun getNewsBySources(source: Source) = viewModelScope.launch {
-        Log.d("callerrrr", "getNewsBySource: ")
+        Log.d("callerrrr3", "getNewsBySource: ")
         _article.postValue(Resource.Loading)
-        _article.postValue(newsRepo.getNewsBySources(source))
+        _article.postValue(newsRepo.getNewsBySources(source, pageNum))
     }
+
 }
