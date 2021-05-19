@@ -87,6 +87,8 @@ class NewsListFragment : Fragment() {
                     Toast.makeText(requireContext(), "Failed", Toast.LENGTH_SHORT).show()
                     _binding!!.apply {
                         newsListRecyclerview.isVisible = true
+                        shimmerProgress.stopShimmer()
+                        shimmerProgress.isVisible = false
                     }
                 }
                 is Resource.Success -> {
@@ -95,11 +97,15 @@ class NewsListFragment : Fragment() {
                     _binding!!.newsListRecyclerview.adapter = newsListAdapter
                     _binding!!.apply {
                         newsListRecyclerview.isVisible = true
+                        shimmerProgress.stopShimmer()
+                        shimmerProgress.isVisible = false
                     }
                 }
                 Resource.Loading -> {
                     _binding!!.apply {
                         newsListRecyclerview.isVisible = false
+                        shimmerProgress.startShimmer()
+                        shimmerProgress.isVisible = true
                     }
                 }
             }
