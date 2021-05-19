@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.libnews.models.Article
 import com.example.newsapp.databinding.NewsListItemBinding
+import com.example.newsapp.utils.formatDate
 import java.text.SimpleDateFormat
 import java.util.*
 
