@@ -18,10 +18,12 @@ fun TextView.formatDate(article: Article) {
 //        "al-jazeera-english" -> "yyyy-MM-dd'T'HH:mm:ss.SSSSSSS'Z'"
 //        else -> "yyyy-MM-dd'T'HH:mm:ss'Z'"
 //    }
-    val pattern = "${article.publishedAt.subSequence(0,21)}'Z'"
-    Log.d("pattern", "formattedDate: $pattern")
+
+    val pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+    val timeStringToBeParsed = article.publishedAt.subSequence(0, 19).toString() + "Z"
+
     val simpleDateFormat = SimpleDateFormat(pattern, Locale.getDefault())
-    val parsedDate: Date? = simpleDateFormat.parse(article.publishedAt)
+    val parsedDate: Date? = simpleDateFormat.parse(timeStringToBeParsed)
     val time: Long = parsedDate?.time!!
     // this wil give difference in string with ago added
     val timeAgo =
