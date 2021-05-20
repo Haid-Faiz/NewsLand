@@ -21,6 +21,7 @@ There are two _modules_ in the project
 * Jetpack Navigation Architecture
 * Retrofit
 * Moshi
+* Room Database
 * Coil
 * Chrome Custom Tab
 * Preferences DataStore
