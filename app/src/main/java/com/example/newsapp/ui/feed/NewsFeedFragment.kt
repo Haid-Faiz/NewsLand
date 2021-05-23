@@ -1,4 +1,4 @@
-package com.example.newsapp.ui.news_feed
+package com.example.newsapp.ui.feed
 
 import android.os.Bundle
 import android.util.Log

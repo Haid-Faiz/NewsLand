@@ -1,10 +1,11 @@
-package com.example.newsapp.ui.news_feed
+package com.example.newsapp.ui.feed
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.libnews.models.Article
 import com.example.libnews.models.NewsResponse
 import com.example.libnews.params.Category
 import com.example.libnews.params.Country
@@ -19,10 +20,15 @@ class NewsFeedViewModel(private val newsRepo: NewsRepo) : ViewModel() {
 
     var tabPosition: MutableLiveData<Int> = SingleLiveEvent()
 
+    // News Article LiveData
     private var _article: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
     var article: LiveData<Resource<NewsResponse>> = _article
+    private val pageNum = 1
 
-    val pageNum = 1
+    // Search News Article LiveData
+    private var _searchArticle: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
+    var searchArticle: LiveData<Resource<NewsResponse>> = _searchArticle
+    private val searchPageNum = 1
 
     fun getNewsByCountry(country: Country) = viewModelScope.launch {
         Log.d("callerrrr1", "getNewsByCountry: ")
@@ -44,20 +50,20 @@ class NewsFeedViewModel(private val newsRepo: NewsRepo) : ViewModel() {
 
     fun searchNews(searchQuery: String) = viewModelScope.launch {
         Log.d("callerrrr4", "getSearchNews: ")
-        _article.postValue(Resource.Loading)
-        _article.postValue(newsRepo.searchNews(searchQuery, pageNum))
+        _searchArticle.postValue(Resource.Loading)
+        _searchArticle.postValue(newsRepo.searchNews(searchQuery, searchPageNum))
     }
 
 //----------------------------------- RoomDatabase Calls -------------------------------------------
 
-    fun insert(articleEntity: ArticleEntity) = viewModelScope.launch {
-        newsRepo.insert(articleEntity)
+
+    fun insert(article: Article) = viewModelScope.launch {
+        newsRepo.insert(article)
     }
 
     fun getAllNewsList(): LiveData<List<ArticleEntity>> = newsRepo.getAllNewsList()
 
-    fun delete(articleEntity: ArticleEntity) = viewModelScope.launch {
-        newsRepo.delete(articleEntity)
+    fun delete(article: Article) = viewModelScope.launch {
+        newsRepo.delete(article)
     }
-
 }

@@ -1,10 +1,12 @@
 package com.example.newsapp.utils
 
 import android.content.Context
+import com.example.libnews.models.Article
 import com.example.libnews.params.Category
 import com.example.libnews.params.Country
 import com.example.libnews.params.Source
 import com.example.newsapp.R
+import com.example.newsapp.data.room.ArticleEntity
 
 class Util(val context: Context) {
 
@@ -62,6 +64,53 @@ class Util(val context: Context) {
 
     private fun getString(string: Int): String {
         return context.getString(string)
+    }
+
+    companion object {
+        fun toInsertArticleEntity(article: Article): ArticleEntity = ArticleEntity(
+            author = article.author,
+            content = article.content,
+            description = article.description,
+            publishedAt = article.publishedAt,
+            source = article.source,
+            title = article.title,
+            url = article.url,
+            urlToImage = article.urlToImage
+        )
+
+        fun toDeleteArticleEntity(article: Article): ArticleEntity = ArticleEntity(
+            id = article.id,
+            author = article.author,
+            content = article.content,
+            description = article.description,
+            publishedAt = article.publishedAt,
+            source = article.source,
+            title = article.title,
+            url = article.url,
+            urlToImage = article.urlToImage
+        )
+
+        fun toArticleList(list: List<ArticleEntity>?): ArrayList<Article> {
+
+            val newList: ArrayList<Article> = ArrayList()
+
+            list?.forEach {
+                newList.add(
+                    Article(
+                        id = it.id,
+                        author = it.author,
+                        content = it.content,
+                        description = it.description,
+                        publishedAt = it.publishedAt,
+                        source = it.source,
+                        title = it.title,
+                        url = it.url,
+                        urlToImage = it.urlToImage
+                    )
+                )
+            }
+            return newList
+        }
     }
 }
 

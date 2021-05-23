@@ -2,8 +2,10 @@ package com.example.newsapp.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.AppBarConfiguration
@@ -25,12 +27,22 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private var _binding: ActivityMainBinding? = null
 
+    private lateinit var onDestinationChangedListener: NavController.OnDestinationChangedListener
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(_binding!!.root)
         setSupportActionBar(_binding?.appBarMain?.toolbar)
         setUpNav()
+
+        onDestinationChangedListener =
+            NavController.OnDestinationChangedListener { controller, destination, arguments ->
+                Log.d("navC", "onCreate: ${destination.id}")
+                _binding?.appBarMain?.contentMain?.navBottom?.isVisible = destination.id != R.id.nav_search || destination.id != R.id.nav_saved
+            }
+
+
 //         Instantiating MyBroadcastReceiver
 //        myBroadcastReceiver = MyBroadcastReceiver()
         val navHeaderView = _binding?.navView?.getHeaderView(0)
@@ -45,6 +57,16 @@ class MainActivity : AppCompatActivity() {
 //                    editor.putBoolean("NightMode", true).apply()
             }
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        navController.addOnDestinationChangedListener(onDestinationChangedListener)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        navController.removeOnDestinationChangedListener(onDestinationChangedListener)
     }
 
     private fun setUpNav() {

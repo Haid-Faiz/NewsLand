@@ -11,7 +11,7 @@ import org.junit.Test
 class NewsApiTest {
 
 
-    val api = NewsClient.buildApi<NewsApi>(NewsApi::class.java)
+    private val api = NewsClient.buildApi<NewsApi>(NewsApi::class.java)
 
     @Test
     fun `GET news by country`() {

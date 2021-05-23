@@ -28,41 +28,25 @@ class IntroScreen : AppIntro() {
         setSeparatorColor(ContextCompat.getColor(this, R.color.whiteColor))
         setNextArrowColor(R.color.primary_text)
 //      setTransformer(AppIntroPageTransformerType.Depth)
-
         addSlide(AppIntroCustomLayoutFragment.newInstance(R.layout.intro_screen_one))
         addSlide(AppIntroCustomLayoutFragment.newInstance(R.layout.intro_screen_two))
         addSlide(AppIntroCustomLayoutFragment.newInstance(R.layout.intro_screen_three))
-
-//        askForPermissions(
-//            permissions = arrayOf(
-//                Manifest.permission.INTERNET,
-//                Manifest.permission.ACCESS_NETWORK_STATE
-//            ),
-//            slideNumber = 3,
-//            required = true)
-
     }
 
     override fun onDonePressed(currentFragment: Fragment?) {
         super.onDonePressed(currentFragment)
-        editor.putBoolean("isIntroduced", true)
-        editor.apply()
-        startActivity(Intent(this@IntroScreen, MainActivity::class.java))
-        finish()
+        saveIntroducedSession()
     }
 
     override fun onSkipPressed(currentFragment: Fragment?) {
         super.onSkipPressed(currentFragment)
+        saveIntroducedSession()
+    }
+
+    private fun saveIntroducedSession() {
         editor.putBoolean("isIntroduced", true)
         editor.apply()
         startActivity(Intent(this@IntroScreen, MainActivity::class.java))
         finish()
     }
-
-//    override fun onUserDeniedPermission(permissionName: String) {
-//        // User pressed "Deny" on the permission dialog
-//    }
-//    override fun onUserDisabledPermission(permissionName: String) {
-//        // User pressed "Deny" + "Don't ask again" on the permission dialog
-//    }
 }

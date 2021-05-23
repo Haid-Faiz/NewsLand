@@ -5,6 +5,7 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class Article(
+    val id: Int? = null,  // This param is for id for Room
     @Json(name = "author")
     val author: String?,
     @Json(name = "content")

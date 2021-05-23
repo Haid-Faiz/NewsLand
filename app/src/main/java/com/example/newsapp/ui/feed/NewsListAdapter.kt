@@ -1,11 +1,11 @@
-package com.example.newsapp.ui.news_feed
+package com.example.newsapp.ui.feed
 
 import android.content.Intent
 import android.net.Uri
-import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.browser.customtabs.CustomTabsIntent
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -13,10 +13,8 @@ import coil.load
 import com.example.libnews.models.Article
 import com.example.newsapp.databinding.NewsListItemBinding
 import com.example.newsapp.utils.formatDate
-import java.text.SimpleDateFormat
-import java.util.*
 
-class NewsListAdapter : ListAdapter<Article, NewsListAdapter.ViewHolder>(NewsListCallback()) {
+class NewsListAdapter(private val deletable: Boolean = false) : ListAdapter<Article, NewsListAdapter.ViewHolder>(NewsListCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
@@ -32,26 +30,25 @@ class NewsListAdapter : ListAdapter<Article, NewsListAdapter.ViewHolder>(NewsLis
         holder.binding.articleImageView.load(article.urlToImage)
         holder.binding.timeStamp.formatDate(article)
         holder.setUpListeners(article)
+        holder.binding.deleteButton.isVisible = deletable
     }
 
 
-
-    inner class ViewHolder(val binding: NewsListItemBinding) : RecyclerView.ViewHolder(binding.root) {
-
-
+    inner class ViewHolder(val binding: NewsListItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun setUpListeners(article: Article) {
             // Click listener for chrome custom tabs
             binding.root.apply {
                 setOnClickListener {
                     val builder: CustomTabsIntent.Builder = CustomTabsIntent.Builder()
-//                    builder.setToolbarColor(
-//                        ContextCompat.getColor(
-//                            context,
-//                            R.color.primary_background
+                        .setShowTitle(true)
+//                        .setToolbarColor(
+//                            ContextCompat.getColor(
+//                                context,
+//                                R.color.primary_background
+//                            )
 //                        )
-//                    )
-                    builder.setShowTitle(true)
                     val customTabsIntent = builder.build()
                     customTabsIntent.launchUrl(context, Uri.parse(article.url))
                 }
@@ -60,6 +57,10 @@ class NewsListAdapter : ListAdapter<Article, NewsListAdapter.ViewHolder>(NewsLis
             // Click listener for bookmark button
             binding.bookmarkButton.setOnClickListener {
                 onItemBookMarkListener?.let { it(article) }
+            }
+
+            binding.deleteButton.setOnClickListener {
+                onItemDeleteListener?.let { it(article) }
             }
 
             // Click listener for share button
@@ -76,9 +77,14 @@ class NewsListAdapter : ListAdapter<Article, NewsListAdapter.ViewHolder>(NewsLis
 
     private var onItemBookMarkListener: ((article: Article) -> Unit)? = null
     // private variable can have access in inner class
+    private var onItemDeleteListener: ((article: Article) -> Unit)? = null
 
     fun setOnItemBookMarkListener(bookMarkListener: (article: Article) -> Unit) {
         onItemBookMarkListener = bookMarkListener
+    }
+
+    fun setOnItemDeleteListener(deleteListener: (article: Article) -> Unit) {
+        onItemDeleteListener = deleteListener
     }
 
     private class NewsListCallback : DiffUtil.ItemCallback<Article>() {

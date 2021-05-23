@@ -3,7 +3,7 @@ package com.example.newsapp.utils
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.newsapp.data.repositories.NewsRepo
-import com.example.newsapp.ui.news_feed.NewsFeedViewModel
+import com.example.newsapp.ui.feed.NewsFeedViewModel
 
 class ViewModelFactory(private val newsRepo: NewsRepo) : ViewModelProvider.NewInstanceFactory() {
 

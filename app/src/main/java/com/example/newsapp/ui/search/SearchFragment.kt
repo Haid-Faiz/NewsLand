@@ -2,13 +2,10 @@ package com.example.newsapp.ui.search
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.libnews.NewsClient
 import com.example.libnews.apis.NewsApi
@@ -16,10 +13,9 @@ import com.example.newsapp.R
 import com.example.newsapp.data.repositories.NewsRepo
 import com.example.newsapp.data.room.NewsDatabase
 import com.example.newsapp.databinding.FragmentNewsListBinding
-import com.example.newsapp.databinding.FragmentSearchBinding
 import com.example.newsapp.ui.Resource
-import com.example.newsapp.ui.news_feed.NewsFeedViewModel
-import com.example.newsapp.ui.news_feed.NewsListAdapter
+import com.example.newsapp.ui.feed.NewsFeedViewModel
+import com.example.newsapp.ui.feed.NewsListAdapter
 import com.example.newsapp.utils.Constants.NEWS_SEARCH_TIME_DELAY
 import com.example.newsapp.utils.ViewModelFactory
 import com.example.newsapp.utils.handleApiError
@@ -61,7 +57,7 @@ class SearchFragment : Fragment() {
         newsFeedViewModel = ViewModelProvider(this, factory).get(NewsFeedViewModel::class.java)
         setUpRecyclerView()
 
-        newsFeedViewModel.article.observe(viewLifecycleOwner) {
+        newsFeedViewModel.searchArticle.observe(viewLifecycleOwner) {
 
             when (it) {
                 is Resource.Failure -> {

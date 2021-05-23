@@ -118,6 +118,18 @@ GTA 5 was a success game for the rockstar company and now gta6 might be the next
             app:layout_constraintTop_toTopOf="@+id/source_name"
             app:srcCompat="@drawable/ic_nav_saved_24" />
 
+        <ImageButton
+            android:id="@+id/delete_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:backgroundTint="@color/sec_background"
+            android:paddingEnd="12dp"
+            app:layout_constraintBottom_toBottomOf="@+id/source_name"
+            app:layout_constraintEnd_toStartOf="@+id/share_button"
+            app:layout_constraintTop_toTopOf="@+id/source_name"
+            app:srcCompat="@drawable/ic_baseline_delete_outline_24" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

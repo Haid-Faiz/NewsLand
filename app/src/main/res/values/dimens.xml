@@ -5,5 +5,6 @@
     <dimen name="nav_header_vertical_spacing">8dp</dimen>
     <dimen name="nav_header_height">216dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="night_mode_button_size">24dp</dimen>
+    <dimen name="margin_top_24">24dp</dimen>
+    <dimen name="night_mode_button_size">36dp</dimen>
 </resources>
