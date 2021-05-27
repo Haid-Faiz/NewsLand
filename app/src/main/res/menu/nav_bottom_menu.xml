@@ -12,7 +12,7 @@
 
     <item
         android:id="@+id/nav_category"
-        android:icon="@drawable/ic_science"
+        android:icon="@drawable/ic_nav_category_24"
         android:title="@string/menu_category"
         app:cnb_backgroundColor="@color/primary_text"
         app:cnb_iconColor="@color/sec_background"
@@ -20,7 +20,7 @@
 
     <item
         android:id="@+id/nav_sources"
-        android:icon="@drawable/ic_tech"
+        android:icon="@drawable/ic_nav_sources"
         android:title="@string/menu_sources"
         app:cnb_backgroundColor="@color/primary_text"
         app:cnb_iconColor="@color/sec_background"

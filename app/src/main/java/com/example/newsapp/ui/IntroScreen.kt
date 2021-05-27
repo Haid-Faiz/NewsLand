@@ -49,4 +49,5 @@ class IntroScreen : AppIntro() {
         startActivity(Intent(this@IntroScreen, MainActivity::class.java))
         finish()
     }
+
 }

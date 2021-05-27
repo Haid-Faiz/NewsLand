@@ -16,6 +16,8 @@
             android:background="@color/primary_background"
             app:popupTheme="@style/Theme.NewsLand.PopupOverlay" />
 
+<!--        app:layout_scrollFlags="scroll"-->
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <include

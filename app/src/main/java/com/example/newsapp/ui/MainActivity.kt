@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         onDestinationChangedListener =
             NavController.OnDestinationChangedListener { controller, destination, arguments ->
                 Log.d("navC", "onCreate: ${destination.id}")
-                _binding?.appBarMain?.contentMain?.navBottom?.isVisible = destination.id != R.id.nav_search || destination.id != R.id.nav_saved
+                _binding?.appBarMain?.contentMain?.navBottom?.isVisible = destination.id != R.id.nav_search && destination.id != R.id.nav_saved
             }
 
 

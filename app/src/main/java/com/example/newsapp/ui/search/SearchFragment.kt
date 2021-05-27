@@ -3,6 +3,7 @@ package com.example.newsapp.ui.search
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -42,6 +43,9 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentNewsListBinding.inflate(inflater, container, false)
+        _binding!!.statusMessageText.text = "Search any news that you are looking for !"
+        _binding!!.statusMsgImg.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_nav_search_24))
+        _binding!!.statusBox.isVisible = true
         return _binding!!.root
     }
 
@@ -50,6 +54,7 @@ class SearchFragment : Fragment() {
 
         val factory = ViewModelFactory(
             NewsRepo(
+//                requireContext().applicationContext,
                 NewsClient.buildApi(NewsApi::class.java),
                 NewsDatabase.invoke(requireContext())
             )
@@ -69,6 +74,7 @@ class SearchFragment : Fragment() {
                     }
                 }
                 is Resource.Success -> {
+//                    _binding!!.statusBox.isVisible = it.value.articles.isEmpty()
                     newsListAdapter.submitList(it.value.articles)
                     _binding!!.newsListRecyclerview.adapter = newsListAdapter
                     _binding!!.apply {
@@ -111,6 +117,7 @@ class SearchFragment : Fragment() {
 
         return when (item.itemId) {
             R.id.search_action -> {
+                _binding!!.statusBox.isVisible = false
                 val searchView = item.actionView as SearchView
                 searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                     override fun onQueryTextSubmit(query: String?): Boolean {

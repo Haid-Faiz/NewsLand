@@ -6,6 +6,7 @@
 
     <string name="menu_search">Search News</string>
     <string name="menu_saved">Saved News</string>
+    <string name="menu_news_feed">News Feed</string>
     <string name="nav_header_subtitle">Your online newspaper</string>
     <string name="menu_top_headlines">Top Headlines</string>
     <string name="menu_category">Category</string>
