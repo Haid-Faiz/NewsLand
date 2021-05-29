@@ -45,6 +45,7 @@ class NewsListFragment : Fragment() {
 
         val factory = ViewModelFactory(
             NewsRepo(
+                requireContext().applicationContext,
                 NewsClient.buildApi<NewsApi>(NewsApi::class.java),
                 NewsDatabase.invoke(requireContext())
             )

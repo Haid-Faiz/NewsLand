@@ -42,7 +42,7 @@ fun View.showSnackBar(message: String) {
 fun Fragment.handleApiError(failure: Resource.Failure) {
     when {
         failure.errorCode == 401 -> requireView().showSnackBar("Unauthorized request")
-        failure.isNetworkError == true -> requireView().showSnackBar("Please check your network connection")
-        else -> requireView().showSnackBar(failure.errorBody?.toString() ?: "Something went wrong")
+        failure.isNetworkError == true -> requireView().showSnackBar("Please check your network")
+        else -> requireView().showSnackBar(failure.message ?: "Something went wrong")
     }
 }

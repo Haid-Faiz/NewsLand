@@ -1,5 +1,6 @@
 package com.example.newsapp.data.repositories
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import com.example.libnews.apis.NewsApi
 import com.example.libnews.models.Article
@@ -13,9 +14,10 @@ import com.example.newsapp.ui.Resource
 import com.example.newsapp.utils.Util
 
 class NewsRepo(
+    private val application: Context,
     private val newsApi: NewsApi,
     private val newsDatabase: NewsDatabase
-) : BaseRepo() {
+) : BaseRepo(application) {
 
     //-------------------------------Remote Api calls-----------------------------------------------
     suspend fun getNewsByCountry(country: Country, pageNum: Int): Resource<NewsResponse> =

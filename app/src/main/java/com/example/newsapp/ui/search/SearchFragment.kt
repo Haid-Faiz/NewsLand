@@ -54,7 +54,7 @@ class SearchFragment : Fragment() {
 
         val factory = ViewModelFactory(
             NewsRepo(
-//                requireContext().applicationContext,
+                requireContext().applicationContext,
                 NewsClient.buildApi(NewsApi::class.java),
                 NewsDatabase.invoke(requireContext())
             )
