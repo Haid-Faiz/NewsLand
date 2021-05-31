@@ -14,9 +14,14 @@ import com.example.newsapp.data.repositories.NewsRepo
 import com.example.newsapp.data.room.ArticleEntity
 import com.example.newsapp.ui.Resource
 import com.example.newsapp.utils.SingleLiveEvent
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class NewsFeedViewModel(private val newsRepo: NewsRepo) : ViewModel() {
+@HiltViewModel
+class NewsFeedViewModel @Inject constructor(
+    private val newsRepo: NewsRepo
+) : ViewModel() {
 
     var tabPosition: MutableLiveData<Int> = SingleLiveEvent()
 

@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,15 +22,18 @@ import com.example.newsapp.databinding.FragmentNewsListBinding
 import com.example.newsapp.ui.Resource
 import com.example.newsapp.utils.ViewModelFactory
 import com.example.newsapp.utils.handleApiError
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class NewsListFragment : Fragment() {
 
     private var _binding: FragmentNewsListBinding? = null
-    private lateinit var newsFeedViewModel: NewsFeedViewModel
+//    private lateinit var newsFeedViewModel: NewsFeedViewModel
+    private val newsFeedViewModel: NewsFeedViewModel by activityViewModels()
     private lateinit var newsListAdapter: NewsListAdapter
 
     override fun onCreateView(
@@ -43,17 +48,17 @@ class NewsListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val factory = ViewModelFactory(
-            NewsRepo(
-                requireContext().applicationContext,
-                NewsClient.buildApi<NewsApi>(NewsApi::class.java),
-                NewsDatabase.invoke(requireContext())
-            )
-        )
-        newsFeedViewModel = ViewModelProvider(
-            requireParentFragment(),
-            factory
-        ).get(NewsFeedViewModel::class.java)
+//        val factory = ViewModelFactory(
+//            NewsRepo(
+//                requireContext().applicationContext,
+//                NewsClient.buildApi<NewsApi>(NewsApi::class.java),
+//                NewsDatabase.invoke(requireContext())
+//            )
+//        )
+//        newsFeedViewModel = ViewModelProvider(
+//            requireParentFragment(),
+//            factory
+//        ).get(NewsFeedViewModel::class.java)
 
         setUpRecyclerView()
 

@@ -14,19 +14,19 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.newsapp.R
 import com.example.newsapp.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class MainActivity : AppCompatActivity() {
-//    , MyBroadcastReceiver.ConnectivityListener
+@AndroidEntryPoint
+class MainActivity : AppCompatActivity() { //    , MyBroadcastReceiver.ConnectivityListener
 
-    //
-//    lateinit var nightModePref: SharedPreferences
+    //    lateinit var nightModePref: SharedPreferences
 //    lateinit var editor: SharedPreferences.Editor
     var isNightModeOn: Boolean = false
-//    lateinit var myBroadcastReceiver: MyBroadcastReceiver
+
+    //    lateinit var myBroadcastReceiver: MyBroadcastReceiver
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
     private var _binding: ActivityMainBinding? = null
-
     private lateinit var onDestinationChangedListener: NavController.OnDestinationChangedListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,9 +39,9 @@ class MainActivity : AppCompatActivity() {
         onDestinationChangedListener =
             NavController.OnDestinationChangedListener { controller, destination, arguments ->
                 Log.d("navC", "onCreate: ${destination.id}")
-                _binding?.appBarMain?.contentMain?.navBottom?.isVisible = destination.id != R.id.nav_search && destination.id != R.id.nav_saved
+                _binding?.appBarMain?.contentMain?.navBottom?.isVisible =
+                    destination.id != R.id.nav_search && destination.id != R.id.nav_saved
             }
-
 
 //         Instantiating MyBroadcastReceiver
 //        myBroadcastReceiver = MyBroadcastReceiver()

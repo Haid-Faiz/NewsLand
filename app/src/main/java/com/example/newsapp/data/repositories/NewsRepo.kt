@@ -8,16 +8,18 @@ import com.example.libnews.models.NewsResponse
 import com.example.libnews.params.Category
 import com.example.libnews.params.Country
 import com.example.libnews.params.Source
+import com.example.newsapp.data.room.ArticleDao
 import com.example.newsapp.data.room.ArticleEntity
-import com.example.newsapp.data.room.NewsDatabase
 import com.example.newsapp.ui.Resource
 import com.example.newsapp.utils.Util
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 
-class NewsRepo(
-    private val application: Context,
+class NewsRepo @Inject constructor(
+    @ApplicationContext private val application: Context,
     private val newsApi: NewsApi,
-    private val newsDatabase: NewsDatabase
-) : BaseRepo(application) {
+    private val articleDao: ArticleDao
+) : BaseRepo(application) {         // Now, no need to create the Provides fun for NewsRepo
 
     //-------------------------------Remote Api calls-----------------------------------------------
     suspend fun getNewsByCountry(country: Country, pageNum: Int): Resource<NewsResponse> =
@@ -40,13 +42,13 @@ class NewsRepo(
     suspend fun insert(article: Article) {
         val articleEntity = Util.toInsertArticleEntity(article = article)
         // this fun will update the article also
-        newsDatabase.getArticleDao().insert(articleEntity)
+        articleDao.insert(articleEntity)
     }
 
     fun getAllNewsList(): LiveData<List<ArticleEntity>> =
-        newsDatabase.getArticleDao().getArticles()
+        articleDao.getArticles()
 
     suspend fun delete(article: Article) {
-        return newsDatabase.getArticleDao().delete(Util.toDeleteArticleEntity(article))
+        return articleDao.delete(Util.toDeleteArticleEntity(article))
     }
 }

@@ -6,6 +6,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.libnews.NewsClient
@@ -20,15 +21,17 @@ import com.example.newsapp.ui.feed.NewsListAdapter
 import com.example.newsapp.utils.Constants.NEWS_SEARCH_TIME_DELAY
 import com.example.newsapp.utils.ViewModelFactory
 import com.example.newsapp.utils.handleApiError
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class SearchFragment : Fragment() {
 
     private var _binding: FragmentNewsListBinding? = null
-    private lateinit var newsFeedViewModel: NewsFeedViewModel
+    private val newsFeedViewModel: NewsFeedViewModel by viewModels()
     private lateinit var newsListAdapter: NewsListAdapter
     private var job: Job? = null
 
@@ -43,23 +46,19 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentNewsListBinding.inflate(inflater, container, false)
-        _binding!!.statusMessageText.text = "Search any news that you are looking for !"
-        _binding!!.statusMsgImg.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_nav_search_24))
+        _binding!!.statusMessageText.text = resources.getString(R.string.search_msg)
+        _binding!!.statusMsgImg.setImageDrawable(
+            ContextCompat.getDrawable(
+                requireContext(),
+                R.drawable.ic_nav_search_24
+            )
+        )
         _binding!!.statusBox.isVisible = true
         return _binding!!.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val factory = ViewModelFactory(
-            NewsRepo(
-                requireContext().applicationContext,
-                NewsClient.buildApi(NewsApi::class.java),
-                NewsDatabase.invoke(requireContext())
-            )
-        )
-        newsFeedViewModel = ViewModelProvider(this, factory).get(NewsFeedViewModel::class.java)
         setUpRecyclerView()
 
         newsFeedViewModel.searchArticle.observe(viewLifecycleOwner) {

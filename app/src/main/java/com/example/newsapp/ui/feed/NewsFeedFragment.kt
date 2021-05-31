@@ -7,23 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.libnews.NewsClient
-import com.example.libnews.apis.NewsApi
-import com.example.newsapp.data.repositories.NewsRepo
-import com.example.newsapp.data.room.NewsDatabase
 import com.example.newsapp.databinding.FragmentNewsFeedBinding
 import com.example.newsapp.utils.Util
-import com.example.newsapp.utils.ViewModelFactory
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class NewsFeedFragment : Fragment() {
 
     private var _binding: FragmentNewsFeedBinding? = null
     private var name: String? = "top_headlines"
-    private lateinit var newsFeedViewModel: NewsFeedViewModel
+    private val newsFeedViewModel: NewsFeedViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,14 +34,14 @@ class NewsFeedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val factory = ViewModelFactory(
-            NewsRepo(
-                requireContext().applicationContext,
-                NewsClient.buildApi(NewsApi::class.java),
-                NewsDatabase.invoke(requireContext())
-            )
-        )
-        newsFeedViewModel = ViewModelProvider(this, factory).get(NewsFeedViewModel::class.java)
+//        val factory = ViewModelFactory(
+//            NewsRepo(
+//                requireContext().applicationContext,
+//                NewsClient.buildApi(NewsApi::class.java),
+//                NewsDatabase.invoke(requireContext())
+//            )
+//        )
+//        newsFeedViewModel = ViewModelProvider(this, factory).get(NewsFeedViewModel::class.java)
 
         val util = Util(requireContext())
         name = arguments?.getString("news_feed", "top_headlines")

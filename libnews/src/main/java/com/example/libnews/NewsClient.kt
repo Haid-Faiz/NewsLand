@@ -6,15 +6,14 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-object NewsClient {
+class NewsClient {
 
 //        val newsURL = "https://newsapi.org/v2/top-headlines?country=in&apiKey=730a60dec330429c8fc1a2d3eeec28fd"
 //        // My New API  ->  f95c36ef152b4180833e911e855b0222
 //        // My Old API  ->  730a60dec330429c8fc1a2d3eeec28fd
-//        // Anuj's API -> 1f4a12d2698e432ea9cf18126dcc7acd
 
-    private const val BASE_URL = "https://newsapi.org/v2/"
-    private const val API_KEY = "f95c36ef152b4180833e911e855b0222"
+    private val BASE_URL = "https://newsapi.org/v2/"
+    private val API_KEY = "f95c36ef152b4180833e911e855b0222"
 
 
 //    val logging = HttpLoggingInterceptor()
