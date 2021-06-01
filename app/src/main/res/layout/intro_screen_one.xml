@@ -1,49 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="#ffffff">
 
     <TextView
-        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="34dp"
+        android:layout_gravity="top|center_horizontal"
         android:fontFamily="@font/paytone_one"
         android:text="Welcome to NewsLand"
         android:textColor="@color/primary_text"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="@+id/lottieAnimationView"
-        app:layout_constraintStart_toStartOf="@+id/lottieAnimationView"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="24sp" />
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottieAnimationView"
-        android:layout_width="194dp"
-        android:layout_height="206dp"
-        android:layout_marginTop="26dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/news_paper_anim" />
+        android:layout_width="match_parent"
+        android:layout_height="186dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginEnd="56dp"
+        android:layout_marginTop="58dp"
+        android:layout_gravity="center"
+        app:lottie_rawRes="@raw/news_paper_anim"
+        app:lottie_autoPlay="true" />
 
     <TextView
-        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="86dp"
-        android:text=" Get news catagorised as: \n\n - Indian Top headlines \n - Science News \n - Tech News \n - BBC News"
+        android:text=" Get latest news as: \n\n - Top headlines \n - Categorised News \n - News from different sources"
         android:textColor="@color/primary_text"
+        android:layout_marginStart="36dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginTop="72dp"
         android:fontFamily="@font/amiko"
-        android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/lottieAnimationView"
-        app:layout_constraintHorizontal_bias="0.545"
-        app:layout_constraintStart_toStartOf="@+id/lottieAnimationView"
-        app:layout_constraintTop_toBottomOf="@+id/lottieAnimationView" />
+        android:layout_gravity="center_horizontal"
+        android:lineSpacingExtra="2dp"
+        android:textSize="16sp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
