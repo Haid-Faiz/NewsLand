@@ -71,4 +71,9 @@ class NewsFeedViewModel @Inject constructor(
     fun delete(article: Article) = viewModelScope.launch {
         newsRepo.delete(article)
     }
+
+    fun setNightMode(nightMode: Boolean) = viewModelScope.launch {
+        newsRepo.setNightMode(nightMode)
+    }
+
 }

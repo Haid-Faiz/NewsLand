@@ -11,10 +11,12 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.libnews.models.Article
+import com.example.newsapp.R
 import com.example.newsapp.databinding.NewsListItemBinding
 import com.example.newsapp.utils.formatDate
 
-class NewsListAdapter(private val deletable: Boolean = false) : ListAdapter<Article, NewsListAdapter.ViewHolder>(NewsListCallback()) {
+class NewsListAdapter(private val deletable: Boolean = false) :
+    ListAdapter<Article, NewsListAdapter.ViewHolder>(NewsListCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
@@ -27,7 +29,10 @@ class NewsListAdapter(private val deletable: Boolean = false) : ListAdapter<Arti
         holder.binding.title.text = article.title
         holder.binding.description.text = article.description
         holder.binding.sourceName.text = article.source.name
-        holder.binding.articleImageView.load(article.urlToImage)
+        if (!article.source.id.equals("google-news"))
+            holder.binding.articleImageView.load(article.urlToImage)
+        else
+            holder.binding.articleImageView.load(R.drawable.ic_google_news_icon)
         holder.binding.timeStamp.formatDate(article)
         holder.setUpListeners(article)
         holder.binding.deleteButton.isVisible = deletable
@@ -76,6 +81,7 @@ class NewsListAdapter(private val deletable: Boolean = false) : ListAdapter<Arti
     }
 
     private var onItemBookMarkListener: ((article: Article) -> Unit)? = null
+
     // private variable can have access in inner class
     private var onItemDeleteListener: ((article: Article) -> Unit)? = null
 

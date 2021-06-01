@@ -6,6 +6,7 @@
         android:id="@+id/nav_top_headlines"
         android:icon="@drawable/ic_whatshot"
         android:title="@string/menu_top_headlines"
+        android:visible="false"
         app:cnb_backgroundColor="@color/primary_text"
         app:cnb_iconColor="@color/sec_background"
         app:cnb_textColor="@color/sec_background" />
@@ -13,6 +14,7 @@
     <item
         android:id="@+id/nav_category"
         android:icon="@drawable/ic_nav_category_24"
+        android:visible="false"
         android:title="@string/menu_category"
         app:cnb_backgroundColor="@color/primary_text"
         app:cnb_iconColor="@color/sec_background"
@@ -22,6 +24,7 @@
         android:id="@+id/nav_sources"
         android:icon="@drawable/ic_nav_sources"
         android:title="@string/menu_sources"
+        android:visible="false"
         app:cnb_backgroundColor="@color/primary_text"
         app:cnb_iconColor="@color/sec_background"
         app:cnb_textColor="@color/sec_background" />

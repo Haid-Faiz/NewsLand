@@ -96,6 +96,9 @@ dependencies {
     implementation 'com.github.AppIntro:AppIntro:6.0.0'
     implementation project(path: ':libnews')
 
+    // Drapper's Bottom nav bar
+    implementation 'nl.joery.animatedbottombar:library:1.1.0'
+
     // Testing
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

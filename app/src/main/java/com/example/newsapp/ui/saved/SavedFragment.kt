@@ -12,9 +12,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.libnews.models.Article
 import com.example.newsapp.R
 import com.example.newsapp.databinding.FragmentNewsListBinding
+import com.example.newsapp.ui.MainActivity
 import com.example.newsapp.ui.feed.NewsFeedViewModel
 import com.example.newsapp.ui.feed.NewsListAdapter
 import com.example.newsapp.utils.Util
+import com.example.newsapp.utils.showSnackBar
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.AppBarLayout.LayoutParams.SCROLL_FLAG_NO_SCROLL
+import com.google.android.material.appbar.AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -55,6 +60,7 @@ class SavedFragment : Fragment() {
         newsListAdapter = NewsListAdapter(true)
         newsListAdapter.setOnItemDeleteListener {
             newsFeedViewModel.delete(it)
+            requireView().showSnackBar("Successfully deleted")
         }
         _binding!!.newsListRecyclerview.adapter = newsListAdapter
     }

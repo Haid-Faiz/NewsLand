@@ -19,7 +19,7 @@
         <ImageView
             android:id="@+id/article_image_view"
             android:layout_width="0dp"
-            android:layout_height="196dp"
+            android:layout_height="192dp"
             android:background="@color/shimmerColor"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"

@@ -7,6 +7,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:elevation="0dp"
         android:theme="@style/Theme.NewsLand.AppBarOverlay">
 
         <androidx.appcompat.widget.Toolbar
@@ -15,8 +16,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/primary_background"
             app:popupTheme="@style/Theme.NewsLand.PopupOverlay" />
-
-<!--        app:layout_scrollFlags="scroll"-->
+<!--        app:layout_scrollFlags="scroll|enterAlwaysCollapsed"-->
 
     </com.google.android.material.appbar.AppBarLayout>
 

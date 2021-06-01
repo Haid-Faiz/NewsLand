@@ -22,6 +22,7 @@ import com.example.newsapp.databinding.FragmentNewsListBinding
 import com.example.newsapp.ui.Resource
 import com.example.newsapp.utils.ViewModelFactory
 import com.example.newsapp.utils.handleApiError
+import com.example.newsapp.utils.showSnackBar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
@@ -32,7 +33,8 @@ import kotlinx.coroutines.launch
 class NewsListFragment : Fragment() {
 
     private var _binding: FragmentNewsListBinding? = null
-//    private lateinit var newsFeedViewModel: NewsFeedViewModel
+
+    //    private lateinit var newsFeedViewModel: NewsFeedViewModel
     private val newsFeedViewModel: NewsFeedViewModel by activityViewModels()
     private lateinit var newsListAdapter: NewsListAdapter
 
@@ -95,28 +97,32 @@ class NewsListFragment : Fragment() {
             when (it) {
                 is Resource.Failure -> {
                     handleApiError(it)
-                    Toast.makeText(requireContext(), "Failed", Toast.LENGTH_SHORT).show()
+                    Log.d("apiCallStatus", "onViewCreated: Failed")
                     _binding!!.apply {
 
-                        job?.cancel()
-                        job = MainScope().launch {
-                            delay(1000)
-                            newsListRecyclerview.isVisible = true
-                            shimmerProgress.stopShimmer()
-                            shimmerProgress.isVisible = false
-                        }
+//                        job?.cancel()
+//                        job = MainScope().launch {
+//                            delay(600)
+//                            newsListRecyclerview.isVisible = true
+//                            shimmerProgress.stopShimmer()
+//                            shimmerProgress.isVisible = false
+//                        }
+
+                        newsListRecyclerview.isVisible = true
+                        shimmerProgress.stopShimmer()
+                        shimmerProgress.isVisible = false
                     }
                 }
 
                 is Resource.Success -> {
-                    Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show()
+                    Log.d("apiCallStatus", "onViewCreated: Succes")
                     newsListAdapter.submitList(it.value.articles)
                     _binding!!.newsListRecyclerview.adapter = newsListAdapter
                     _binding!!.apply {
 
                         job?.cancel()
                         job = MainScope().launch {
-                            delay(1000)
+                            delay(600)
                             newsListRecyclerview.isVisible = true
                             shimmerProgress.stopShimmer()
                             shimmerProgress.isVisible = false
@@ -142,6 +148,7 @@ class NewsListFragment : Fragment() {
         newsListAdapter = NewsListAdapter()
         newsListAdapter.setOnItemBookMarkListener {
             newsFeedViewModel.insert(it)
+            requireView().showSnackBar("Successfully bookmarked")
         }
     }
 

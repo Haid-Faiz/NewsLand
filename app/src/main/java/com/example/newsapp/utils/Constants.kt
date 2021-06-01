@@ -5,5 +5,5 @@ object Constants {
 //    const val BASE_URL = "https://newsapi.org/v2/"
     const val NEWS_SEARCH_TIME_DELAY = 700L
     const val NEWS_APP_DATABASE_NAME = "news_room_database"
-
+    const val NIGHT_MODE_KEY = "night_mode"
 }

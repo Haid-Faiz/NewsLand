@@ -11,14 +11,17 @@ import com.example.libnews.params.Source
 import com.example.newsapp.data.room.ArticleDao
 import com.example.newsapp.data.room.ArticleEntity
 import com.example.newsapp.ui.Resource
+import com.example.newsapp.utils.PreferenceRepository
 import com.example.newsapp.utils.Util
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
 class NewsRepo @Inject constructor(
     @ApplicationContext private val application: Context,
     private val newsApi: NewsApi,
-    private val articleDao: ArticleDao
+    private val articleDao: ArticleDao,
+    private val preferenceRepository: PreferenceRepository
 ) : BaseRepo(application) {         // Now, no need to create the Provides fun for NewsRepo
 
     //-------------------------------Remote Api calls-----------------------------------------------
@@ -51,4 +54,8 @@ class NewsRepo @Inject constructor(
     suspend fun delete(article: Article) {
         return articleDao.delete(Util.toDeleteArticleEntity(article))
     }
+
+    suspend fun setNightMode(nightMode: Boolean) = preferenceRepository.setNightMode(nightMode)
+
+//    suspend fun isNightMode(): Boolean? = preferenceRepository.isNightMode
 }

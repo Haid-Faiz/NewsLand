@@ -15,12 +15,14 @@ import com.example.newsapp.R
 import com.example.newsapp.data.repositories.NewsRepo
 import com.example.newsapp.data.room.NewsDatabase
 import com.example.newsapp.databinding.FragmentNewsListBinding
+import com.example.newsapp.ui.MainActivity
 import com.example.newsapp.ui.Resource
 import com.example.newsapp.ui.feed.NewsFeedViewModel
 import com.example.newsapp.ui.feed.NewsListAdapter
 import com.example.newsapp.utils.Constants.NEWS_SEARCH_TIME_DELAY
 import com.example.newsapp.utils.ViewModelFactory
 import com.example.newsapp.utils.handleApiError
+import com.google.android.material.appbar.AppBarLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
