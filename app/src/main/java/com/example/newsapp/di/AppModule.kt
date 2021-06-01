@@ -12,8 +12,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import retrofit2.Retrofit
-import javax.inject.Inject
 import javax.inject.Singleton
 
 @Module
@@ -41,4 +39,9 @@ class AppModule {
     @Provides
     @Singleton
     fun providesArticleDao(newsDatabase: NewsDatabase): ArticleDao = newsDatabase.getArticleDao()
+
+//    @Provides
+//    @Singleton
+//    fun providesAppPref(@ApplicationContext context: Context) = PreferenceRepository(context)
+
 }

@@ -1,20 +1,19 @@
 package com.example.newsapp.ui.feed
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.example.libnews.models.Article
-import com.example.libnews.models.NewsResponse
 import com.example.libnews.params.Category
 import com.example.libnews.params.Country
 import com.example.libnews.params.Source
 import com.example.newsapp.data.repositories.NewsRepo
 import com.example.newsapp.data.room.ArticleEntity
-import com.example.newsapp.ui.Resource
-import com.example.newsapp.utils.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -23,40 +22,31 @@ class NewsFeedViewModel @Inject constructor(
     private val newsRepo: NewsRepo
 ) : ViewModel() {
 
-    var tabPosition: MutableLiveData<Int> = SingleLiveEvent()
+//    private var numList = mutableListOf<Int>()
+//    var tabPosition: Flow<Int> = _tabPosition.filter { newNum ->
+//
+//        numList.contains(newNum).let { isContain ->
+//            if (isContain) false else {
+//                numList.add(newNum)
+//                true
+//            }
+//        }
+//    }
 
-    // News Article LiveData
-    private var _article: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
-    var article: LiveData<Resource<NewsResponse>> = _article
-    private val pageNum = 1
-
-    // Search News Article LiveData
-    private var _searchArticle: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
-    var searchArticle: LiveData<Resource<NewsResponse>> = _searchArticle
-    private val searchPageNum = 1
-
-    fun getNewsByCountry(country: Country) = viewModelScope.launch {
-        Log.d("callerrrr1", "getNewsByCountry: ")
-        _article.postValue(Resource.Loading)
-        _article.postValue(newsRepo.getNewsByCountry(country, pageNum))
+    fun getNewsByCountry(country: Country): Flow<PagingData<Article>> {
+        return newsRepo.getNewsByCountry(country).cachedIn(viewModelScope)
     }
 
-    fun getNewsByCategory(category: Category) = viewModelScope.launch {
-        Log.d("callerrrr2", "getNewsByCategory: ")
-        _article.postValue(Resource.Loading)
-        _article.postValue(newsRepo.getNewsByCategory(category, pageNum))
+    fun getNewsByCategory(category: Category): Flow<PagingData<Article>> {
+        return newsRepo.getNewsByCategory(category).cachedIn(viewModelScope)
     }
 
-    fun getNewsBySources(source: Source) = viewModelScope.launch {
-        Log.d("callerrrr3", "getNewsBySource: ")
-        _article.postValue(Resource.Loading)
-        _article.postValue(newsRepo.getNewsBySources(source, pageNum))
+    fun getNewsBySources(source: Source): Flow<PagingData<Article>> {
+        return newsRepo.getNewsBySources(source).cachedIn(viewModelScope)
     }
 
-    fun searchNews(searchQuery: String) = viewModelScope.launch {
-        Log.d("callerrrr4", "getSearchNews: ")
-        _searchArticle.postValue(Resource.Loading)
-        _searchArticle.postValue(newsRepo.searchNews(searchQuery, searchPageNum))
+    fun searchNews(searchQuery: String): Flow<PagingData<Article>> {
+        return newsRepo.searchNews(searchQuery).cachedIn(viewModelScope)
     }
 
 //----------------------------------- RoomDatabase Calls -------------------------------------------
@@ -71,4 +61,9 @@ class NewsFeedViewModel @Inject constructor(
     fun delete(article: Article) = viewModelScope.launch {
         newsRepo.delete(article)
     }
+
+    fun setNightMode(nightMode: Boolean) = viewModelScope.launch {
+        newsRepo.setNightMode(nightMode)
+    }
+
 }

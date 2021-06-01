@@ -20,13 +20,34 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/main_navigation" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--        android:id="@+id/nav_bottom"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="bottom"-->
+<!--        android:background="?android:attr/windowBackground"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:menu="@menu/nav_bottom_menu" />-->
+
+    <nl.joery.animatedbottombar.AnimatedBottomBar
         android:id="@+id/nav_bottom"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?android:attr/actionBarSize"
+        app:abb_selectedIndex="0"
+        app:abb_selectedTabType="text"
+        app:abb_indicatorHeight="2dp"
+        app:abb_indicatorMargin="8dp"
+        app:abb_indicatorAppearance="round"
+        app:abb_indicatorColor="@color/primary_text"
+        app:abb_rippleEnabled="true"
+        app:abb_tabColor="@color/sec_text"
+        app:abb_tabColorSelected="@color/primary_text"
+        android:background="@color/primary_background"
+        app:abb_indicatorAnimation="none"
+        app:abb_tabAnimation="slide"
+        app:abb_tabAnimationSelected="slide"
         android:layout_gravity="bottom"
-        android:background="?android:attr/windowBackground"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/nav_bottom_menu" />
+        app:abb_tabs="@menu/nav_bottom_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

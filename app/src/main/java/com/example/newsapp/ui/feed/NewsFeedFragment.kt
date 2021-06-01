@@ -8,15 +8,19 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.newsapp.databinding.FragmentNewsFeedBinding
 import com.example.newsapp.utils.Util
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class NewsFeedFragment : Fragment() {
+class NewsFeedFragment() : Fragment() {
 
     private var _binding: FragmentNewsFeedBinding? = null
     private var name: String? = "top_headlines"
@@ -31,40 +35,22 @@ class NewsFeedFragment : Fragment() {
         return _binding!!.root
     }
 
+    @ExperimentalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-//        val factory = ViewModelFactory(
-//            NewsRepo(
-//                requireContext().applicationContext,
-//                NewsClient.buildApi(NewsApi::class.java),
-//                NewsDatabase.invoke(requireContext())
-//            )
-//        )
-//        newsFeedViewModel = ViewModelProvider(this, factory).get(NewsFeedViewModel::class.java)
 
         val util = Util(requireContext())
         name = arguments?.getString("news_feed", "top_headlines")
         val titleList: ArrayList<String>? = util.getTabsTitle(name)
 
         val newsPagerAdapter = NewsPagerAdapter(childFragmentManager)
+//        _binding?.viewPager?.offscreenPageLimit = 1
         _binding?.viewPager?.adapter = newsPagerAdapter
         // Attaching TabLayout with ViewPager2
         TabLayoutMediator(_binding!!.tabLayout, _binding!!.viewPager) { tab, position ->
             // Setting title to the tabs of TabLayout
             tab.text = titleList?.get(position)
         }.attach()
-
-        newsFeedViewModel.tabPosition.value = 0
-        _binding!!.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                Log.d("tabPosNewsFeed", "onViewCreated: ${tab?.position}")
-                newsFeedViewModel.tabPosition.value = tab?.position
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {}
-            override fun onTabReselected(tab: TabLayout.Tab?) {}
-        })
     }
 
     override fun onDestroy() {
@@ -80,6 +66,7 @@ class NewsFeedFragment : Fragment() {
             val fragment by lazy { NewsListFragment() }
             fragment.arguments = Bundle().apply {
                 putString("news", name)
+                putInt("tab_position", position)
             }
             return fragment
         }

@@ -19,7 +19,7 @@
         <ImageView
             android:id="@+id/article_image_view"
             android:layout_width="0dp"
-            android:layout_height="196dp"
+            android:layout_height="192dp"
             android:background="@color/shimmerColor"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
@@ -59,7 +59,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:ellipsize="end"
+            android:letterSpacing="0.02"
             android:maxLines="3"
+            android:lineSpacingExtra="2dp"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             tools:text="According to the sources, GTA 6 is just about to launch and it is a good news for the peoples who are big fan of the game.
@@ -117,7 +119,7 @@ GTA 5 was a success game for the rockstar company and now gta6 might be the next
             app:layout_constraintBottom_toBottomOf="@+id/source_name"
             app:layout_constraintEnd_toStartOf="@+id/share_button"
             app:layout_constraintTop_toTopOf="@+id/source_name"
-            app:srcCompat="@drawable/ic_nav_bookmark_24" />
+            app:srcCompat="@drawable/ic_bookmark_24" />
 
         <ImageButton
             android:id="@+id/delete_button"

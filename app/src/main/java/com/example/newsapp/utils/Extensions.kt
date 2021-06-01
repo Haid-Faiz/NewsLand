@@ -35,7 +35,7 @@ fun TextView.formatDate(article: Article) {
     this.text = timeAgo
 }
 
-fun View.showSnackBar(message: String) {
+fun View.showSnackBar(message: String, retryFun: (() -> Unit)? = null) {
     Snackbar.make(this, message, Snackbar.LENGTH_LONG).show()
 }
 

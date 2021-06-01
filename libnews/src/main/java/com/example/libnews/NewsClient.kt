@@ -13,7 +13,7 @@ class NewsClient {
 //        // My Old API  ->  730a60dec330429c8fc1a2d3eeec28fd
 
     private val BASE_URL = "https://newsapi.org/v2/"
-    private val API_KEY = "f95c36ef152b4180833e911e855b0222"
+    private val API_KEY = "730a60dec330429c8fc1a2d3eeec28fd"
 
 
 //    val logging = HttpLoggingInterceptor()

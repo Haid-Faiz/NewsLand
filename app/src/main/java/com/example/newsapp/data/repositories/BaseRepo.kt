@@ -25,7 +25,7 @@ abstract class BaseRepo(private val applicationContext: Context) {
                         isNetworkError = false,
                         message = response.message()
                     )
-                } else Resource.Failure(message = "Please check your internet connection")
+                } else Resource.Failure(message = "Please turn on your internet connection")
             } catch (e: Exception) {
                 when (e) {
                     is HttpException -> Resource.Failure(

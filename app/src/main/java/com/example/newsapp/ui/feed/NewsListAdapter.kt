@@ -6,15 +6,18 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.view.isVisible
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.libnews.models.Article
+import com.example.newsapp.R
 import com.example.newsapp.databinding.NewsListItemBinding
 import com.example.newsapp.utils.formatDate
 
-class NewsListAdapter(private val deletable: Boolean = false) : ListAdapter<Article, NewsListAdapter.ViewHolder>(NewsListCallback()) {
+class NewsListAdapter(private val deletable: Boolean = false) :
+    PagingDataAdapter<Article, NewsListAdapter.ViewHolder>(NewsListCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
@@ -23,13 +26,18 @@ class NewsListAdapter(private val deletable: Boolean = false) : ListAdapter<Arti
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val article = getItem(position)
-        holder.binding.title.text = article.title
-        holder.binding.description.text = article.description
-        holder.binding.sourceName.text = article.source.name
-        holder.binding.articleImageView.load(article.urlToImage)
-        holder.binding.timeStamp.formatDate(article)
-        holder.setUpListeners(article)
+        getItem(position)?.let { article: Article ->
+            holder.binding.title.text = article.title
+            holder.binding.description.text = article.description
+            holder.binding.sourceName.text = article.source.name
+            if (!article.source.id.equals("google-news"))
+                holder.binding.articleImageView.load(article.urlToImage)
+            else
+                holder.binding.articleImageView.load(R.drawable.ic_google_news_icon)
+            holder.binding.timeStamp.formatDate(article)
+            holder.setUpListeners(article)
+        }
+
         holder.binding.deleteButton.isVisible = deletable
     }
 
@@ -76,6 +84,7 @@ class NewsListAdapter(private val deletable: Boolean = false) : ListAdapter<Arti
     }
 
     private var onItemBookMarkListener: ((article: Article) -> Unit)? = null
+
     // private variable can have access in inner class
     private var onItemDeleteListener: ((article: Article) -> Unit)? = null
 
