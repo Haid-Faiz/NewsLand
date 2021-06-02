@@ -59,7 +59,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:ellipsize="end"
+            android:letterSpacing="0.02"
             android:maxLines="3"
+            android:lineSpacingExtra="2dp"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             tools:text="According to the sources, GTA 6 is just about to launch and it is a good news for the peoples who are big fan of the game.

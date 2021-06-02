@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-val Context.dataStore by preferencesDataStore("app_prefs_data_store")
+val Context.dataStore by preferencesDataStore(name = Constants.APP_PREFERENCE_DATASTORE)
 
 class PreferenceRepository @Inject constructor(
     @ApplicationContext context: Context
@@ -22,6 +22,7 @@ class PreferenceRepository @Inject constructor(
 //    )
 
     private val nightModeKey = booleanPreferencesKey(name = Constants.NIGHT_MODE_KEY)
+    private val onBoardingKey = booleanPreferencesKey(name = Constants.ON_BOARDED_KEY)
 
     suspend fun setNightMode(nightMode: Boolean) = _datastore.edit {
         it[nightModeKey] = nightMode
@@ -30,6 +31,15 @@ class PreferenceRepository @Inject constructor(
     val isNightMode: Flow<Boolean?>
         get() = _datastore.data.map {
             it[nightModeKey]
+        }
+
+    suspend fun setOnBoard(isOnboarded: Boolean) = _datastore.edit {
+        it[onBoardingKey] = isOnboarded
+    }
+
+    val isOnboarded
+        get() = _datastore.data.map {
+            it[onBoardingKey] ?: false
         }
     // we haven't used setter... becoz we need setter to be suspend fun
 

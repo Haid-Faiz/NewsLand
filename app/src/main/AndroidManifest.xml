@@ -19,17 +19,16 @@
 <!--            android:enabled="true"-->
 <!--            android:exported="true"></receiver>-->
 
-        <activity
-            android:name=".ui.SplashScreen"
-            android:theme="@style/SplashTheme">
+        <activity android:name=".ui.IntroScreen"
+            android:theme="@style/IntroTheme">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
-        <activity android:name=".ui.IntroScreen"
-            android:theme="@style/IntroTheme"/>
         <activity android:name=".ui.MainActivity" />
 
         <meta-data
