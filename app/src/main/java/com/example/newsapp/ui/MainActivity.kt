@@ -43,7 +43,6 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(_binding?.appBarMain?.toolbar)
         setUpNav()
 //        checkNightMode()
-
         preferenceRepository.isNightMode.asLiveData().observe(this) {
             isNightMode = it ?: false
             if (it == true)
@@ -76,6 +75,8 @@ class MainActivity : AppCompatActivity() {
             viewModel.setNightMode(!isNightMode)
         }
     }
+
+
 
 //    private fun checkNightMode(): Boolean {
 //

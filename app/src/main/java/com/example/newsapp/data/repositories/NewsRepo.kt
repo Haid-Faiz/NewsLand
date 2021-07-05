@@ -5,10 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import androidx.paging.liveData
 import com.example.libnews.apis.NewsApi
 import com.example.libnews.models.Article
-import com.example.libnews.models.NewsResponse
 import com.example.libnews.params.Category
 import com.example.libnews.params.Country
 import com.example.libnews.params.Source
@@ -18,13 +16,11 @@ import com.example.newsapp.data.paging.SearchPagingSource
 import com.example.newsapp.data.paging.SourcesPagingSource
 import com.example.newsapp.data.room.ArticleDao
 import com.example.newsapp.data.room.ArticleEntity
-import com.example.newsapp.ui.Resource
 import com.example.newsapp.utils.Constants.PAGE_LOAD_SIZE
 import com.example.newsapp.utils.PreferenceRepository
 import com.example.newsapp.utils.Util
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
 class NewsRepo @Inject constructor(
@@ -78,8 +74,12 @@ class NewsRepo @Inject constructor(
         articleDao.insert(articleEntity)
     }
 
-    fun getAllNewsList(): LiveData<List<ArticleEntity>> =
-        articleDao.getArticles()
+    fun getAllNewsList(): Flow<PagingData<ArticleEntity>> {
+        return Pager(
+            config = PagingConfig(pageSize = 10, enablePlaceholders = false),
+            pagingSourceFactory = { articleDao.getArticles() }
+        ).flow
+    }
 
     suspend fun delete(article: Article) {
         return articleDao.delete(Util.toDeleteArticleEntity(article))

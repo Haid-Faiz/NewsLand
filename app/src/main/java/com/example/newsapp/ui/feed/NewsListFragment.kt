@@ -14,10 +14,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newsapp.data.paging.PagingErrorAdapter
 import com.example.newsapp.utils.Util
 import com.example.newsapp.databinding.FragmentNewsListBinding
+import com.example.newsapp.utils.handleExceptions
 import com.example.newsapp.utils.showSnackBar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
+import java.io.IOException
 
 @AndroidEntryPoint
 class NewsListFragment : Fragment() {
@@ -95,9 +98,7 @@ class NewsListFragment : Fragment() {
                     }
                 }
                 is LoadState.Error -> {
-                    (it.refresh as LoadState.Error).error.message?.let { it1 ->
-                        requireView().showSnackBar(it1)
-                    }
+                    handleExceptions((it.refresh as LoadState.Error).error)
                     _binding!!.apply {
                         newsListRecyclerview.isVisible = false
                         shimmerProgress.stopShimmer()

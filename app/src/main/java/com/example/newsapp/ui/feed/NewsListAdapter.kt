@@ -1,7 +1,9 @@
 package com.example.newsapp.ui.feed
 
 import android.content.Intent
+import android.media.MediaPlayer
 import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.browser.customtabs.CustomTabsIntent
@@ -16,7 +18,10 @@ import com.example.newsapp.R
 import com.example.newsapp.databinding.NewsListItemBinding
 import com.example.newsapp.utils.formatDate
 
-class NewsListAdapter(private val deletable: Boolean = false) :
+class NewsListAdapter(
+    private val deletable: Boolean = false,
+    private val getItemCount: ((itemcount: Int) -> Unit)? = null
+) :
     PagingDataAdapter<Article, NewsListAdapter.ViewHolder>(NewsListCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -26,6 +31,8 @@ class NewsListAdapter(private val deletable: Boolean = false) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        getItemCount?.invoke(itemCount)
+        Log.d("hellomr2", "onBindViewHolder: $itemCount")
         getItem(position)?.let { article: Article ->
             holder.binding.title.text = article.title
             holder.binding.description.text = article.description
@@ -37,7 +44,6 @@ class NewsListAdapter(private val deletable: Boolean = false) :
             holder.binding.timeStamp.formatDate(article)
             holder.setUpListeners(article)
         }
-
         holder.binding.deleteButton.isVisible = deletable
     }
 

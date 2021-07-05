@@ -56,7 +56,8 @@ class NewsFeedViewModel @Inject constructor(
         newsRepo.insert(article)
     }
 
-    fun getAllNewsList(): LiveData<List<ArticleEntity>> = newsRepo.getAllNewsList()
+    fun getAllNewsList(): Flow<PagingData<ArticleEntity>> =
+        newsRepo.getAllNewsList().cachedIn(viewModelScope)
 
     fun delete(article: Article) = viewModelScope.launch {
         newsRepo.delete(article)

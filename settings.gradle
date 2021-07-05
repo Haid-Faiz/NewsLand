@@ -1,3 +1,4 @@
 include ':libnews'
 include ':app'
 rootProject.name = "NewsLand"
+include ':datastore'
