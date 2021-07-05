@@ -1,11 +1,14 @@
 package com.example.newsapp.ui.feed
 
 import android.content.Intent
+import android.media.MediaPlayer
 import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.view.isVisible
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -15,8 +18,11 @@ import com.example.newsapp.R
 import com.example.newsapp.databinding.NewsListItemBinding
 import com.example.newsapp.utils.formatDate
 
-class NewsListAdapter(private val deletable: Boolean = false) :
-    ListAdapter<Article, NewsListAdapter.ViewHolder>(NewsListCallback()) {
+class NewsListAdapter(
+    private val deletable: Boolean = false,
+    private val getItemCount: ((itemcount: Int) -> Unit)? = null
+) :
+    PagingDataAdapter<Article, NewsListAdapter.ViewHolder>(NewsListCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
@@ -25,16 +31,19 @@ class NewsListAdapter(private val deletable: Boolean = false) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val article = getItem(position)
-        holder.binding.title.text = article.title
-        holder.binding.description.text = article.description
-        holder.binding.sourceName.text = article.source.name
-        if (!article.source.id.equals("google-news"))
-            holder.binding.articleImageView.load(article.urlToImage)
-        else
-            holder.binding.articleImageView.load(R.drawable.ic_google_news_icon)
-        holder.binding.timeStamp.formatDate(article)
-        holder.setUpListeners(article)
+        getItemCount?.invoke(itemCount)
+        Log.d("hellomr2", "onBindViewHolder: $itemCount")
+        getItem(position)?.let { article: Article ->
+            holder.binding.title.text = article.title
+            holder.binding.description.text = article.description
+            holder.binding.sourceName.text = article.source.name
+            if (!article.source.id.equals("google-news"))
+                holder.binding.articleImageView.load(article.urlToImage)
+            else
+                holder.binding.articleImageView.load(R.drawable.ic_google_news_icon)
+            holder.binding.timeStamp.formatDate(article)
+            holder.setUpListeners(article)
+        }
         holder.binding.deleteButton.isVisible = deletable
     }
 

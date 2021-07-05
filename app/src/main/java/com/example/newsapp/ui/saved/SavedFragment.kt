@@ -8,6 +8,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.flatMap
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.libnews.models.Article
 import com.example.newsapp.R
@@ -21,6 +23,7 @@ import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.AppBarLayout.LayoutParams.SCROLL_FLAG_NO_SCROLL
 import com.google.android.material.appbar.AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
 class SavedFragment : Fragment() {
@@ -36,7 +39,12 @@ class SavedFragment : Fragment() {
     ): View {
         _binding = FragmentNewsListBinding.inflate(inflater, container, false)
         _binding!!.statusMessageText.text = resources.getString(R.string.no_bookmark_msg)
-        _binding!!.statusMsgImg.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_nav_bookmark_24))
+        _binding!!.statusMsgImg.setImageDrawable(
+            ContextCompat.getDrawable(
+                requireContext(),
+                R.drawable.ic_nav_bookmark_24
+            )
+        )
         return _binding!!.root
     }
 
@@ -44,20 +52,29 @@ class SavedFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setUpRecyclerView()
 
-        newsFeedViewModel.getAllNewsList().observe(viewLifecycleOwner) {
-            it.isEmpty().also {  isEmpty ->
-                _binding!!.statusBox.isVisible = isEmpty
-                _binding!!.newsListRecyclerview.isVisible = !isEmpty
+//        newsFeedViewModel.getAllNewsList().observe(viewLifecycleOwner) {
+//            it.isEmpty().also { isEmpty ->
+//                _binding!!.statusBox.isVisible = isEmpty
+//                _binding!!.newsListRecyclerview.isVisible = !isEmpty
+//            }
+//            val newList: ArrayList<Article> = Util.toArticleList(it)
+////            newsListAdapter.submitList(newList)
+//        }
+
+        lifecycleScope.launchWhenCreated {
+            newsFeedViewModel.getAllNewsList().collectLatest {
+//                newsListAdapter.submitList(it)
             }
-            val newList: ArrayList<Article> = Util.toArticleList(it)
-            newsListAdapter.submitList(newList)
         }
     }
 
     private fun setUpRecyclerView() {
         _binding!!.newsListRecyclerview.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        newsListAdapter = NewsListAdapter(true)
+        newsListAdapter = NewsListAdapter(true) {
+            _binding!!.statusBox.isVisible = it == 0
+            _binding!!.newsListRecyclerview.isVisible = it != 0
+        }
         newsListAdapter.setOnItemDeleteListener {
             newsFeedViewModel.delete(it)
             requireView().showSnackBar("Successfully deleted")

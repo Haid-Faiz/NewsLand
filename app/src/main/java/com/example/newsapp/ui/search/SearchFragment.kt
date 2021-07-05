@@ -7,26 +7,21 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.libnews.NewsClient
-import com.example.libnews.apis.NewsApi
 import com.example.newsapp.R
-import com.example.newsapp.data.repositories.NewsRepo
-import com.example.newsapp.data.room.NewsDatabase
+import com.example.newsapp.data.paging.PagingErrorAdapter
 import com.example.newsapp.databinding.FragmentNewsListBinding
-import com.example.newsapp.ui.MainActivity
-import com.example.newsapp.ui.Resource
 import com.example.newsapp.ui.feed.NewsFeedViewModel
 import com.example.newsapp.ui.feed.NewsListAdapter
 import com.example.newsapp.utils.Constants.NEWS_SEARCH_TIME_DELAY
-import com.example.newsapp.utils.ViewModelFactory
-import com.example.newsapp.utils.handleApiError
-import com.google.android.material.appbar.AppBarLayout
+import com.example.newsapp.utils.showSnackBar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -62,50 +57,60 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpRecyclerView()
-
-        newsFeedViewModel.searchArticle.observe(viewLifecycleOwner) {
-
-            when (it) {
-                is Resource.Failure -> {
-                    handleApiError(it)
-                    _binding!!.apply {
-                        newsListRecyclerview.isVisible = true
-                        shimmerProgress.stopShimmer()
-                        shimmerProgress.isVisible = false
-                    }
-                }
-                is Resource.Success -> {
-//                    _binding!!.statusBox.isVisible = it.value.articles.isEmpty()
-                    newsListAdapter.submitList(it.value.articles)
-                    _binding!!.newsListRecyclerview.adapter = newsListAdapter
-                    _binding!!.apply {
-                        newsListRecyclerview.isVisible = true
-                        shimmerProgress.stopShimmer()
-                        shimmerProgress.isVisible = false
-                    }
-                }
-                Resource.Loading -> {
-                    _binding!!.apply {
-                        newsListRecyclerview.isVisible = false
-                        shimmerProgress.startShimmer()
-                        shimmerProgress.isVisible = true
-                    }
-                }
-            }
-        }
     }
 
     private fun setUpRecyclerView() {
         _binding!!.newsListRecyclerview.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         newsListAdapter = NewsListAdapter()
+        _binding!!.newsListRecyclerview.adapter = newsListAdapter.withLoadStateHeaderAndFooter(
+            header = PagingErrorAdapter { newsListAdapter.retry() },
+            footer = PagingErrorAdapter { newsListAdapter.retry() }
+        )
+        newsListAdapter.addLoadStateListener {
+            when (it.refresh) {
+                is LoadState.NotLoading -> {
+                    _binding!!.apply {
+                        newsListRecyclerview.isVisible = true
+                        shimmerProgress.stopShimmer()
+                        shimmerProgress.isVisible = false
+                    }
+                }
+                LoadState.Loading -> {
+                    _binding!!.apply {
+                        newsListRecyclerview.isVisible = false
+                        shimmerProgress.startShimmer()
+                        shimmerProgress.isVisible = true
+                    }
+                }
+                is LoadState.Error -> {
+                    (it.refresh as LoadState.Error).error.message?.let { it1 ->
+                        requireView().showSnackBar(it1)
+                    }
+                    _binding!!.apply {
+                        newsListRecyclerview.isVisible = false
+                        shimmerProgress.stopShimmer()
+                        shimmerProgress.isVisible = false
+                    }
+                }
+            }
+        }
+        newsListAdapter.setOnItemBookMarkListener {
+            newsFeedViewModel.insert(it)
+            requireView().showSnackBar("Successfully bookmarked")
+        }
     }
 
     private fun performSearch(query: String) {
         job?.cancel()
         job = MainScope().launch {
             delay(NEWS_SEARCH_TIME_DELAY)
-            newsFeedViewModel.searchNews(query)
+            lifecycleScope.launchWhenCreated {
+                newsFeedViewModel.searchNews(query)
+                    .collect {
+                        newsListAdapter.submitData(lifecycle, it)
+                    }
+            }
         }
     }
 

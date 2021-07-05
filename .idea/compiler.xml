@@ -3,6 +3,8 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="1.8">
       <module name="NewsApp.app" target="11" />
+      <module name="NewsLand.app" target="11" />
+      <module name="NewsLand.datastore" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

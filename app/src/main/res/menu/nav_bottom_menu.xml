@@ -6,27 +6,39 @@
         android:id="@+id/nav_top_headlines"
         android:icon="@drawable/ic_whatshot"
         android:title="@string/menu_top_headlines"
+<<<<<<< HEAD
         android:visible="false"
         app:cnb_backgroundColor="@color/primary_text"
         app:cnb_iconColor="@color/sec_background"
         app:cnb_textColor="@color/sec_background" />
+=======
+        android:visible="false" />
+>>>>>>> pagination_implementation
 
     <item
         android:id="@+id/nav_category"
         android:icon="@drawable/ic_nav_category_24"
         android:visible="false"
+<<<<<<< HEAD
         android:title="@string/menu_category"
         app:cnb_backgroundColor="@color/primary_text"
         app:cnb_iconColor="@color/sec_background"
         app:cnb_textColor="@color/sec_background" />
+=======
+        android:title="@string/menu_category" />
+>>>>>>> pagination_implementation
 
     <item
         android:id="@+id/nav_sources"
         android:icon="@drawable/ic_nav_sources"
         android:title="@string/menu_sources"
+<<<<<<< HEAD
         android:visible="false"
         app:cnb_backgroundColor="@color/primary_text"
         app:cnb_iconColor="@color/sec_background"
         app:cnb_textColor="@color/sec_background" />
+=======
+        android:visible="false" />
+>>>>>>> pagination_implementation
 
 </menu>

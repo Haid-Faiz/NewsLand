@@ -1,13 +1,13 @@
 package com.example.newsapp.utils
 
 import android.text.format.DateUtils
-import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.libnews.models.Article
-import com.example.newsapp.ui.Resource
 import com.google.android.material.snackbar.Snackbar
+import retrofit2.HttpException
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -44,5 +44,12 @@ fun Fragment.handleApiError(failure: Resource.Failure) {
         failure.errorCode == 401 -> requireView().showSnackBar("Unauthorized request")
         failure.isNetworkError == true -> requireView().showSnackBar("Please check your network")
         else -> requireView().showSnackBar(failure.message ?: "Something went wrong")
+    }
+}
+
+fun Fragment.handleExceptions(throwable: Throwable) {
+    when(throwable) {
+        is HttpException -> requireView().showSnackBar("Oops.. Something went wrong !")
+        is IOException -> requireView().showSnackBar("Please check your internet connection")
     }
 }

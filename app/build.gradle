@@ -46,9 +46,12 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'androidx.recyclerview:recyclerview:1.2.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'com.google.android.material:material:1.3.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    // Jetpack paging 3
+    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
 
     // Coil for image loading
     implementation "io.coil-kt:coil:$coil_version"
@@ -65,8 +68,8 @@ dependencies {
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 
     // JetPack DataStore
-    implementation 'androidx.datastore:datastore-preferences:1.0.0-beta01'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.0-alpha01'
+    implementation "androidx.datastore:datastore-preferences:$datastore_version"
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.0-alpha02'
 
     // Room components
     implementation "androidx.room:room-runtime:$room_version"
@@ -82,9 +85,6 @@ dependencies {
 
     // Crome Custom Tabs
     implementation "androidx.browser:browser:$chrome_custom_tabs"
-
-    // Custom Bottom Navigation bar
-    implementation 'com.ismaeldivita.chipnavigation:chip-navigation-bar:1.3.4'
 
     // Lottie Animation Library
     implementation "com.airbnb.android:lottie:$lottie_version"
