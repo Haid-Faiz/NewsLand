@@ -1,4 +1,4 @@
-package com.example.newsapp.data.paging
+package com.example.newsapp.utils
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

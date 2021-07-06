@@ -1,11 +1,15 @@
-package com.example.libnews.models
+package com.example.datastore.remote.models
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
+@Entity(tableName = "article_table")
 @JsonClass(generateAdapter = true)
 data class Article(
-    val id: Int? = null,  // This param is for id for Room
+    @PrimaryKey(autoGenerate = true)
+    val id: Int? = null,
     @Json(name = "author")
     val author: String?,
     @Json(name = "content")

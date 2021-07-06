@@ -1,27 +1,23 @@
 package com.example.newsapp.ui.saved
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
+import androidx.core.view.isGone
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.paging.flatMap
+import androidx.paging.CombinedLoadStates
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.libnews.models.Article
 import com.example.newsapp.R
 import com.example.newsapp.databinding.FragmentNewsListBinding
-import com.example.newsapp.ui.MainActivity
 import com.example.newsapp.ui.feed.NewsFeedViewModel
 import com.example.newsapp.ui.feed.NewsListAdapter
-import com.example.newsapp.utils.Util
 import com.example.newsapp.utils.showSnackBar
-import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.appbar.AppBarLayout.LayoutParams.SCROLL_FLAG_NO_SCROLL
-import com.google.android.material.appbar.AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
@@ -52,18 +48,18 @@ class SavedFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setUpRecyclerView()
 
-//        newsFeedViewModel.getAllNewsList().observe(viewLifecycleOwner) {
-//            it.isEmpty().also { isEmpty ->
-//                _binding!!.statusBox.isVisible = isEmpty
-//                _binding!!.newsListRecyclerview.isVisible = !isEmpty
-//            }
-//            val newList: ArrayList<Article> = Util.toArticleList(it)
-////            newsListAdapter.submitList(newList)
-//        }
-
         lifecycleScope.launchWhenCreated {
             newsFeedViewModel.getAllNewsList().collectLatest {
-//                newsListAdapter.submitList(it)
+                newsListAdapter.submitData(lifecycle, it)
+                newsListAdapter.loadStateFlow.collectLatest { loadStates: CombinedLoadStates ->
+                    val refreshState = loadStates.source.refresh
+                    val isListEmpty = (refreshState is LoadState.NotLoading
+                            && loadStates.append.endOfPaginationReached
+                            && newsListAdapter.itemCount == 0)
+
+                    _binding!!.newsListRecyclerview.isGone = isListEmpty
+                    _binding!!.statusBox.isGone = !isListEmpty
+                }
             }
         }
     }
@@ -71,10 +67,7 @@ class SavedFragment : Fragment() {
     private fun setUpRecyclerView() {
         _binding!!.newsListRecyclerview.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        newsListAdapter = NewsListAdapter(true) {
-            _binding!!.statusBox.isVisible = it == 0
-            _binding!!.newsListRecyclerview.isVisible = it != 0
-        }
+        newsListAdapter = NewsListAdapter(true)
         newsListAdapter.setOnItemDeleteListener {
             newsFeedViewModel.delete(it)
             requireView().showSnackBar("Successfully deleted")

@@ -35,7 +35,6 @@ class NewsFeedFragment() : Fragment() {
         return _binding!!.root
     }
 
-    @ExperimentalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -44,7 +43,7 @@ class NewsFeedFragment() : Fragment() {
         val titleList: ArrayList<String>? = util.getTabsTitle(name)
 
         val newsPagerAdapter = NewsPagerAdapter(childFragmentManager)
-//        _binding?.viewPager?.offscreenPageLimit = 1
+        // _binding?.viewPager?.offscreenPageLimit = 1
         _binding?.viewPager?.adapter = newsPagerAdapter
         // Attaching TabLayout with ViewPager2
         TabLayoutMediator(_binding!!.tabLayout, _binding!!.viewPager) { tab, position ->

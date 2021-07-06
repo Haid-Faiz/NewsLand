@@ -13,7 +13,6 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/datastore" />
-            <option value="$PROJECT_DIR$/libnews" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

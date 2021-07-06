@@ -7,7 +7,7 @@ object Constants {
     const val NIGHT_MODE_KEY = "night_mode"
     const val ON_BOARDED_KEY = "is_on_boarded_on_app"
     const val APP_PREFERENCE_DATASTORE = "news_land_preference_data_store"
-    const val STARTING_PAGE_INDEX = 1
+//    const val STARTING_PAGE_INDEX = 1
     const val PAGE_LOAD_SIZE = 4
     const val NEWS_SEARCH_TIME_DELAY = 800L
 }

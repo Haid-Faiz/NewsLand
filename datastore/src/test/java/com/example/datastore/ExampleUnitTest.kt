@@ -1,7 +1,8 @@
 package com.example.datastore
 
+import com.example.datastore.remote.NewsClient
+import com.example.datastore.remote.apis.NewsApi
 import org.junit.Test
-
 import org.junit.Assert.*
 
 /**

@@ -13,14 +13,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.example.libnews.models.Article
+import com.example.datastore.remote.models.Article
 import com.example.newsapp.R
 import com.example.newsapp.databinding.NewsListItemBinding
 import com.example.newsapp.utils.formatDate
 
 class NewsListAdapter(
-    private val deletable: Boolean = false,
-    private val getItemCount: ((itemcount: Int) -> Unit)? = null
+    private val deletable: Boolean = false
 ) :
     PagingDataAdapter<Article, NewsListAdapter.ViewHolder>(NewsListCallback()) {
 
@@ -30,9 +29,9 @@ class NewsListAdapter(
         return ViewHolder(binding)
     }
 
+    
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        getItemCount?.invoke(itemCount)
-        Log.d("hellomr2", "onBindViewHolder: $itemCount")
         getItem(position)?.let { article: Article ->
             holder.binding.title.text = article.title
             holder.binding.description.text = article.description

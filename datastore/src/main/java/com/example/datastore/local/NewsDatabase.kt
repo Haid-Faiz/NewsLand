@@ -1,13 +1,11 @@
-package com.example.newsapp.data.room
+package com.example.datastore.local
 
-import android.content.Context
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.newsapp.utils.Constants.NEWS_APP_DATABASE_NAME
+import com.example.datastore.remote.models.Article
 
-@Database(entities = [ArticleEntity::class], version = 1, exportSchema = false)
+@Database(entities = [Article::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class NewsDatabase : RoomDatabase() {
 

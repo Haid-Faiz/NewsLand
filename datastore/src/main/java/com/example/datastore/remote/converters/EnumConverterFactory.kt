@@ -1,4 +1,4 @@
-package com.example.libnews.converters
+package com.example.datastore.remote.converters
 
 import com.squareup.moshi.Json
 import retrofit2.Converter

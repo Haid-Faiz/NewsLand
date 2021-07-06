@@ -11,7 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newsapp.R
-import com.example.newsapp.data.paging.PagingErrorAdapter
+import com.example.newsapp.utils.PagingErrorAdapter
 import com.example.newsapp.databinding.FragmentNewsListBinding
 import com.example.newsapp.ui.feed.NewsFeedViewModel
 import com.example.newsapp.ui.feed.NewsListAdapter

@@ -3,6 +3,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="no_bookmark_msg">No bookmarked news found !</string>
+    <string name="connection_error_msg">Connection error</string>
     <string name="search_msg">Search any news that you are looking for !</string>
 
     <string name="menu_search">Search News</string>

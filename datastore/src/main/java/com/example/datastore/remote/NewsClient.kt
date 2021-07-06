@@ -1,6 +1,6 @@
-package com.example.libnews
+package com.example.datastore.remote
 
-import com.example.libnews.converters.EnumConverterFactory
+import com.example.datastore.remote.converters.EnumConverterFactory
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

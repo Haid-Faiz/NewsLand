@@ -1,9 +1,9 @@
-package com.example.libnews.apis
+package com.example.datastore.remote.apis
 
-import com.example.libnews.models.NewsResponse
-import com.example.libnews.params.Category
-import com.example.libnews.params.Country
-import com.example.libnews.params.Source
+import com.example.datastore.remote.models.NewsResponse
+import com.example.datastore.remote.params.Category
+import com.example.datastore.remote.params.Country
+import com.example.datastore.remote.params.Source
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

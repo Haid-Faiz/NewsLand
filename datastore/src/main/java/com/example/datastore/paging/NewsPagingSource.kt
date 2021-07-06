@@ -1,17 +1,18 @@
-package com.example.newsapp.data.paging
+package com.example.datastore.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.libnews.apis.NewsApi
-import com.example.libnews.models.Article
-import com.example.libnews.models.NewsResponse
-import com.example.libnews.params.Category
-import com.example.libnews.params.Country
-import com.example.libnews.params.Source
-import com.example.newsapp.utils.Constants.STARTING_PAGE_INDEX
+import com.example.datastore.remote.apis.NewsApi
+import com.example.datastore.remote.models.Article
+import com.example.datastore.remote.models.NewsResponse
+import com.example.datastore.remote.params.Category
+import com.example.datastore.remote.params.Country
+import com.example.datastore.remote.params.Source
 import retrofit2.HttpException
 import retrofit2.Response
 import java.io.IOException
+
+const val STARTING_PAGE_INDEX = 1
 
 class CountryPagingSource(
     private val newsApi: NewsApi,

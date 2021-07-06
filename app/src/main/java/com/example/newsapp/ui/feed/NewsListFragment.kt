@@ -5,22 +5,21 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.newsapp.data.paging.PagingErrorAdapter
+import com.example.newsapp.R
+import com.example.newsapp.utils.PagingErrorAdapter
 import com.example.newsapp.utils.Util
 import com.example.newsapp.databinding.FragmentNewsListBinding
 import com.example.newsapp.utils.handleExceptions
 import com.example.newsapp.utils.showSnackBar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
-import retrofit2.HttpException
-import java.io.IOException
 
 @AndroidEntryPoint
 class NewsListFragment : Fragment() {
@@ -36,6 +35,14 @@ class NewsListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentNewsListBinding.inflate(inflater, container, false)
+        _binding!!.statusMessageText.text = resources.getString(R.string.connection_error_msg)
+        _binding!!.retryButton.isVisible = true
+        _binding!!.statusMsgImg.setImageDrawable(
+            ContextCompat.getDrawable(
+                requireContext(),
+                R.drawable.ic_connection_error_24
+            )
+        )
         return _binding!!.root
     }
 
@@ -47,8 +54,7 @@ class NewsListFragment : Fragment() {
         val list = util.getTabsTitle(news)
 
         arguments?.getInt("tab_position")?.let { position ->
-
-            Log.d("tabPosition", "onViewCreated: $news   ////  $position")
+            Log.d("tabPosition", "onViewCreated-> tag: $news  | position: $position")
 
             lifecycleScope.launchWhenCreated {
                 when (news) {
@@ -72,6 +78,10 @@ class NewsListFragment : Fragment() {
                 }
             }
         }
+
+        _binding!!.retryButton.setOnClickListener {
+            newsListAdapter.retry()
+        }
     }
 
     private fun setUpRecyclerView() {
@@ -87,6 +97,7 @@ class NewsListFragment : Fragment() {
                 is LoadState.NotLoading -> {
                     _binding!!.apply {
                         newsListRecyclerview.isVisible = true
+                        statusBox.isVisible = false
                         shimmerProgress.stopShimmer()
                         shimmerProgress.isVisible = false
                     }
@@ -95,6 +106,7 @@ class NewsListFragment : Fragment() {
                 LoadState.Loading -> {
                     _binding!!.apply {
                         newsListRecyclerview.isVisible = false
+                        statusBox.isVisible = false
                         shimmerProgress.startShimmer()
                         shimmerProgress.isVisible = true
                     }
@@ -103,6 +115,7 @@ class NewsListFragment : Fragment() {
                     handleExceptions((it.refresh as LoadState.Error).error)
                     _binding!!.apply {
                         newsListRecyclerview.isVisible = false
+                        statusBox.isVisible = true
                         shimmerProgress.stopShimmer()
                         shimmerProgress.isVisible = false
                     }

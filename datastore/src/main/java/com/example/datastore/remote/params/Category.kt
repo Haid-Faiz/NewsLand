@@ -1,4 +1,4 @@
-package com.example.libnews.params
+package com.example.datastore.remote.params
 
 import com.squareup.moshi.Json
 

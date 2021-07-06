@@ -1,4 +1,4 @@
-package com.example.libnews.models
+package com.example.datastore.remote.models
 
 
 import com.squareup.moshi.Json

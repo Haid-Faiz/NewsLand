@@ -1,17 +1,14 @@
 package com.example.newsapp.ui.feed
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.example.libnews.models.Article
-import com.example.libnews.params.Category
-import com.example.libnews.params.Country
-import com.example.libnews.params.Source
+import com.example.datastore.remote.models.Article
+import com.example.datastore.remote.params.Category
+import com.example.datastore.remote.params.Country
+import com.example.datastore.remote.params.Source
 import com.example.newsapp.data.repositories.NewsRepo
-import com.example.newsapp.data.room.ArticleEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -56,7 +53,7 @@ class NewsFeedViewModel @Inject constructor(
         newsRepo.insert(article)
     }
 
-    fun getAllNewsList(): Flow<PagingData<ArticleEntity>> =
+    fun getAllNewsList(): Flow<PagingData<Article>> =
         newsRepo.getAllNewsList().cachedIn(viewModelScope)
 
     fun delete(article: Article) = viewModelScope.launch {

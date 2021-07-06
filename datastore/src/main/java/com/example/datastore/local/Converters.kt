@@ -1,7 +1,7 @@
-package com.example.newsapp.data.room
+package com.example.datastore.local
 
 import androidx.room.TypeConverter
-import com.example.libnews.models.Article
+import com.example.datastore.remote.models.Article
 
 class Converters  {
 

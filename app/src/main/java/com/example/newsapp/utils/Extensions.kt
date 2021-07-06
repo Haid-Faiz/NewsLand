@@ -4,7 +4,7 @@ import android.text.format.DateUtils
 import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.example.libnews.models.Article
+import com.example.datastore.remote.models.Article
 import com.google.android.material.snackbar.Snackbar
 import retrofit2.HttpException
 import java.io.IOException
