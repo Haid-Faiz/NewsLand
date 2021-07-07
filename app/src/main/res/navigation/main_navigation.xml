@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/nav_category"
         android:name="com.example.newsapp.ui.feed.NewsFeedFragment"
-        android:label="Category" >
+        android:label="Category">
         <argument
             android:name="news_feed"
             android:defaultValue="category"
@@ -27,7 +27,7 @@
     <fragment
         android:id="@+id/nav_sources"
         android:name="com.example.newsapp.ui.feed.NewsFeedFragment"
-        android:label="sources" >
+        android:label="sources">
         <argument
             android:name="news_feed"
             android:defaultValue="sources"

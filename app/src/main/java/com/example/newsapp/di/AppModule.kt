@@ -7,6 +7,7 @@ import com.example.datastore.remote.apis.NewsApi
 import com.example.datastore.local.ArticleDao
 import com.example.datastore.local.NewsDatabase
 import com.example.newsapp.utils.Constants.NEWS_APP_DATABASE_NAME
+import com.example.newsapp.utils.Util
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -19,17 +19,6 @@ class NewsFeedViewModel @Inject constructor(
     private val newsRepo: NewsRepo
 ) : ViewModel() {
 
-//    private var numList = mutableListOf<Int>()
-//    var tabPosition: Flow<Int> = _tabPosition.filter { newNum ->
-//
-//        numList.contains(newNum).let { isContain ->
-//            if (isContain) false else {
-//                numList.add(newNum)
-//                true
-//            }
-//        }
-//    }
-
     fun getNewsByCountry(country: Country): Flow<PagingData<Article>> {
         return newsRepo.getNewsByCountry(country).cachedIn(viewModelScope)
     }

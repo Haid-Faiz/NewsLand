@@ -1,7 +1,6 @@
 package com.example.newsapp.ui.saved
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newsapp.R
 import com.example.newsapp.databinding.FragmentNewsListBinding
 import com.example.newsapp.ui.feed.NewsFeedViewModel
@@ -47,7 +45,6 @@ class SavedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpRecyclerView()
-
         lifecycleScope.launchWhenCreated {
             newsFeedViewModel.getAllNewsList().collectLatest {
                 newsListAdapter.submitData(lifecycle, it)
@@ -65,8 +62,6 @@ class SavedFragment : Fragment() {
     }
 
     private fun setUpRecyclerView() {
-        _binding!!.newsListRecyclerview.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         newsListAdapter = NewsListAdapter(true)
         newsListAdapter.setOnItemDeleteListener {
             newsFeedViewModel.delete(it)

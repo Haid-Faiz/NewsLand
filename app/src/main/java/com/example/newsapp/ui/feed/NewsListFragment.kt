@@ -8,25 +8,31 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newsapp.R
 import com.example.newsapp.utils.PagingErrorAdapter
 import com.example.newsapp.utils.Util
 import com.example.newsapp.databinding.FragmentNewsListBinding
+import com.example.newsapp.utils.Constants.CATEGORY
+import com.example.newsapp.utils.Constants.NEWS_TAG
+import com.example.newsapp.utils.Constants.SOURCES
+import com.example.newsapp.utils.Constants.TAB_POSITION
+import com.example.newsapp.utils.Constants.TOP_HEADLINES
 import com.example.newsapp.utils.handleExceptions
 import com.example.newsapp.utils.showSnackBar
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class NewsListFragment : Fragment() {
 
+    @Inject
+    lateinit var util: Util
     private var _binding: FragmentNewsListBinding? = null
-    //    private lateinit var newsFeedViewModel: NewsFeedViewModel
-    private val newsFeedViewModel: NewsFeedViewModel by activityViewModels()
+    private val newsFeedViewModel: NewsFeedViewModel by viewModels()
     private lateinit var newsListAdapter: NewsListAdapter
 
     override fun onCreateView(
@@ -49,30 +55,32 @@ class NewsListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpRecyclerView()
-        val util = Util(requireContext())
-        val news = arguments?.getString("news", "top_headlines")!!
+        val news = requireArguments().getString(
+            NEWS_TAG,
+            TOP_HEADLINES
+        )
         val list = util.getTabsTitle(news)
 
-        arguments?.getInt("tab_position")?.let { position ->
+        requireArguments().getInt(TAB_POSITION).let { position ->
             Log.d("tabPosition", "onViewCreated-> tag: $news  | position: $position")
 
             lifecycleScope.launchWhenCreated {
                 when (news) {
-                    "top_headlines" -> newsFeedViewModel
+                    TOP_HEADLINES -> newsFeedViewModel
                         .getNewsByCountry(util.toEnumCountry(list?.get(position)))
-                        .collect {
+                        .collectLatest {
                             newsListAdapter.submitData(lifecycle, it)
                         }
 
-                    "category" -> newsFeedViewModel
+                    CATEGORY -> newsFeedViewModel
                         .getNewsByCategory(util.toEnumCategory(list?.get(position)))
-                        .collect {
+                        .collectLatest {
                             newsListAdapter.submitData(lifecycle, it)
                         }
 
-                    "sources" -> newsFeedViewModel
+                    SOURCES -> newsFeedViewModel
                         .getNewsBySources(util.toEnumSource(list?.get(position)))
-                        .collect {
+                        .collectLatest {
                             newsListAdapter.submitData(lifecycle, it)
                         }
                 }
@@ -85,8 +93,6 @@ class NewsListFragment : Fragment() {
     }
 
     private fun setUpRecyclerView() {
-        _binding!!.newsListRecyclerview.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         newsListAdapter = NewsListAdapter()
         _binding!!.newsListRecyclerview.adapter = newsListAdapter.withLoadStateHeaderAndFooter(
             header = PagingErrorAdapter { newsListAdapter.retry() },

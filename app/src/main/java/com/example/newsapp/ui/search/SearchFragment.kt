@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newsapp.R
 import com.example.newsapp.utils.PagingErrorAdapter
 import com.example.newsapp.databinding.FragmentNewsListBinding
@@ -60,8 +59,6 @@ class SearchFragment : Fragment() {
     }
 
     private fun setUpRecyclerView() {
-        _binding!!.newsListRecyclerview.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         newsListAdapter = NewsListAdapter()
         _binding!!.newsListRecyclerview.adapter = newsListAdapter.withLoadStateHeaderAndFooter(
             header = PagingErrorAdapter { newsListAdapter.retry() },

@@ -5,25 +5,30 @@ import com.example.datastore.remote.params.Category
 import com.example.datastore.remote.params.Country
 import com.example.datastore.remote.params.Source
 import com.example.newsapp.R
+import com.example.newsapp.utils.Constants.CATEGORY
+import com.example.newsapp.utils.Constants.SOURCES
+import com.example.newsapp.utils.Constants.TOP_HEADLINES
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 
-class Util(val context: Context) {
+class Util @Inject constructor(@ApplicationContext val context: Context) {
 
     fun getTabsTitle(newsFeedName: String?): ArrayList<String>? = when (newsFeedName) {
-        "top_headlines" -> arrayListOf(
+        TOP_HEADLINES -> arrayListOf(
             getString(R.string.india),
             getString(R.string.usa),
             getString(R.string.united_kingdom),
             getString(R.string.canada),
             getString(R.string.singapore)
         )
-        "category" -> arrayListOf(
+        CATEGORY -> arrayListOf(
             getString(R.string.technology),
             getString(R.string.health),
             getString(R.string.entertainment),
             getString(R.string.science),
             getString(R.string.business)
         )
-        "sources" -> arrayListOf(
+        SOURCES -> arrayListOf(
             getString(R.string.bbc),
             getString(R.string.times_of_india),
             getString(R.string.the_hindu),
@@ -60,7 +65,7 @@ class Util(val context: Context) {
         else -> Source.BBC
     }
 
-    private fun getString(string: Int): String {
+    fun getString(string: Int): String {
         return context.getString(string)
     }
 }

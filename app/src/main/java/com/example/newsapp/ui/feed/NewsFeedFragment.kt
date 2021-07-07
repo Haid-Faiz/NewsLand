@@ -1,36 +1,34 @@
 package com.example.newsapp.ui.feed
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.newsapp.databinding.FragmentNewsFeedBinding
+import com.example.newsapp.utils.Constants.NEWS_FEED
+import com.example.newsapp.utils.Constants.NEWS_TAG
+import com.example.newsapp.utils.Constants.TAB_POSITION
+import com.example.newsapp.utils.Constants.TOP_HEADLINES
 import com.example.newsapp.utils.Util
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class NewsFeedFragment() : Fragment() {
+class NewsFeedFragment : Fragment() {
 
+    @Inject
+    lateinit var util: Util    // Field Injection
     private var _binding: FragmentNewsFeedBinding? = null
-    private var name: String? = "top_headlines"
-    private val newsFeedViewModel: NewsFeedViewModel by activityViewModels()
+    private var name: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         _binding = FragmentNewsFeedBinding.inflate(inflater, container, false)
         return _binding!!.root
     }
@@ -38,8 +36,7 @@ class NewsFeedFragment() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val util = Util(requireContext())
-        name = arguments?.getString("news_feed", "top_headlines")
+        name = requireArguments().getString(NEWS_FEED, TOP_HEADLINES)
         val titleList: ArrayList<String>? = util.getTabsTitle(name)
 
         val newsPagerAdapter = NewsPagerAdapter(childFragmentManager)
@@ -64,8 +61,8 @@ class NewsFeedFragment() : Fragment() {
         override fun createFragment(position: Int): Fragment {
             val fragment by lazy { NewsListFragment() }
             fragment.arguments = Bundle().apply {
-                putString("news", name)
-                putInt("tab_position", position)
+                putString(NEWS_TAG, name)
+                putInt(TAB_POSITION, position)
             }
             return fragment
         }

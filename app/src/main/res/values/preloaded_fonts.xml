@@ -2,9 +2,7 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/amiko</item>
-        <item>@font/amita_bold</item>
-        <item>@font/averia_sans_libre</item>
-        <item>@font/goblin_one</item>
+        <item>@font/noto_sans</item>
         <item>@font/paytone_one</item>
     </array>
 </resources>

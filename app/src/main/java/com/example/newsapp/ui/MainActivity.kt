@@ -1,7 +1,6 @@
 package com.example.newsapp.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.widget.ImageView
 import androidx.activity.viewModels
@@ -28,7 +27,7 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
 
     @Inject
-    lateinit var preferenceRepository: PreferenceRepository
+    lateinit var preferenceRepository: PreferenceRepository  // This is Field injection
     private var isNightMode: Boolean = false
     private val viewModel: NewsFeedViewModel by viewModels()   // It's injection will take care by viewModels() property delegate
     private lateinit var navController: NavController
@@ -42,18 +41,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(_binding!!.root)
         setSupportActionBar(_binding?.appBarMain?.toolbar)
         setUpNav()
-//        checkNightMode()
-        preferenceRepository.isNightMode.asLiveData().observe(this) {
-            isNightMode = it ?: false
-            if (it == true)
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            else
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        }
+        checkNightMode()
 
         onDestinationChangedListener =
             NavController.OnDestinationChangedListener { controller, destination, arguments ->
-                Log.d("navC", "onCreate: ${destination.id}")
 
                 (destination.id != R.id.nav_search && destination.id != R.id.nav_saved).let {
                     _binding?.appBarMain?.contentMain?.navBottom?.isVisible = it
@@ -68,18 +59,21 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-//         Instantiating MyBroadcastReceiver
-//        myBroadcastReceiver = MyBroadcastReceiver()
         val navHeaderView = _binding?.navView?.getHeaderView(0)
         navHeaderView?.findViewById<ImageView>(R.id.night_mode_Button)?.setOnClickListener {
             viewModel.setNightMode(!isNightMode)
         }
     }
 
-
-//    private fun checkNightMode(): Boolean {
-//
-//    }
+    private fun checkNightMode() {
+        preferenceRepository.isNightMode.asLiveData().observe(this) {
+            isNightMode = it ?: false
+            if (it == true)
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            else
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.nav_bottom_menu, menu)
@@ -104,17 +98,6 @@ class MainActivity : AppCompatActivity() {
         _binding?.navView?.setupWithNavController(navController)
     }
 
-//    private fun checkNightMode() {
-//        nightModePref = getSharedPreferences("NightModePref", MODE_PRIVATE)
-//        editor = nightModePref.edit()
-//        isNightModeOn = nightModePref.getBoolean("NightMode", false)
-//
-//        if (isNightModeOn)
-//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-//        else
-//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-//    }
-
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
@@ -134,9 +117,3 @@ class MainActivity : AppCompatActivity() {
         _binding = null
     }
 }
-
-//The device already has an application with the same package but a different signature.
-//In order to proceed, you will have to uninstall the existing application
-//
-//WARNING: Uninstalling will remove the application data!
-//Do you want to uninstall the existing application?

@@ -59,18 +59,17 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:ellipsize="end"
-            android:letterSpacing="0.02"
+            android:fontFamily="@font/noto_sans"
             android:maxLines="3"
-            android:lineSpacingExtra="2dp"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            tools:text="According to the sources, GTA 6 is just about to launch and it is a good news for the peoples who are big fan of the game.
-GTA 5 was a success game for the rockstar company and now gta6 might be the next one."
             android:textColor="@color/sec_text"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="@id/title"
             app:layout_constraintStart_toStartOf="@id/title"
-            app:layout_constraintTop_toBottomOf="@id/title" />
+            app:layout_constraintTop_toBottomOf="@id/title"
+            tools:text="According to the sources, GTA 6 is just about to launch and it is a good news for the peoples who are big fan of the game.
+GTA 5 was a success game for the rockstar company and now gta6 might be the next one." />
 
         <TextView
             android:id="@+id/source_name"
@@ -79,6 +78,7 @@ GTA 5 was a success game for the rockstar company and now gta6 might be the next
             android:layout_marginTop="14dp"
             android:layout_marginBottom="12dp"
             android:paddingStart="16dp"
+            android:fontFamily="@font/noto_sans"
             tools:text="NDTV India"
             android:textColor="@color/sec_text"
             android:textSize="12sp"
@@ -92,6 +92,7 @@ GTA 5 was a success game for the rockstar company and now gta6 might be the next
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
             android:text="7 hours ago"
+            android:fontFamily="@font/noto_sans"
             android:textColor="@color/sec_text"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@id/source_name"

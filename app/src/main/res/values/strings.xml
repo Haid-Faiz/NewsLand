@@ -6,6 +6,13 @@
     <string name="connection_error_msg">Connection error</string>
     <string name="search_msg">Search any news that you are looking for !</string>
 
+    <string name="news_feed">news_feed</string>
+    <string name="news_tag">news_tag</string>
+    <string name="tab_position">tab_position</string>
+    <string name="top_headlines">top_headlines</string>
+    <string name="category">category</string>
+    <string name="sources">sources</string>
+
     <string name="menu_search">Search News</string>
     <string name="menu_saved">Saved News</string>
     <string name="menu_news_feed">News Feed</string>

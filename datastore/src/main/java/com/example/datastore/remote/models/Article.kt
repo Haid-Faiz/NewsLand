@@ -8,8 +8,11 @@ import com.squareup.moshi.JsonClass
 @Entity(tableName = "article_table")
 @JsonClass(generateAdapter = true)
 data class Article(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int? = null,
+//    @PrimaryKey(autoGenerate = true)
+//    val id: Int? = null,
+    @PrimaryKey(autoGenerate = false)
+    @Json(name = "url")
+    val url: String,
     @Json(name = "author")
     val author: String?,
     @Json(name = "content")
@@ -22,8 +25,6 @@ data class Article(
     val source: Source,
     @Json(name = "title")
     val title: String,
-    @Json(name = "url")
-    val url: String,
     @Json(name = "urlToImage")
     val urlToImage: String?
 ) {
