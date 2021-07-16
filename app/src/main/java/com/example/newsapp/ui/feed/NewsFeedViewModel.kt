@@ -19,20 +19,28 @@ class NewsFeedViewModel @Inject constructor(
     private val newsRepo: NewsRepo
 ) : ViewModel() {
 
-    fun getNewsByCountry(country: Country): Flow<PagingData<Article>> {
-        return newsRepo.getNewsByCountry(country).cachedIn(viewModelScope)
+    lateinit var news: Flow<PagingData<Article>>
+
+    // If device will get rotated then
+    var isRotated: Boolean = false
+
+    fun getNewsByCountry(country: Country) {
+        news = newsRepo.getNewsByCountry(country).cachedIn(viewModelScope)
+//        return newsRepo.getNewsByCountry(country).cachedIn(viewModelScope)
     }
 
-    fun getNewsByCategory(category: Category): Flow<PagingData<Article>> {
-        return newsRepo.getNewsByCategory(category).cachedIn(viewModelScope)
+    fun getNewsByCategory(category: Category) {
+        news = newsRepo.getNewsByCategory(category).cachedIn(viewModelScope)
+//        return newsRepo.getNewsByCategory(category).cachedIn(viewModelScope)
     }
 
-    fun getNewsBySources(source: Source): Flow<PagingData<Article>> {
-        return newsRepo.getNewsBySources(source).cachedIn(viewModelScope)
+    fun getNewsBySources(source: Source) {
+        news = newsRepo.getNewsBySources(source).cachedIn(viewModelScope)
+//        return newsRepo.getNewsBySources(source).cachedIn(viewModelScope)
     }
 
-    fun searchNews(searchQuery: String): Flow<PagingData<Article>> {
-        return newsRepo.searchNews(searchQuery).cachedIn(viewModelScope)
+    fun searchNews(searchQuery: String) {
+        news = newsRepo.searchNews(searchQuery).cachedIn(viewModelScope)
     }
 
 //----------------------------------- RoomDatabase Calls -------------------------------------------

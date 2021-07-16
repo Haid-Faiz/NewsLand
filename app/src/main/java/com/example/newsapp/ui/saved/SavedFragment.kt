@@ -34,10 +34,7 @@ class SavedFragment : Fragment() {
         _binding = FragmentNewsListBinding.inflate(inflater, container, false)
         _binding!!.statusMessageText.text = resources.getString(R.string.no_bookmark_msg)
         _binding!!.statusMsgImg.setImageDrawable(
-            ContextCompat.getDrawable(
-                requireContext(),
-                R.drawable.ic_nav_bookmark_24
-            )
+            ContextCompat.getDrawable(requireContext(), R.drawable.ic_nav_bookmark_24)
         )
         return _binding!!.root
     }

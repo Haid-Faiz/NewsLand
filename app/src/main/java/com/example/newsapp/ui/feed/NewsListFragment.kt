@@ -55,35 +55,29 @@ class NewsListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpRecyclerView()
-        val news = requireArguments().getString(
-            NEWS_TAG,
-            TOP_HEADLINES
-        )
+        val news = requireArguments().getString(NEWS_TAG, TOP_HEADLINES)
         val list = util.getTabsTitle(news)
 
         requireArguments().getInt(TAB_POSITION).let { position ->
-            Log.d("tabPosition", "onViewCreated-> tag: $news  | position: $position")
 
-            lifecycleScope.launchWhenCreated {
+            if (!newsFeedViewModel.isRotated) {
+                Log.d("orientation", "onViewCreated: called")
                 when (news) {
                     TOP_HEADLINES -> newsFeedViewModel
                         .getNewsByCountry(util.toEnumCountry(list?.get(position)))
-                        .collectLatest {
-                            newsListAdapter.submitData(lifecycle, it)
-                        }
 
                     CATEGORY -> newsFeedViewModel
                         .getNewsByCategory(util.toEnumCategory(list?.get(position)))
-                        .collectLatest {
-                            newsListAdapter.submitData(lifecycle, it)
-                        }
 
                     SOURCES -> newsFeedViewModel
                         .getNewsBySources(util.toEnumSource(list?.get(position)))
-                        .collectLatest {
-                            newsListAdapter.submitData(lifecycle, it)
-                        }
                 }
+            }
+        }
+
+        lifecycleScope.launchWhenCreated {
+            newsFeedViewModel.news.collectLatest {
+                newsListAdapter.submitData(lifecycle, it)
             }
         }
 
@@ -137,5 +131,6 @@ class NewsListFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+        newsFeedViewModel.isRotated = true
     }
 }

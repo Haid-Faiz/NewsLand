@@ -20,7 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -40,14 +40,11 @@ class SearchFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentNewsListBinding.inflate(inflater, container, false)
         _binding!!.statusMessageText.text = resources.getString(R.string.search_msg)
         _binding!!.statusMsgImg.setImageDrawable(
-            ContextCompat.getDrawable(
-                requireContext(),
-                R.drawable.ic_nav_search_24
-            )
+            ContextCompat.getDrawable(requireContext(), R.drawable.ic_nav_search_24)
         )
         _binding!!.statusBox.isVisible = true
         return _binding!!.root
@@ -102,11 +99,8 @@ class SearchFragment : Fragment() {
         job?.cancel()
         job = MainScope().launch {
             delay(NEWS_SEARCH_TIME_DELAY)
-            lifecycleScope.launchWhenCreated {
-                newsFeedViewModel.searchNews(query)
-                    .collect {
-                        newsListAdapter.submitData(lifecycle, it)
-                    }
+            newsFeedViewModel.news.collectLatest {
+                newsListAdapter.submitData(lifecycle, it)
             }
         }
     }
