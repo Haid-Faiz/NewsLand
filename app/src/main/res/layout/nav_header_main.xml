@@ -4,12 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_header_main"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/nav_header_height"
+    android:layout_height="@dimen/_168sdp"
     android:background="@drawable/side_nav_bar"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/_12sdp"
+    android:paddingTop="@dimen/_12sdp"
+    android:paddingRight="@dimen/_12sdp"
+    android:paddingBottom="@dimen/_12sdp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
 
@@ -18,8 +18,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_marginTop="@dimen/night_mode_button_size"
-        android:layout_marginBottom="4dp"
+        android:layout_marginTop="@dimen/_24sdp"
+        android:layout_marginBottom="@dimen/_2sdp"
         android:fontFamily="@font/paytone_one"
         android:text="@string/app_name"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
@@ -29,11 +29,11 @@
 
     <ImageView
         android:id="@+id/night_mode_Button"
-        android:layout_width="@dimen/night_mode_button_size"
-        android:layout_height="@dimen/night_mode_button_size"
+        android:layout_width="@dimen/_24sdp"
+        android:layout_height="@dimen/_24sdp"
         android:layout_gravity="end"
-        android:padding="6dp"
-        android:layout_marginEnd="16dp"
+        android:padding="@dimen/_2sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
         android:src="@drawable/ic_day_24"
         app:layout_constraintBottom_toBottomOf="@+id/app_name_text"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:text="@string/nav_header_subtitle"
         android:textColor="@color/sec_text"
-        android:textSize="16sp"
+        android:textSize="@dimen/_12ssp"
         android:fontFamily="@font/amiko"
         app:layout_constraintStart_toStartOf="@id/app_name_text"
         app:layout_constraintTop_toBottomOf="@id/app_name_text"/>

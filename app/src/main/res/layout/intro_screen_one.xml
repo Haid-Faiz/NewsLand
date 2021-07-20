@@ -9,19 +9,19 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="34dp"
+        android:layout_marginTop="@dimen/_24sdp"
         android:layout_gravity="top|center_horizontal"
         android:fontFamily="@font/paytone_one"
         android:text="Welcome to NewsLand"
         android:textColor="@color/primary_text"
-        android:textSize="24sp" />
+        android:textSize="@dimen/_16ssp" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:layout_width="match_parent"
-        android:layout_height="186dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginEnd="56dp"
-        android:layout_marginTop="58dp"
+        android:layout_height="@dimen/_146sdp"
+        android:layout_marginStart="@dimen/_42sdp"
+        android:layout_marginEnd="@dimen/_42sdp"
+        android:layout_marginTop="@dimen/_46sdp"
         android:layout_gravity="center"
         app:lottie_rawRes="@raw/news_paper_anim"
         app:lottie_autoPlay="true" />
@@ -31,12 +31,12 @@
         android:layout_height="wrap_content"
         android:text=" Get latest news as: \n\n - Top headlines \n - Categorised News \n - News from different sources"
         android:textColor="@color/primary_text"
-        android:layout_marginStart="36dp"
-        android:layout_marginEnd="36dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginStart="@dimen/_24sdp"
+        android:layout_marginEnd="@dimen/_24sdp"
+        android:layout_marginTop="@dimen/_56sdp"
         android:fontFamily="@font/amiko"
         android:layout_gravity="center_horizontal"
-        android:lineSpacingExtra="2dp"
-        android:textSize="16sp" />
+        android:lineSpacingExtra="@dimen/_1sdp"
+        android:textSize="@dimen/_12ssp" />
 
 </LinearLayout>

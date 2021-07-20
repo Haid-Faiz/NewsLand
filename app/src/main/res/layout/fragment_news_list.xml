@@ -25,11 +25,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
             <include layout="@layout/news_list_item_shimmer" />
-
             <include layout="@layout/news_list_item_shimmer" />
-
             <include layout="@layout/news_list_item_shimmer" />
         </LinearLayout>
 
@@ -39,7 +36,7 @@
         android:id="@+id/status_box"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="96dp"
+        android:layout_marginBottom="@dimen/_72sdp"
         android:orientation="vertical"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -50,11 +47,11 @@
 
         <ImageView
             android:id="@+id/status_msg_img"
-            android:layout_width="168dp"
-            android:layout_height="168dp"
+            android:layout_width="@dimen/_132sdp"
+            android:layout_height="@dimen/_132sdp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginStart="56dp"
-            android:layout_marginEnd="56dp"
+            android:layout_marginStart="@dimen/_42sdp"
+            android:layout_marginEnd="@dimen/_42sdp"
             tools:src="@drawable/ic_nav_bookmark_24" />
 
 
@@ -63,15 +60,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/margin_top_24"
-            android:layout_marginStart="@dimen/margin_top_24"
-            android:layout_marginEnd="@dimen/margin_top_24"
-            android:layout_marginBottom="@dimen/fab_margin"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginEnd="@dimen/_16sdp"
+            android:layout_marginBottom="@dimen/_12sdp"
             android:fontFamily="@font/noto_sans"
             android:gravity="center_horizontal"
             android:text="You didn't bookmarked anything yet !"
             android:textColor="@color/primary_text"
-            android:textSize="18sp"
+            android:textSize="@dimen/_14sdp"
             android:textStyle="bold" />
 
         <com.google.android.material.button.MaterialButton

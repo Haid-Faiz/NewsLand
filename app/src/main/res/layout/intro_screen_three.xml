@@ -11,18 +11,18 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="34dp"
+        android:layout_marginTop="@dimen/_24sdp"
         android:fontFamily="@font/paytone_one"
         android:text="Search News"
         android:textColor="@color/primary_text"
-        android:textSize="24sp" />
+        android:textSize="@dimen/_16ssp" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:layout_width="match_parent"
-        android:layout_height="252dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginEnd="56dp"
-        android:layout_marginTop="52dp"
+        android:layout_height="@dimen/_196sdp"
+        android:layout_marginStart="@dimen/_42sdp"
+        android:layout_marginEnd="@dimen/_42sdp"
+        android:layout_marginTop="@dimen/_46sdp"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/anim_search_news"
         app:lottie_autoPlay="true" />
@@ -30,13 +30,13 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginEnd="36dp"
+        android:layout_marginTop="@dimen/_50sdp"
+        android:layout_marginStart="@dimen/_24sdp"
+        android:layout_marginEnd="@dimen/_24sdp"
         android:gravity="center_horizontal"
         android:text="Search for any news you are looking for"
         android:fontFamily="@font/amiko"
         android:textColor="@color/primary_text"
-        android:textSize="16sp" />
+        android:textSize="@dimen/_12ssp" />
 
 </LinearLayout>

@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="14sp"
-    android:layout_marginTop="8dp"
-    android:layout_marginEnd="14sp"
-    android:layout_marginBottom="8dp"
+    android:layout_marginStart="@dimen/_10sdp"
+    android:layout_marginTop="@dimen/_4sdp"
+    android:layout_marginEnd="@dimen/_10sdp"
+    android:layout_marginBottom="@dimen/_4sdp"
     android:backgroundTint="@color/sec_background"
-    app:cardCornerRadius="14dp"
-    app:cardElevation="3dp">
+    app:cardCornerRadius="@dimen/_10sdp"
+    app:cardElevation="@dimen/_3sdp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -19,7 +19,7 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="0dp"
-            android:layout_height="196dp"
+            android:layout_height="@dimen/_152sdp"
             android:background="@color/shimmerColor"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
@@ -30,8 +30,8 @@
             android:id="@+id/title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="14sp"
-            android:layout_marginEnd="84dp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_64sdp"
             android:background="@drawable/shimmer_bg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/imageView"
@@ -41,12 +41,12 @@
             android:id="@+id/description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_16sdp"
+            android:layout_marginBottom="@dimen/_12sdp"
             android:background="@drawable/shimmer_bg"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
+            android:paddingStart="@dimen/_12sdp"
+            android:paddingEnd="@dimen/_12sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/title"
             app:layout_constraintTop_toBottomOf="@id/title" />
@@ -55,51 +55,16 @@
             android:id="@+id/author_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            android:layout_marginEnd="184dp"
-            android:layout_marginBottom="12dp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_142sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
             android:background="@drawable/shimmer_bg"
-            android:paddingStart="16dp"
+            android:paddingStart="@dimen/_12sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/description"
             app:layout_constraintTop_toBottomOf="@id/description" />
 
-<!--        <TextView-->
-<!--            android:id="@+id/time_stamp"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="0dp"-->
-<!--            android:layout_marginStart="16dp"-->
-<!--            android:text="7 hours ago"-->
-<!--            android:textColor="@color/sec_text"-->
-<!--            android:textSize="12sp"-->
-<!--            app:layout_constraintBottom_toBottomOf="@id/author_name"-->
-<!--            app:layout_constraintStart_toEndOf="@id/author_name"-->
-<!--            app:layout_constraintTop_toTopOf="@id/author_name" />-->
-
-<!--        <ImageButton-->
-<!--            android:id="@+id/share_button"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:backgroundTint="@color/sec_background"-->
-<!--            android:paddingEnd="16dp"-->
-<!--            app:layout_constraintBottom_toBottomOf="@+id/author_name"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="@+id/author_name"-->
-<!--            app:srcCompat="@drawable/ic_baseline_share_24" />-->
-
-<!--        <ImageButton-->
-<!--            android:id="@+id/bookmark_button"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:backgroundTint="@color/sec_background"-->
-<!--            android:paddingEnd="12dp"-->
-<!--            app:layout_constraintBottom_toBottomOf="@+id/author_name"-->
-<!--            app:layout_constraintEnd_toStartOf="@+id/share_button"-->
-<!--            app:layout_constraintTop_toTopOf="@+id/author_name"-->
-<!--            app:srcCompat="@drawable/ic_nav_saved_24" />-->
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </com.google.android.material.card.MaterialCardView>

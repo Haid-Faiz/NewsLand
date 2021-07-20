@@ -39,8 +39,8 @@ class NewsFeedViewModel @Inject constructor(
 //        return newsRepo.getNewsBySources(source).cachedIn(viewModelScope)
     }
 
-    fun searchNews(searchQuery: String) {
-        news = newsRepo.searchNews(searchQuery).cachedIn(viewModelScope)
+    fun searchNews(searchQuery: String): Flow<PagingData<Article>> {
+        return newsRepo.searchNews(searchQuery).cachedIn(viewModelScope)
     }
 
 //----------------------------------- RoomDatabase Calls -------------------------------------------

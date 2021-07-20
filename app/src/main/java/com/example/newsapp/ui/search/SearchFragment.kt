@@ -20,6 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -99,7 +100,7 @@ class SearchFragment : Fragment() {
         job?.cancel()
         job = MainScope().launch {
             delay(NEWS_SEARCH_TIME_DELAY)
-            newsFeedViewModel.news.collectLatest {
+            newsFeedViewModel.searchNews(query).collect {
                 newsListAdapter.submitData(lifecycle, it)
             }
         }

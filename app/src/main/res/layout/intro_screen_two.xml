@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/whiteColor"
@@ -11,18 +10,18 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="34dp"
+        android:layout_marginTop="@dimen/_24sdp"
         android:fontFamily="@font/paytone_one"
         android:text="Bookmark News"
         android:textColor="@color/primary_text"
-        android:textSize="24sp" />
+        android:textSize="@dimen/_16ssp" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:layout_width="match_parent"
-        android:layout_height="186dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginEnd="56dp"
-        android:layout_marginTop="64dp"
+        android:layout_height="@dimen/_142sdp"
+        android:layout_marginStart="@dimen/_42sdp"
+        android:layout_marginEnd="@dimen/_42sdp"
+        android:layout_marginTop="@dimen/_50sdp"
         app:lottie_rawRes="@raw/anim_bookmark"
         app:lottie_loop="true"
         app:lottie_autoPlay="true" />
@@ -30,13 +29,13 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="104dp"
+        android:layout_marginStart="@dimen/_24sdp"
+        android:layout_marginTop="@dimen/_80sdp"
         android:gravity="center_horizontal"
-        android:layout_marginEnd="36dp"
+        android:layout_marginEnd="@dimen/_24sdp"
         android:fontFamily="@font/amiko"
         android:text="Save news of your choice locally and access them without internet connection"
         android:textColor="@color/primary_text"
-        android:textSize="16sp" />
+        android:textSize="@dimen/_12ssp" />
 
 </LinearLayout>
