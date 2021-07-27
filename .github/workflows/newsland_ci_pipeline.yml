@@ -1,4 +1,4 @@
-name: NewsLand Ci Pipeline
+name: Build
 
 on: push
 
