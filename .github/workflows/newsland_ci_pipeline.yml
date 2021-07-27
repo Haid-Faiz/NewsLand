@@ -19,4 +19,4 @@ jobs:
         run: ./gradlew assembleDebug
 
       - name: Ktlint Check
-        run: ./gradlew ktlintDebugCheck
+        run: ./gradlew ktlintCheck
