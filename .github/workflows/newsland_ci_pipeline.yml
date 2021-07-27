@@ -1,0 +1,17 @@
+name: NewsLand Ci Pipeline
+
+on: push
+
+jobs:
+  build_job:
+    name: Assemble Gradle
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Assemble Debug
+        run: ./gradlew assembleDebug
+
+      - name: Ktlint Check
+        run: ./gradlew ktlintDebugCheck
