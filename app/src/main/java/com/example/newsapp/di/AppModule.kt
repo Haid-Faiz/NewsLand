@@ -2,12 +2,11 @@ package com.example.newsapp.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.datastore.remote.NewsClient
-import com.example.datastore.remote.apis.NewsApi
 import com.example.datastore.local.ArticleDao
 import com.example.datastore.local.NewsDatabase
+import com.example.datastore.remote.NewsClient
+import com.example.datastore.remote.apis.NewsApi
 import com.example.newsapp.utils.Constants.NEWS_APP_DATABASE_NAME
-import com.example.newsapp.utils.Util
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -44,5 +43,4 @@ class AppModule {
 //    @Provides
 //    @Singleton
 //    fun providesAppPref(@ApplicationContext context: Context) = PreferenceRepository(context)
-
 }

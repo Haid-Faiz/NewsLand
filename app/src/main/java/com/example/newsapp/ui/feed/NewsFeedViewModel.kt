@@ -10,7 +10,7 @@ import com.example.datastore.remote.params.Country
 import com.example.datastore.remote.params.Source
 import com.example.newsapp.data.repositories.NewsRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -43,8 +43,7 @@ class NewsFeedViewModel @Inject constructor(
         return newsRepo.searchNews(searchQuery).cachedIn(viewModelScope)
     }
 
-//----------------------------------- RoomDatabase Calls -------------------------------------------
-
+// ----------------------------------- RoomDatabase Calls -------------------------------------------
 
     fun insert(article: Article) = viewModelScope.launch {
         newsRepo.insert(article)
@@ -60,5 +59,4 @@ class NewsFeedViewModel @Inject constructor(
     fun setNightMode(nightMode: Boolean) = viewModelScope.launch {
         newsRepo.setNightMode(nightMode)
     }
-
 }

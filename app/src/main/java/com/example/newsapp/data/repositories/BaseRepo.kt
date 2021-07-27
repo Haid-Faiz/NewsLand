@@ -46,7 +46,7 @@ abstract class BaseRepo(private val applicationContext: Context) {
         val connectivityManager =
             applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkCapabilities = connectivityManager.getNetworkCapabilities(
-            connectivityManager.activeNetwork ?: return false  // returning false out of this function
+            connectivityManager.activeNetwork ?: return false // returning false out of this function
         ) ?: return false // returning false out of this function
         return when {
             networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true

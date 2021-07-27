@@ -26,7 +26,6 @@ class PagingErrorAdapter(val retry: () -> Unit) :
     inner class ViewHolder(private val binding: PageErrorItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-
         fun bind(loadState: LoadState) {
             binding.apply {
 

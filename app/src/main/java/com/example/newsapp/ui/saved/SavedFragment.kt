@@ -47,9 +47,11 @@ class SavedFragment : Fragment() {
                 newsListAdapter.submitData(lifecycle, it)
                 newsListAdapter.loadStateFlow.collectLatest { loadStates: CombinedLoadStates ->
                     val refreshState = loadStates.source.refresh
-                    val isListEmpty = (refreshState is LoadState.NotLoading
-                            && loadStates.append.endOfPaginationReached
-                            && newsListAdapter.itemCount == 0)
+                    val isListEmpty = (
+                        refreshState is LoadState.NotLoading &&
+                            loadStates.append.endOfPaginationReached &&
+                            newsListAdapter.itemCount == 0
+                        )
 
                     _binding!!.newsListRecyclerview.isGone = isListEmpty
                     _binding!!.statusBox.isGone = !isListEmpty

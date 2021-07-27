@@ -21,12 +21,13 @@ import javax.inject.Inject
 class NewsFeedFragment : Fragment() {
 
     @Inject
-    lateinit var util: Util    // Field Injection
+    lateinit var util: Util // Field Injection
     private var _binding: FragmentNewsFeedBinding? = null
     private var name: String? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentNewsFeedBinding.inflate(inflater, container, false)

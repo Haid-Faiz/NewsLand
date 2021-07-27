@@ -11,7 +11,6 @@ import org.junit.Test
 
 class NewsApiTest {
 
-
     private val api = NewsClient().buildApi<NewsApi>(NewsApi::class.java)
 
     @Test
@@ -21,7 +20,6 @@ class NewsApiTest {
             assertNotNull(response)
         }
     }
-
 
     @Test
     fun `GET news by category`() {

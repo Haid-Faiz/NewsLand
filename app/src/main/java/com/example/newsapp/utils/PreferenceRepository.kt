@@ -43,7 +43,6 @@ class PreferenceRepository @Inject constructor(
         }
     // we haven't used setter... becoz we need setter to be suspend fun
 
-
 //    fun getNightMode() = _datastore.data.map {
 //        it[nightModeKey]
 //    }
