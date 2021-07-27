@@ -1,3 +1,7 @@
+[![Build](https://github.com/Haid-Faiz/NewsLand/actions/workflows/newsland_ci_pipeline.yml/badge.svg)](https://github.com/Haid-Faiz/NewsLand/actions/workflows/newsland_ci_pipeline.yml)
+[![Platform](https://img.shields.io/badge/platform-android-blue.svg)](http://developer.android.com/index.html)
+[![API](https://img.shields.io/badge/API-23%2B-blue.svg?style=flat)](https://android-arsenal.com/api?level=23)
+
 ## NewsLand
 
 **It shows news under following catagories:**
