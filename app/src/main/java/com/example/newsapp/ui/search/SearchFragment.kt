@@ -100,7 +100,7 @@ class SearchFragment : Fragment() {
         job?.cancel()
         job = MainScope().launch {
             delay(NEWS_SEARCH_TIME_DELAY)
-            newsFeedViewModel.searchNews(query).collect {
+            newsFeedViewModel.searchNews(query).collectLatest {
                 newsListAdapter.submitData(lifecycle, it)
             }
         }

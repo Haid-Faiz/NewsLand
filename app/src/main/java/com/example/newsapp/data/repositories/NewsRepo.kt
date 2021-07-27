@@ -35,10 +35,11 @@ class NewsRepo @Inject constructor(
 //        safeApiCall { newsApi.getNewsByCountry(country, pageNum) }
 
     fun getNewsByCountry(country: Country): Flow<PagingData<Article>> {
-        return Pager<Int, Article>(
+        return Pager(
             config = PagingConfig(
                 pageSize = PAGE_LOAD_SIZE,
                 enablePlaceholders = false,
+                prefetchDistance = 1
             ),
             pagingSourceFactory = { CountryPagingSource(newsApi, country) }
         ).flow  // flow & livedata are already asynchronous

@@ -1,5 +1,6 @@
 package com.example.datastore.paging
 
+import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.datastore.remote.apis.NewsApi
@@ -22,6 +23,8 @@ class CountryPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Article> {
 
         val page = params.key ?: STARTING_PAGE_INDEX
+
+        Log.d("paging_page_number", "load: $page")
 
         return try {
             val response: Response<NewsResponse> = newsApi.getNewsByCountry(
