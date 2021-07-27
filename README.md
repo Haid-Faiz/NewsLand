@@ -15,7 +15,7 @@ The project follows the general MVVM structure without any specifics.
 There are two _modules_ in the project 
 
 * `app` - The UI of the app. The main project that forms the APK
-* `api` - The REST API consumption library. Pure JVM library not Android-specific
+* `datastore` - The REST API consumption and local database android library
 
 ###  The following libraries were used in this project.
 
@@ -24,6 +24,7 @@ There are two _modules_ in the project
 * Kotlin Coroutines
 * Jetpack Navigation Architecture
 * Retrofit
+* Pagination using Jetpack Paging 3
 * Moshi
 * Room Database
 * Coil
