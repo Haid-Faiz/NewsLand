@@ -15,7 +15,6 @@ class NewsClient {
     private val BASE_URL = "https://newsapi.org/v2/"
     private val API_KEY = "730a60dec330429c8fc1a2d3eeec28fd"
 
-
 //    val logging = HttpLoggingInterceptor()
 //    logging.setLevel(HttpLoggingInterceptor.Level.BODY)
 
@@ -29,12 +28,14 @@ class NewsClient {
     }
 
     private val okHttpClient by lazy {
-        OkHttpClient.Builder().addInterceptor(Interceptor {
-            val request = it.request().newBuilder()
-                .header("Authorization", API_KEY)
-                .build()
-            it.proceed(request)
-        }).build()
+        OkHttpClient.Builder().addInterceptor(
+            Interceptor {
+                val request = it.request().newBuilder()
+                    .header("Authorization", API_KEY)
+                    .build()
+                it.proceed(request)
+            }
+        ).build()
     }
 
     fun <T> buildApi(api: Class<T>): T = retrofit.create(api)

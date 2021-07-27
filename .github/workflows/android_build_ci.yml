@@ -1,4 +1,4 @@
-name: NewsLand Ci Pipeline
+name: Build
 
 on: push
 
@@ -17,6 +17,3 @@ jobs:
 
       - name: Assemble Debug
         run: ./gradlew assembleDebug
-
-      - name: Ktlint Check
-        run: ./gradlew ktlintDebugCheck

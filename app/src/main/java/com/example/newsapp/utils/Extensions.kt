@@ -9,7 +9,8 @@ import com.google.android.material.snackbar.Snackbar
 import retrofit2.HttpException
 import java.io.IOException
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 
 fun TextView.formatDate(article: Article) {
 //    val pattern = when (article.source.id) {
@@ -48,7 +49,7 @@ fun Fragment.handleApiError(failure: Resource.Failure) {
 }
 
 fun Fragment.handleExceptions(throwable: Throwable) {
-    when(throwable) {
+    when (throwable) {
         is HttpException -> requireView().showSnackBar("Oops.. Something went wrong !")
         is IOException -> requireView().showSnackBar("Please check your internet connection")
     }

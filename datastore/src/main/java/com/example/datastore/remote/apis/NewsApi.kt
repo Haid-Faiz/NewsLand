@@ -31,14 +31,10 @@ interface NewsApi {
         @Query("pageSize") pageSize: Int
     ): Response<NewsResponse>
 
-
     @GET("everything")
     suspend fun searchNews(
         @Query("q") searchQuery: String,
         @Query("page") page: Int,
         @Query("pageSize") pageSize: Int
     ): Response<NewsResponse>
-
 }
-
-

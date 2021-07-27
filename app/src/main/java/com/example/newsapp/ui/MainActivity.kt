@@ -19,7 +19,8 @@ import com.example.newsapp.databinding.ActivityMainBinding
 import com.example.newsapp.ui.feed.NewsFeedViewModel
 import com.example.newsapp.utils.PreferenceRepository
 import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.appbar.AppBarLayout.LayoutParams.*
+import com.google.android.material.appbar.AppBarLayout.LayoutParams.SCROLL_FLAG_NO_SCROLL
+import com.google.android.material.appbar.AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -27,9 +28,9 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
 
     @Inject
-    lateinit var preferenceRepository: PreferenceRepository  // This is Field injection
+    lateinit var preferenceRepository: PreferenceRepository // This is Field injection
     private var isNightMode: Boolean = false
-    private val viewModel: NewsFeedViewModel by viewModels()   // It's injection will take care by viewModels() property delegate
+    private val viewModel: NewsFeedViewModel by viewModels() // It's injection will take care by viewModels() property delegate
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
     private var _binding: ActivityMainBinding? = null

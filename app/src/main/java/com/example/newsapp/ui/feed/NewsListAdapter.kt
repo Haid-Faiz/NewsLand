@@ -1,16 +1,13 @@
 package com.example.newsapp.ui.feed
 
 import android.content.Intent
-import android.media.MediaPlayer
 import android.net.Uri
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.view.isVisible
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.datastore.remote.models.Article
@@ -29,8 +26,6 @@ class NewsListAdapter(
         return ViewHolder(binding)
     }
 
-    
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         getItem(position)?.let { article: Article ->
             holder.binding.title.text = article.title
@@ -45,7 +40,6 @@ class NewsListAdapter(
         }
         holder.binding.deleteButton.isVisible = deletable
     }
-
 
     inner class ViewHolder(val binding: NewsListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {

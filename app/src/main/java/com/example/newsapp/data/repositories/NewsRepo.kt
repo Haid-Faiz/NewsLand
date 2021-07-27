@@ -1,18 +1,16 @@
 package com.example.newsapp.data.repositories
 
 import android.content.Context
-import androidx.lifecycle.LiveData
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import androidx.paging.liveData
-import com.example.datastore.remote.apis.NewsApi
-import com.example.datastore.remote.models.Article
+import com.example.datastore.local.ArticleDao
 import com.example.datastore.paging.CategoryPagingSource
 import com.example.datastore.paging.CountryPagingSource
 import com.example.datastore.paging.SearchPagingSource
 import com.example.datastore.paging.SourcesPagingSource
-import com.example.datastore.local.ArticleDao
+import com.example.datastore.remote.apis.NewsApi
+import com.example.datastore.remote.models.Article
 import com.example.datastore.remote.params.Category
 import com.example.datastore.remote.params.Country
 import com.example.datastore.remote.params.Source
@@ -27,10 +25,9 @@ class NewsRepo @Inject constructor(
     private val newsApi: NewsApi,
     private val articleDao: ArticleDao,
     private val preferenceRepository: PreferenceRepository
-) : BaseRepo(application) {         // Now, no need to create the Provides fun for NewsRepo
+) : BaseRepo(application) { // Now, no need to create the Provides fun for NewsRepo
 
-
-    //-------------------------------Remote Api calls-----------------------------------------------
+    // -------------------------------Remote Api calls-----------------------------------------------
 //    suspend fun getNewsByCountry(country: Country, pageNum: Int): Resource<NewsResponse> =
 //        safeApiCall { newsApi.getNewsByCountry(country, pageNum) }
 
@@ -42,9 +39,8 @@ class NewsRepo @Inject constructor(
                 prefetchDistance = 1
             ),
             pagingSourceFactory = { CountryPagingSource(newsApi, country) }
-        ).flow  // flow & livedata are already asynchronous
+        ).flow // flow & livedata are already asynchronous
     }
-
 
     fun getNewsByCategory(category: Category): Flow<PagingData<Article>> {
         return Pager(
@@ -67,7 +63,7 @@ class NewsRepo @Inject constructor(
         ).flow
     }
 
-//----------------------------- Room Database calls ------------------------------------------------
+// ----------------------------- Room Database calls ------------------------------------------------
 
     suspend fun insert(article: Article) {
         // this fun will update the article also

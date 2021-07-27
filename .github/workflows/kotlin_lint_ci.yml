@@ -1,0 +1,14 @@
+name: Kotlin Lint
+
+on: push
+
+jobs:
+  linting-job:
+    name: Kt Lint Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Ktlint Check
+        run: ./gradlew ktlintCheck

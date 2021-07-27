@@ -29,5 +29,4 @@ abstract class NewsDatabase : RoomDatabase() {
 //            NEWS_APP_DATABASE_NAME
 //        ).build()
 //    }
-
 }

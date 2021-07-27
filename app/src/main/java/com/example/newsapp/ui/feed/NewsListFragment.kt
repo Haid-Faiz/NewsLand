@@ -12,14 +12,14 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import com.example.newsapp.R
-import com.example.newsapp.utils.PagingErrorAdapter
-import com.example.newsapp.utils.Util
 import com.example.newsapp.databinding.FragmentNewsListBinding
 import com.example.newsapp.utils.Constants.CATEGORY
 import com.example.newsapp.utils.Constants.NEWS_TAG
 import com.example.newsapp.utils.Constants.SOURCES
 import com.example.newsapp.utils.Constants.TAB_POSITION
 import com.example.newsapp.utils.Constants.TOP_HEADLINES
+import com.example.newsapp.utils.PagingErrorAdapter
+import com.example.newsapp.utils.Util
 import com.example.newsapp.utils.handleExceptions
 import com.example.newsapp.utils.showSnackBar
 import dagger.hilt.android.AndroidEntryPoint
@@ -63,14 +63,17 @@ class NewsListFragment : Fragment() {
             if (!newsFeedViewModel.isRotated) {
                 Log.d("orientation", "onViewCreated: called")
                 when (news) {
-                    TOP_HEADLINES -> newsFeedViewModel
-                        .getNewsByCountry(util.toEnumCountry(list?.get(position)))
+                    TOP_HEADLINES ->
+                        newsFeedViewModel
+                            .getNewsByCountry(util.toEnumCountry(list?.get(position)))
 
-                    CATEGORY -> newsFeedViewModel
-                        .getNewsByCategory(util.toEnumCategory(list?.get(position)))
+                    CATEGORY ->
+                        newsFeedViewModel
+                            .getNewsByCategory(util.toEnumCategory(list?.get(position)))
 
-                    SOURCES -> newsFeedViewModel
-                        .getNewsBySources(util.toEnumSource(list?.get(position)))
+                    SOURCES ->
+                        newsFeedViewModel
+                            .getNewsBySources(util.toEnumSource(list?.get(position)))
                 }
             }
         }

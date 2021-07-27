@@ -40,8 +40,7 @@ class CountryPagingSource(
             )
         } catch (e: HttpException) {
             LoadResult.Error(e)
-        }
-        catch (e: IOException) {
+        } catch (e: IOException) {
             LoadResult.Error(e)
         }
     }
@@ -49,7 +48,6 @@ class CountryPagingSource(
     override fun getRefreshKey(state: PagingState<Int, Article>): Int? {
         TODO("Not yet implemented")
     }
-
 }
 
 class CategoryPagingSource(
@@ -74,8 +72,7 @@ class CategoryPagingSource(
             )
         } catch (e: HttpException) {
             LoadResult.Error(e)
-        }
-        catch (e: IOException) {
+        } catch (e: IOException) {
             LoadResult.Error(e)
         }
     }
@@ -83,7 +80,6 @@ class CategoryPagingSource(
     override fun getRefreshKey(state: PagingState<Int, Article>): Int? {
         TODO("Not yet implemented")
     }
-
 }
 
 class SourcesPagingSource(
@@ -109,8 +105,7 @@ class SourcesPagingSource(
             )
         } catch (e: HttpException) {
             LoadResult.Error(e)
-        }
-        catch (e: IOException) {
+        } catch (e: IOException) {
             LoadResult.Error(e)
         }
     }
@@ -118,7 +113,6 @@ class SourcesPagingSource(
     override fun getRefreshKey(state: PagingState<Int, Article>): Int? {
         TODO("Not yet implemented")
     }
-
 }
 
 class SearchPagingSource(
@@ -144,15 +138,12 @@ class SearchPagingSource(
             )
         } catch (e: HttpException) {
             LoadResult.Error(e)
-        }
-        catch (e: IOException) {
+        } catch (e: IOException) {
             LoadResult.Error(e)
         }
-
     }
 
     override fun getRefreshKey(state: PagingState<Int, Article>): Int? {
         TODO("Not yet implemented")
     }
-
 }

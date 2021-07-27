@@ -8,7 +8,8 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import com.example.newsapp.R
 import com.example.newsapp.utils.PreferenceRepository
-import com.github.appintro.*
+import com.github.appintro.AppIntro
+import com.github.appintro.AppIntroCustomLayoutFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -60,5 +61,4 @@ class IntroScreen : AppIntro() {
         startActivity(Intent(this@IntroScreen, MainActivity::class.java))
         finish()
     }
-
 }

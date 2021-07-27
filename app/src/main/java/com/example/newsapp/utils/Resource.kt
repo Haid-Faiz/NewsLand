@@ -12,7 +12,7 @@ sealed class Resource<out T> {
     object Loading : Resource<Nothing>()
 }
 
-//sealed class Resource<T>(data: T? = null, message: String? = null) {
+// sealed class Resource<T>(data: T? = null, message: String? = null) {
 //
 //    class Success<T>(data: T) : Resource<T>(data = data)
 //    class Error<T>(message: String) : Resource<T>(message = message)
@@ -20,4 +20,4 @@ sealed class Resource<out T> {
 //                                                       // we may need to send some data in loading state
 //                                                       // also. Like: during loading/refreshing i want
 //                                                       // to show this data, etc.
-//}
+// }
