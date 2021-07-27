@@ -10,7 +10,7 @@
     android:layout_marginBottom="@dimen/_6sdp"
     android:backgroundTint="@color/sec_background"
     app:cardCornerRadius="@dimen/_10sdp"
-    app:cardElevation="@dimen/_3sdp">
+    app:cardElevation="@dimen/_2sdp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -54,7 +54,7 @@
             android:paddingStart="@dimen/_12sdp"
             android:paddingEnd="@dimen/_12sdp"
             android:textColor="@color/sec_text"
-            android:textSize="@dimen/_10ssp"
+            android:textSize="@dimen/_12ssp"
             app:layout_constraintEnd_toEndOf="@id/title"
             app:layout_constraintStart_toStartOf="@id/title"
             app:layout_constraintTop_toBottomOf="@id/title"
@@ -66,7 +66,7 @@ GTA 5 was a success game for the rockstar company and now gta6 might be the next
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_14sdp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_8sdp"
+            android:layout_marginBottom="@dimen/_6sdp"
             android:paddingStart="@dimen/_12sdp"
             android:fontFamily="@font/noto_sans"
             tools:text="NDTV India"
