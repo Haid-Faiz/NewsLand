@@ -1,4 +1,5 @@
-[![Build](https://github.com/Haid-Faiz/NewsLand/actions/workflows/newsland_ci_pipeline.yml/badge.svg)](https://github.com/Haid-Faiz/NewsLand/actions/workflows/newsland_ci_pipeline.yml)
+[![Build](https://github.com/Haid-Faiz/NewsLand/actions/workflows/android_build_ci.yml/badge.svg)](https://github.com/Haid-Faiz/NewsLand/actions/workflows/android_build_ci.yml)
+[![Kotlin Lint](https://github.com/Haid-Faiz/NewsLand/actions/workflows/kotlin_lint_ci.yml/badge.svg)](https://github.com/Haid-Faiz/NewsLand/actions/workflows/kotlin_lint_ci.yml)
 [![Platform](https://img.shields.io/badge/platform-android-blue.svg)](http://developer.android.com/index.html)
 [![API](https://img.shields.io/badge/API-23%2B-blue.svg?style=flat)](https://android-arsenal.com/api?level=23)
 
