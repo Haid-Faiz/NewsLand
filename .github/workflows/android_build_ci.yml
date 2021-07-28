@@ -18,5 +18,9 @@ jobs:
       - name: Assemble Debug
         run: ./gradlew assembleDebug
 
-      - name: Ktlint Check
+  lint_job:
+    name: Lint Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: ktlint check
         run: ./gradlew ktlintCheck
