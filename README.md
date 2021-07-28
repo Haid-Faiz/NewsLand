@@ -6,12 +6,12 @@
 [![API](https://img.shields.io/badge/API-23%2B-blue.svg?style=flat)](https://android-arsenal.com/api?level=23)
 
 **It shows news under following catagories:**
-- Top Headlines wise news under 5 country
-- Category wise news under 5 category
-- Source wise news under 5 sources
+- Top Headlines wise news from 5 country
+- Category wise news from 5 category
+- Source wise news from 5 sources
 
 ### Architecture
-The project follows the general MVVM structure without any specifics. 
+The project follows the MVVM structure with Modular Architecture without any specifics. 
 
 There are two _modules_ in the project 
 
@@ -21,13 +21,15 @@ There are two _modules_ in the project
 ###  The following libraries were used in this project.
 
 * MVVM (Model View ViewModel) Architecture
-* LiveData
+* Flow & LiveData
 * Kotlin Coroutines
+* Dagger-Hilt for Dependency Injection
+* Pagination using Jetpack Paging 3
 * Jetpack Navigation Architecture
 * Retrofit
-* Pagination using Jetpack Paging 3
-* Moshi
 * Room Database
+* Moshi
 * Coil
 * Chrome Custom Tab
 * Preferences DataStore
+* Lottie Animation
