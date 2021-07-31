@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         checkNightMode()
 
         onDestinationChangedListener =
-            NavController.OnDestinationChangedListener { controller, destination, arguments ->
+            NavController.OnDestinationChangedListener { _, destination, _ ->
 
                 (destination.id != R.id.nav_search && destination.id != R.id.nav_saved).let {
                     _binding?.appBarMain?.contentMain?.navBottom?.isVisible = it

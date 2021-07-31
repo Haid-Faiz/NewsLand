@@ -78,8 +78,8 @@ class NewsListFragment : Fragment() {
             }
         }
 
-        lifecycleScope.launchWhenCreated {
-            newsFeedViewModel.news.collectLatest {
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+            newsFeedViewModel.news?.collectLatest {
                 newsListAdapter.submitData(lifecycle, it)
             }
         }

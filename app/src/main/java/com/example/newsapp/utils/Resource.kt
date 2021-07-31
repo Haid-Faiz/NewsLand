@@ -1,23 +1,20 @@
 package com.example.newsapp.utils
 
-sealed class Resource<out T> {
+sealed class Resource<T>(status: Status, data: T? = null, message: String? = null) {
 
-    data class Success<out T>(val value: T) : Resource<T>()
-    data class Failure(
-        val errorCode: Int? = null,
-        val message: String? = null,
-        val isNetworkError: Boolean? = null
-    ) : Resource<Nothing>()
+    class Success<T>(data: T) : Resource<T>(status = Status.SUCCESS, data = data)
 
-    object Loading : Resource<Nothing>()
+    class Error<T>(message: String) : Resource<T>(status = Status.ERROR, message = message)
+
+    class Loading<T>(data: T? = null) : Resource<T>(status = Status.LOADING)
+    // Added data in loading also because sometimes
+    // we may need to send some data in loading state
+    // also. Like: during loading/refreshing i want
+    // to show this data, etc.
 }
 
-// sealed class Resource<T>(data: T? = null, message: String? = null) {
-//
-//    class Success<T>(data: T) : Resource<T>(data = data)
-//    class Error<T>(message: String) : Resource<T>(message = message)
-//    class Loading<T>(data: T? = null) : Resource<T>()  // Added data in loading also because sometimes
-//                                                       // we may need to send some data in loading state
-//                                                       // also. Like: during loading/refreshing i want
-//                                                       // to show this data, etc.
-// }
+enum class Status {
+    SUCCESS,
+    ERROR,
+    LOADING
+}

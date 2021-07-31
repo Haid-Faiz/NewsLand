@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import com.example.newsapp.R
 import com.example.newsapp.databinding.FragmentNewsListBinding
@@ -19,6 +20,7 @@ import com.example.newsapp.ui.feed.NewsFeedViewModel
 import com.example.newsapp.ui.feed.NewsListAdapter
 import com.example.newsapp.utils.Constants.NEWS_SEARCH_TIME_DELAY
 import com.example.newsapp.utils.PagingErrorAdapter
+import com.example.newsapp.utils.handleExceptions
 import com.example.newsapp.utils.showSnackBar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
@@ -82,9 +84,7 @@ class SearchFragment : Fragment() {
                     }
                 }
                 is LoadState.Error -> {
-                    (it.refresh as LoadState.Error).error.message?.let { it1 ->
-                        requireView().showSnackBar(it1)
-                    }
+                    handleExceptions((it.refresh as LoadState.Error).error)
                     _binding!!.apply {
                         newsListRecyclerview.isVisible = false
                         shimmerProgress.stopShimmer()
@@ -101,9 +101,10 @@ class SearchFragment : Fragment() {
 
     private fun performSearch(query: String) {
         job?.cancel()
-        job = MainScope().launch {
+        job = viewLifecycleOwner.lifecycleScope.launch {
             delay(NEWS_SEARCH_TIME_DELAY)
-            newsFeedViewModel.searchNews(query).collectLatest {
+            newsFeedViewModel.searchNews(query)
+            newsFeedViewModel.news?.collectLatest {
                 newsListAdapter.submitData(lifecycle, it)
             }
         }
@@ -126,7 +127,7 @@ class SearchFragment : Fragment() {
                     }
 
                     override fun onQueryTextChange(newText: String?): Boolean {
-                        newText?.let { if (it.isNotEmpty()) performSearch(newText) }
+                        newText?.let { if (it.isNotEmpty()) performSearch(it) }
                         return true
                     }
                 })
@@ -134,5 +135,11 @@ class SearchFragment : Fragment() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+        job = null
     }
 }

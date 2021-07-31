@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import com.example.newsapp.utils.Resource
+import com.example.newsapp.utils.Status
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
@@ -20,23 +21,15 @@ abstract class BaseRepo(private val applicationContext: Context) {
                 if (isInternetAvailable()) {
                     val response: Response<T> = api()
                     if (response.isSuccessful) Resource.Success<T>(response.body()!!)
-                    else Resource.Failure(
-                        response.code(),
-                        isNetworkError = false,
-                        message = response.message()
-                    )
-                } else Resource.Failure(message = "Please turn on your internet connection")
+                    else Resource.Error(message = response.message())
+                } else Resource.Error(message = "Please turn on your internet connection")
             } catch (e: Exception) {
                 when (e) {
-                    is HttpException -> {
-                        Resource.Failure(
-                            e.code(),
-                            isNetworkError = false,
-                            message = e.message()
-                        )
-                    }
-                    is IOException -> Resource.Failure(message = e.message, isNetworkError = null)
-                    else -> Resource.Failure(null, "Oops..! Something went wrong", null)
+                    is HttpException -> Resource.Error(
+                        message = e.message ?: "Something went wrong"
+                    )
+                    is IOException -> Resource.Error(message = e.message ?: "Network failure")
+                    else -> Resource.Error("Oops..! Something went wrong")
                 }
             }
         }
@@ -46,7 +39,8 @@ abstract class BaseRepo(private val applicationContext: Context) {
         val connectivityManager =
             applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkCapabilities = connectivityManager.getNetworkCapabilities(
-            connectivityManager.activeNetwork ?: return false // returning false out of this function
+            connectivityManager.activeNetwork
+                ?: return false // returning false out of this function
         ) ?: return false // returning false out of this function
         return when {
             networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true

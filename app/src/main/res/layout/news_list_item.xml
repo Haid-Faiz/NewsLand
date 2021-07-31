@@ -65,7 +65,7 @@ GTA 5 was a success game for the rockstar company and now gta6 might be the next
             android:id="@+id/source_name"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_14sdp"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_8sdp"
             android:layout_marginBottom="@dimen/_6sdp"
             android:paddingStart="@dimen/_12sdp"
             android:fontFamily="@font/noto_sans"

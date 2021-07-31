@@ -19,9 +19,8 @@ class NewsFeedViewModel @Inject constructor(
     private val newsRepo: NewsRepo
 ) : ViewModel() {
 
-    lateinit var news: Flow<PagingData<Article>>
-
-    // If device will get rotated then
+    var news: Flow<PagingData<Article>>? = null
+    // If device will get rotated then isRotated will survive with changed value
     var isRotated: Boolean = false
 
     fun getNewsByCountry(country: Country) {
@@ -39,8 +38,8 @@ class NewsFeedViewModel @Inject constructor(
 //        return newsRepo.getNewsBySources(source).cachedIn(viewModelScope)
     }
 
-    fun searchNews(searchQuery: String): Flow<PagingData<Article>> {
-        return newsRepo.searchNews(searchQuery).cachedIn(viewModelScope)
+    fun searchNews(searchQuery: String) {
+        news = newsRepo.searchNews(searchQuery).cachedIn(viewModelScope)
     }
 
 // ----------------------------------- RoomDatabase Calls -------------------------------------------

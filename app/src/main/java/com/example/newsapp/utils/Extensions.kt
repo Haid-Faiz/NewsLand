@@ -40,13 +40,13 @@ fun View.showSnackBar(message: String, retryFun: (() -> Unit)? = null) {
     Snackbar.make(this, message, Snackbar.LENGTH_LONG).show()
 }
 
-fun Fragment.handleApiError(failure: Resource.Failure) {
-    when {
-        failure.errorCode == 401 -> requireView().showSnackBar("Unauthorized request")
-        failure.isNetworkError == true -> requireView().showSnackBar("Please check your network")
-        else -> requireView().showSnackBar(failure.message ?: "Something went wrong")
-    }
-}
+//fun Fragment.handleApiError(failure: Resource.Error) {
+//    when {
+//        failure.errorCode == 401 -> requireView().showSnackBar("Unauthorized request")
+//        failure.isNetworkError == true -> requireView().showSnackBar("Please check your network")
+//        else -> requireView().showSnackBar(failure.message ?: "Something went wrong")
+//    }
+//}
 
 fun Fragment.handleExceptions(throwable: Throwable) {
     when (throwable) {

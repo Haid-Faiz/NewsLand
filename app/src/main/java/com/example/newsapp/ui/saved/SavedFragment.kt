@@ -42,7 +42,7 @@ class SavedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpRecyclerView()
-        lifecycleScope.launchWhenCreated {
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
             newsFeedViewModel.getAllNewsList().collectLatest {
                 newsListAdapter.submitData(lifecycle, it)
                 newsListAdapter.loadStateFlow.collectLatest { loadStates: CombinedLoadStates ->
@@ -67,5 +67,10 @@ class SavedFragment : Fragment() {
             requireView().showSnackBar("Successfully deleted")
         }
         _binding!!.newsListRecyclerview.adapter = newsListAdapter
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }
