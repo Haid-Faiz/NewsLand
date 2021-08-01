@@ -16,7 +16,7 @@
         android:id="@+id/dots_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_4sdp"
+        android:layout_marginBottom="@dimen/_8sdp"
         app:vpi_orientation="horizontal"
         app:vpi_slider_radius="@dimen/_4sdp"
         app:vpi_slide_mode="worm"
@@ -35,7 +35,7 @@
         android:backgroundTint="@color/primary_text"
         android:text="Continue"
         android:textAllCaps="false"
-        app:cornerRadius="@dimen/_4sdp"
+        app:cornerRadius="@dimen/_6sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

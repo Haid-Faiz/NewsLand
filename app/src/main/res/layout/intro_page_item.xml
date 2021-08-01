@@ -37,6 +37,6 @@
         android:fontFamily="@font/amiko"
         android:layout_gravity="center_horizontal"
         android:lineSpacingExtra="@dimen/_1sdp"
-        android:textSize="@dimen/_12ssp" />
+        android:textSize="@dimen/_14ssp" />
 
 </LinearLayout>

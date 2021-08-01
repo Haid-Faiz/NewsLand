@@ -37,12 +37,12 @@ class IntroPagerAdapter : RecyclerView.Adapter<IntroPagerAdapter.ViewHolder>() {
                 1 -> {
                     introTitle.text = "Bookmark News"
                     introDescription.text =
-                        "Save news of your choice locally and access them without internet connection"
+                        "Save news locally and access them without internet connection"
                     introAnim.setAnimation(R.raw.anim_bookmark)
                 }
                 2 -> {
                     introTitle.text = "Search News"
-                    introDescription.text = "Search for any news you are looking for"
+                    introDescription.text = "Search any news you are looking for"
                     introAnim.setAnimation(R.raw.anim_search_news)
                 }
             }
