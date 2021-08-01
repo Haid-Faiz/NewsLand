@@ -11,27 +11,14 @@
 
     <style name="Theme.NewsLand.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
 
-    <style name="SplashTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="IntroTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="android:windowBackground">@drawable/splash_bg</item>
-        <item name="android:statusBarColor">@color/whiteColor</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:statusBarColor">@color/primary_background</item>
         <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowBackground">@drawable/splash_bg</item>
     </style>
-
-<!--    <style name="CustomToast">-->
-<!--        <item name="stTextBold">true</item>-->
-<!--        <item name="stTextColor">@color/primary_text</item>-->
-<!--&lt;!&ndash;        <item name="stFont">@font/retrofont</item>&ndash;&gt;-->
-<!--        <item name="stTextSize">14sp</item>-->
-<!--        <item name="stColorBackground">@color/primary_background</item>-->
-<!--        <item name="stSolidBackground">true</item>-->
-<!--        <item name="stStrokeWidth">3dp</item>-->
-<!--        <item name="stStrokeColor">@color/primary_text</item>-->
-<!--&lt;!&ndash;        <item name="stIconStart">@drawable/ic</item>&ndash;&gt;-->
-<!--&lt;!&ndash;        <item name="stIconEnd">@drawable/ic</item>&ndash;&gt;-->
-<!--        <item name="stGravity">top</item>-->
-<!--        <item name="stRadius">12dp</item>-->
-<!--    </style>-->
 
 </resources>

@@ -3,7 +3,7 @@
     package="com.example.newsapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".NewsApp"
@@ -14,22 +14,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-<!--        <receiver-->
-<!--            android:name=".BroadCast.MyReceiver"-->
-<!--            android:enabled="true"-->
-<!--            android:exported="true"></receiver>-->
+        <!--        <receiver-->
+        <!--            android:name=".BroadCast.MyReceiver"-->
+        <!--            android:enabled="true"-->
+        <!--            android:exported="true"></receiver>-->
 
-        <activity android:name=".ui.IntroScreen"
+        <activity android:name=".ui.intro.IntroActivity"
             android:theme="@style/IntroTheme">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-        <activity android:name=".ui.MainActivity" />
+
+        <activity android:name=".ui.MainActivity"/>
 
         <meta-data
             android:name="preloaded_fonts"

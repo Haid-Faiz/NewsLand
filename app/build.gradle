@@ -89,8 +89,8 @@ dependencies {
     // Facebook shimmer effect
     implementation "com.facebook.shimmer:shimmer:$facebook_shimmer"
 
-    // App Intro Library
-    implementation 'com.github.AppIntro:AppIntro:6.0.0'
+    // Material Dot viewpager indicator library
+    implementation "com.github.zhpanvip:viewpagerindicator:$dot_indicator"
 
     // Drapper's Bottom nav bar
     implementation 'nl.joery.animatedbottombar:library:1.1.0'
