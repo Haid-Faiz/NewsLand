@@ -36,7 +36,6 @@ class NewsRepo @Inject constructor(
             config = PagingConfig(
                 pageSize = PAGE_LOAD_SIZE,
                 enablePlaceholders = false,
-                prefetchDistance = 1
             ),
             pagingSourceFactory = { CountryPagingSource(newsApi, country) }
         ).flow // flow & livedata are already asynchronous

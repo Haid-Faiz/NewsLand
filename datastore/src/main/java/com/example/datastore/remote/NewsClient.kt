@@ -1,5 +1,6 @@
 package com.example.datastore.remote
 
+import com.example.datastore.BuildConfig
 import com.example.datastore.remote.converters.EnumConverterFactory
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -13,7 +14,6 @@ class NewsClient {
 //        // My Old API  ->  730a60dec330429c8fc1a2d3eeec28fd
 
     private val BASE_URL = "https://newsapi.org/v2/"
-    private val API_KEY = "730a60dec330429c8fc1a2d3eeec28fd"
 
 //    val logging = HttpLoggingInterceptor()
 //    logging.setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -31,7 +31,7 @@ class NewsClient {
         OkHttpClient.Builder().addInterceptor(
             Interceptor {
                 val request = it.request().newBuilder()
-                    .header("Authorization", API_KEY)
+                    .header("Authorization", BuildConfig.Api_Key)
                     .build()
                 it.proceed(request)
             }
