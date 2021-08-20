@@ -36,6 +36,7 @@ class NewsRepo @Inject constructor(
             config = PagingConfig(
                 pageSize = PAGE_LOAD_SIZE,
                 enablePlaceholders = false,
+                initialLoadSize = PAGE_LOAD_SIZE
             ),
             pagingSourceFactory = { CountryPagingSource(newsApi, country) }
         ).flow // flow & livedata are already asynchronous
@@ -43,21 +44,33 @@ class NewsRepo @Inject constructor(
 
     fun getNewsByCategory(category: Category): Flow<PagingData<Article>> {
         return Pager(
-            config = PagingConfig(pageSize = PAGE_LOAD_SIZE, enablePlaceholders = false),
+            config = PagingConfig(
+                pageSize = PAGE_LOAD_SIZE,
+                enablePlaceholders = false,
+                initialLoadSize = PAGE_LOAD_SIZE
+            ),
             pagingSourceFactory = { CategoryPagingSource(newsApi, category) }
         ).flow
     }
 
     fun getNewsBySources(source: Source): Flow<PagingData<Article>> {
         return Pager(
-            config = PagingConfig(pageSize = PAGE_LOAD_SIZE, enablePlaceholders = false),
+            config = PagingConfig(
+                pageSize = PAGE_LOAD_SIZE,
+                enablePlaceholders = false,
+                initialLoadSize = PAGE_LOAD_SIZE
+            ),
             pagingSourceFactory = { SourcesPagingSource(newsApi, source) }
         ).flow
     }
 
     fun searchNews(searchQuery: String): Flow<PagingData<Article>> {
         return Pager(
-            config = PagingConfig(pageSize = PAGE_LOAD_SIZE, enablePlaceholders = false),
+            config = PagingConfig(
+                pageSize = PAGE_LOAD_SIZE,
+                enablePlaceholders = false,
+                initialLoadSize = PAGE_LOAD_SIZE
+            ),
             pagingSourceFactory = { SearchPagingSource(newsApi, searchQuery) }
         ).flow
     }
@@ -71,7 +84,11 @@ class NewsRepo @Inject constructor(
 
     fun getAllNewsList(): Flow<PagingData<Article>> {
         return Pager(
-            config = PagingConfig(pageSize = 10, enablePlaceholders = false),
+            config = PagingConfig(
+                pageSize = 10,
+                enablePlaceholders = false,
+                initialLoadSize = PAGE_LOAD_SIZE
+            ),
             pagingSourceFactory = { articleDao.getArticles() }
         ).flow
     }

@@ -19,16 +19,18 @@
         <!--            android:enabled="true"-->
         <!--            android:exported="true"></receiver>-->
 
-        <activity android:name=".ui.intro.IntroActivity"
+        <activity
+            android:name=".ui.intro.IntroActivity"
+            android:exported="true"
             android:theme="@style/IntroTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.MainActivity"/>
+        <activity
+            android:name=".ui.MainActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

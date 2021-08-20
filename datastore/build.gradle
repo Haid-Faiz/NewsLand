@@ -5,14 +5,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
     buildToolsVersion "30.0.3"
 
     defaultConfig {
         minSdkVersion 23
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        targetSdkVersion 31
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -65,7 +63,7 @@ dependencies {
     // OkHttp
     implementation "com.squareup.okhttp3:okhttp:$okk_http_version"
     // Kotlin Coroutine library (Core -> means not specific to android)
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version"
+//    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_version"
     // Moshi
     implementation "com.squareup.moshi:moshi:$moshi_version"
     // Moshi Codegen

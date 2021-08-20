@@ -9,9 +9,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 class NewsClient {
 
-//        val newsURL = "https://newsapi.org/v2/top-headlines?country=in&apiKey=730a60dec330429c8fc1a2d3eeec28fd"
-//        // My New API  ->  f95c36ef152b4180833e911e855b0222
-//        // My Old API  ->  730a60dec330429c8fc1a2d3eeec28fd
+//        val newsURL = "https://newsapi.org/v2/top-headlines?country=in&apiKey=####"
 
     private val BASE_URL = "https://newsapi.org/v2/"
 
