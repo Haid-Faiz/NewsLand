@@ -61,19 +61,15 @@ class NewsListFragment : Fragment() {
         requireArguments().getInt(TAB_POSITION).let { position ->
 
             if (!newsFeedViewModel.isRotated) {
-                Log.d("orientation", "onViewCreated: called")
                 when (news) {
                     TOP_HEADLINES ->
-                        newsFeedViewModel
-                            .getNewsByCountry(util.toEnumCountry(list?.get(position)))
+                        newsFeedViewModel.getNewsByCountry(util.toEnumCountry(list?.get(position)))
 
                     CATEGORY ->
-                        newsFeedViewModel
-                            .getNewsByCategory(util.toEnumCategory(list?.get(position)))
+                        newsFeedViewModel.getNewsByCategory(util.toEnumCategory(list?.get(position)))
 
                     SOURCES ->
-                        newsFeedViewModel
-                            .getNewsBySources(util.toEnumSource(list?.get(position)))
+                        newsFeedViewModel.getNewsBySources(util.toEnumSource(list?.get(position)))
                 }
             }
         }
@@ -131,9 +127,14 @@ class NewsListFragment : Fragment() {
         }
     }
 
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     override fun onDestroy() {
         super.onDestroy()
-        _binding = null
         newsFeedViewModel.isRotated = true
     }
 }
