@@ -17,6 +17,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.newsapp.R
 import com.example.newsapp.databinding.ActivityMainBinding
 import com.example.newsapp.ui.feed.NewsFeedViewModel
+import com.example.newsapp.ui.search.SearchViewModel
 import com.example.newsapp.utils.PreferenceRepository
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.AppBarLayout.LayoutParams.SCROLL_FLAG_NO_SCROLL
@@ -30,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var preferenceRepository: PreferenceRepository // This is Field injection
     private var isNightMode: Boolean = false
-    private val viewModel: NewsFeedViewModel by viewModels() // It's injection will take care by viewModels() property delegate
+    private val viewModel: SearchViewModel by viewModels() // It's injection will take care by viewModels() property delegate
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
     private var _binding: ActivityMainBinding? = null
@@ -111,10 +112,5 @@ class MainActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         navController.removeOnDestinationChangedListener(onDestinationChangedListener)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
     }
 }

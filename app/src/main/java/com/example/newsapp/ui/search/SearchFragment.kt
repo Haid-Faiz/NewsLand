@@ -32,7 +32,7 @@ import kotlinx.coroutines.launch
 class SearchFragment : Fragment() {
 
     private var _binding: FragmentNewsListBinding? = null
-    private val newsFeedViewModel: NewsFeedViewModel by viewModels()
+    private val viewModel: SearchViewModel by viewModels()
     private lateinit var newsListAdapter: NewsListAdapter
     private var job: Job? = null
 
@@ -93,7 +93,7 @@ class SearchFragment : Fragment() {
             }
         }
         newsListAdapter.setOnItemBookMarkListener {
-            newsFeedViewModel.insert(it)
+            viewModel.insert(it)
             requireView().showSnackBar("Successfully bookmarked")
         }
     }
@@ -102,8 +102,8 @@ class SearchFragment : Fragment() {
         job?.cancel()
         job = viewLifecycleOwner.lifecycleScope.launch {
             delay(NEWS_SEARCH_TIME_DELAY)
-            newsFeedViewModel.searchNews(query)
-            newsFeedViewModel.news?.collectLatest {
+            viewModel.searchNews(query)
+            viewModel.news?.collectLatest {
                 newsListAdapter.submitData(lifecycle, it)
             }
         }
@@ -136,8 +136,9 @@ class SearchFragment : Fragment() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
         job = null
     }

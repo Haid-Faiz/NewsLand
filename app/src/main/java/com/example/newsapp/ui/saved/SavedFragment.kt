@@ -15,6 +15,7 @@ import com.example.newsapp.R
 import com.example.newsapp.databinding.FragmentNewsListBinding
 import com.example.newsapp.ui.feed.NewsFeedViewModel
 import com.example.newsapp.ui.feed.NewsListAdapter
+import com.example.newsapp.ui.search.SearchViewModel
 import com.example.newsapp.utils.showSnackBar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -23,7 +24,7 @@ import kotlinx.coroutines.flow.collectLatest
 class SavedFragment : Fragment() {
 
     private var _binding: FragmentNewsListBinding? = null
-    private val newsFeedViewModel: NewsFeedViewModel by viewModels()
+    private val viewModel: SearchViewModel by viewModels()
     private lateinit var newsListAdapter: NewsListAdapter
 
     override fun onCreateView(
@@ -43,7 +44,7 @@ class SavedFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setUpRecyclerView()
         viewLifecycleOwner.lifecycleScope.launchWhenCreated {
-            newsFeedViewModel.getAllNewsList().collectLatest {
+            viewModel.getAllNewsList().collectLatest {
                 newsListAdapter.submitData(lifecycle, it)
                 newsListAdapter.loadStateFlow.collectLatest { loadStates: CombinedLoadStates ->
                     val refreshState = loadStates.source.refresh
@@ -63,14 +64,14 @@ class SavedFragment : Fragment() {
     private fun setUpRecyclerView() {
         newsListAdapter = NewsListAdapter(true)
         newsListAdapter.setOnItemDeleteListener {
-            newsFeedViewModel.delete(it)
+            viewModel.delete(it)
             requireView().showSnackBar("Successfully deleted")
         }
         _binding!!.newsListRecyclerview.adapter = newsListAdapter
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
 }
