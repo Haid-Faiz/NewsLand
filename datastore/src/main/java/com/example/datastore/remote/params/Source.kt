@@ -1,7 +1,9 @@
 package com.example.datastore.remote.params
 
+import androidx.annotation.Keep
 import com.squareup.moshi.Json
 
+@Keep
 enum class Source {
 
     @Json(name = "bbc-news")

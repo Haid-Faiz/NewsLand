@@ -1,10 +1,12 @@
 package com.example.datastore.remote.models
 
+import androidx.annotation.Keep
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
+@Keep
 @Entity(tableName = "article_table")
 @JsonClass(generateAdapter = true)
 data class Article(
@@ -28,6 +30,7 @@ data class Article(
     @Json(name = "urlToImage")
     val urlToImage: String?
 ) {
+    @Keep
     @JsonClass(generateAdapter = true)
     data class Source(
         @Json(name = "id")
