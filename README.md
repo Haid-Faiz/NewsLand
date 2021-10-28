@@ -5,12 +5,41 @@
 [![Platform](https://img.shields.io/badge/platform-android-blue.svg)](http://developer.android.com/index.html)
 [![API](https://img.shields.io/badge/API-23%2B-blue.svg?style=flat)](https://android-arsenal.com/api?level=23)
 
-**It shows news under following catagories:**
-- Top Headlines wise news from 5 country
-- Category wise news from 5 category
-- Source wise news from 5 sources
+<img src = "https://user-images.githubusercontent.com/56159740/138607350-29e7498e-e6e2-4b54-b18c-2a35576cc080.png" height = "200" width="500">
 
-### Architecture
+
+***It shows news under following catagories:***
+- Top Headlines wise news from 5 different country
+- Category wise news from 5 different category
+- Source wise news from 5 different sources
+
+## ScreenShots
+<table>
+   <ul>
+      <li>
+         <h4>App Intro & Search feature<h4>
+      </li>
+   </ul>
+   <tr>
+<td><img src = "https://user-images.githubusercontent.com/56159740/138334041-6073b1eb-dae4-4e6a-ad18-c9b86427e417.gif" height = "370" width="200"></td>
+<td><img src = "https://user-images.githubusercontent.com/56159740/138608774-1d28f696-aa27-4ee0-a65c-6cfda19c38d2.gif" height = "370" width="200"></td>
+<td><img src = "https://user-images.githubusercontent.com/56159740/138395751-3992a126-c522-49f0-9d9f-12e127aa7bfb.gif" height = "370" width="200"></td>
+  </tr>
+</table>
+
+<table>
+      <ul>
+      <li>
+         <h4>Screen orientation changes & Pagination, etc<h4>
+          </li>
+   </ul>
+  <tr>
+<td><img src = "https://user-images.githubusercontent.com/56159740/138395197-8ef241b2-53e6-4abc-b2c9-a7f4c0529cac.gif" height = "370" width="200"></td>
+<td><img src = "https://user-images.githubusercontent.com/56159740/138334650-0e63e931-efd1-4ae0-8da4-f9caf7e1691f.gif" height = "370" width="200"></td>
+  </tr>
+</table>
+
+## Architecture
 The project follows the MVVM structure with Modular Architecture without any specifics.
 
 There are two _modules_ in the project
