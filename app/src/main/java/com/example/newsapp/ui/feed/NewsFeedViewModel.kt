@@ -20,7 +20,7 @@ import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.flow.Flow
 
-//@HiltViewModel
+// @HiltViewModel
 class NewsFeedViewModel @AssistedInject constructor(
     util: Util,
     private val newsRepo: NewsRepo,
@@ -40,7 +40,7 @@ class NewsFeedViewModel @AssistedInject constructor(
             newsType: String,
             tabPosition: Int
         ) = object : ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
                 return assistedFactory.create(newsType, tabPosition) as T
             }
         }

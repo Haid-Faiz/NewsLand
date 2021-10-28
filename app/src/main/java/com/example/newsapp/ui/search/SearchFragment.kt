@@ -16,7 +16,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import com.example.newsapp.R
 import com.example.newsapp.databinding.FragmentNewsListBinding
-import com.example.newsapp.ui.feed.NewsFeedViewModel
 import com.example.newsapp.ui.feed.NewsListAdapter
 import com.example.newsapp.utils.Constants.NEWS_SEARCH_TIME_DELAY
 import com.example.newsapp.utils.PagingErrorAdapter
@@ -135,7 +134,6 @@ class SearchFragment : Fragment() {
             else -> super.onOptionsItemSelected(item)
         }
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

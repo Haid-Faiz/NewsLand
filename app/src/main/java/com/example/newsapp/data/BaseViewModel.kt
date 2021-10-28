@@ -13,7 +13,6 @@ open class BaseViewModel(
     private val newsRepo: NewsRepo
 ) : ViewModel() {
 
-
     fun insert(article: Article) = viewModelScope.launch {
         newsRepo.insert(article)
     }

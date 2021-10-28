@@ -10,7 +10,9 @@
         <entry key="app/src/main/res/layout/content_main.xml" value="0.14130434782608695" />
         <entry key="app/src/main/res/layout/fragment_news_feed.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_news_list.xml" value="0.18795289855072464" />
+        <entry key="app/src/main/res/layout/intro_page_item.xml" value="0.18" />
         <entry key="app/src/main/res/layout/news_list_item.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/page_error_item.xml" value="0.25" />
         <entry key="app/src/main/res/menu/search_menu.xml" value="0.21510416666666668" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_newsland.xml" value="0.21197916666666666" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_newsland_round.xml" value="0.21197916666666666" />

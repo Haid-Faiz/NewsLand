@@ -16,7 +16,6 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.newsapp.R
 import com.example.newsapp.databinding.ActivityMainBinding
-import com.example.newsapp.ui.feed.NewsFeedViewModel
 import com.example.newsapp.ui.search.SearchViewModel
 import com.example.newsapp.utils.PreferenceRepository
 import com.google.android.material.appbar.AppBarLayout
