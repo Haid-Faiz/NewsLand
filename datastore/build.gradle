@@ -4,6 +4,16 @@ plugins {
     id 'kotlin-kapt'
 }
 
+// This fun will return api key while building on CI
+String getApiKey() {
+    // Read credentials
+    def credentialFile = rootProject.file("./credentials.properties")
+    def credentialProperty = new Properties()
+    credentialProperty.load(new FileInputStream(credentialFile))
+    return credentialProperty['API_KEY']
+}
+
+
 android {
     compileSdkVersion 31
     buildToolsVersion "30.0.3"
@@ -11,19 +21,18 @@ android {
     defaultConfig {
         minSdkVersion 23
         targetSdkVersion 31
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField 'String', "Api_Key", API_KEY
+            buildConfigField 'String', "Api_Key", getApiKey()
         }
         debug {
-            buildConfigField 'String', "Api_Key", API_KEY
+            buildConfigField 'String', "Api_Key", getApiKey()
         }
     }
     compileOptions {
@@ -49,20 +58,22 @@ dependencies {
     // Kotlin Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
 
+    // Kotlin Coroutine library (Core -> means not specific to android)
+    // implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_version"
+
     // Jetpack paging 3
     api "androidx.paging:paging-runtime-ktx:$paging_version"
 
     // Retrofit 2
     api "com.squareup.retrofit2:retrofit:$retrofit_version"
-    // api add krne se app level ke andr eccesss aa jaega retrpfit ka
-    // but isse building thodi slow ho jati hai
+    // Adding api gives access of retrofit in app module too,
+    // but it affects the build performance.
 
     // Moshi converter factory
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
     // OkHttp
     implementation "com.squareup.okhttp3:okhttp:$okk_http_version"
-    // Kotlin Coroutine library (Core -> means not specific to android)
-//    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_version"
+
     // Moshi
     implementation "com.squareup.moshi:moshi:$moshi_version"
     // Moshi Codegen

@@ -13,7 +13,14 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v1
         with:
-          java-version: 1.8
+          java-version: 11
+
+
+      # Access API_KEY
+      - name: Decode credentials.properties
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+        run: echo API_KEY=\"$API_KEY\" > ./credentials.properties
 
       - name: Run unit test
         run: ./gradlew testDebugUnitTest
