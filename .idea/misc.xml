@@ -10,11 +10,11 @@
         <entry key="app/src/main/res/layout/app_bar_main.xml" value="0.14130434782608695" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_news_feed.xml" value="0.18" />
-        <entry key="app/src/main/res/layout/fragment_news_list.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_news_list.xml" value="0.22" />
         <entry key="app/src/main/res/layout/intro_page_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/nav_header_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/news_list_item.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/news_list_item_shimmer.xml" value="0.19583333333333333" />
+        <entry key="app/src/main/res/layout/news_list_item_shimmer.xml" value="0.33" />
         <entry key="app/src/main/res/layout/page_error_item.xml" value="0.5" />
         <entry key="app/src/main/res/menu/nav_bottom_menu.xml" value="0.19583333333333333" />
         <entry key="app/src/main/res/menu/nav_drawer_menu.xml" value="0.19583333333333333" />

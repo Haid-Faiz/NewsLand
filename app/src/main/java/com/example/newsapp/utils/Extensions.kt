@@ -36,8 +36,8 @@ fun TextView.formatDate(article: Article) {
     this.text = timeAgo
 }
 
-fun View.showSnackBar(message: String, retryFun: (() -> Unit)? = null) {
-    Snackbar.make(this, message, Snackbar.LENGTH_LONG).show()
+fun View?.showSnackBar(message: String, retryFun: (() -> Unit)? = null) {
+    this?.let { Snackbar.make(it, message, Snackbar.LENGTH_LONG).show() }
 }
 
 // fun Fragment.handleApiError(failure: Resource.Error) {
@@ -51,6 +51,6 @@ fun View.showSnackBar(message: String, retryFun: (() -> Unit)? = null) {
 fun Fragment.handleExceptions(throwable: Throwable) {
     when (throwable) {
         is HttpException -> view?.showSnackBar("Oops.. Something went wrong !")
-        is IOException -> view?.showSnackBar("Please check your internet connection")
+        is IOException -> this.view?.showSnackBar("Please check your internet connection")
     }
 }

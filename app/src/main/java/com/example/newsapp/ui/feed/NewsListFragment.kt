@@ -83,8 +83,8 @@ class NewsListFragment : Fragment() {
             header = PagingErrorAdapter { adapter.retry() },
             footer = PagingErrorAdapter { adapter.retry() }
         )
-        adapter.addLoadStateListener {
-            when (it.refresh) {
+        adapter.addLoadStateListener { loadStates ->
+            when (loadStates.refresh) {
                 is LoadState.NotLoading -> {
                     binding.apply {
                         newsListRecyclerview.isVisible = true
@@ -103,13 +103,13 @@ class NewsListFragment : Fragment() {
                     }
                 }
                 is LoadState.Error -> {
-                    handleExceptions((it.refresh as LoadState.Error).error)
                     binding.apply {
                         newsListRecyclerview.isVisible = false
                         statusBox.isVisible = true
                         shimmerProgress.stopShimmer()
                         shimmerProgress.isVisible = false
                     }
+                    handleExceptions((loadStates.refresh as LoadState.Error).error)
                 }
             }
         }

@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity() {
 
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
                 // Running Android OS version is less than Android 10 i.e. Android Q
-                _isNightMode = it ?: false   // Updating _isNightMode value
+                _isNightMode = it ?: false // Updating _isNightMode value
                 if (_isNightMode)
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 else
