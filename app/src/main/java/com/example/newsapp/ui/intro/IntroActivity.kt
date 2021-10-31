@@ -3,6 +3,7 @@ package com.example.newsapp.ui.intro
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import com.example.newsapp.databinding.ActivityIntroBinding
@@ -17,14 +18,14 @@ class IntroActivity : AppCompatActivity() {
 
     @Inject
     lateinit var preferenceRepository: PreferenceRepository
-    private var _binding: ActivityIntroBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: ActivityIntroBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivityIntroBinding.inflate(layoutInflater)
+        binding = ActivityIntroBinding.inflate(layoutInflater)
         checkIsOnBoarded()
         setContentView(binding.root)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         binding.apply {
             viewpager.adapter = IntroPagerAdapter()
             dotsIndicator.setupWithViewPager(binding.viewpager)

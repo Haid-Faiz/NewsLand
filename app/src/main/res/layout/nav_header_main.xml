@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_header_main"
     android:layout_width="match_parent"
     android:layout_height="@dimen/_172sdp"
@@ -18,23 +18,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_marginTop="@dimen/_24sdp"
         android:layout_marginStart="@dimen/_6sdp"
+        android:layout_marginTop="@dimen/_24sdp"
         android:layout_marginBottom="@dimen/_2sdp"
         android:fontFamily="@font/paytone_one"
         android:text="@string/app_name"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
         android:textColor="@color/primary_text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/night_mode_Button"
         android:layout_width="@dimen/_24sdp"
         android:layout_height="@dimen/_24sdp"
         android:layout_gravity="end"
-        android:padding="@dimen/_2sdp"
         android:layout_marginEnd="@dimen/_6sdp"
+        android:padding="@dimen/_2sdp"
         android:src="@drawable/ic_day_24"
         app:layout_constraintBottom_toBottomOf="@+id/app_name_text"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,10 +44,12 @@
         android:id="@+id/app_subtitle_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat"
+        android:textStyle="bold"
         android:text="@string/nav_header_subtitle"
         android:textColor="@color/sec_text"
         android:textSize="@dimen/_12ssp"
-        android:fontFamily="@font/amiko"
         app:layout_constraintStart_toStartOf="@id/app_name_text"
-        app:layout_constraintTop_toBottomOf="@id/app_name_text"/>
+        app:layout_constraintTop_toBottomOf="@id/app_name_text" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

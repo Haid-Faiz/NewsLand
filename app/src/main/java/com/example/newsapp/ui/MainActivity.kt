@@ -1,5 +1,6 @@
 package com.example.newsapp.ui
 
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.widget.ImageView
@@ -29,18 +30,18 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var preferenceRepository: PreferenceRepository // This is Field injection
-    private var isNightMode: Boolean = false
+    private var _isNightMode: Boolean = false
     private val viewModel: SearchViewModel by viewModels() // It's injection will take care by viewModels() property delegate
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
-    private var _binding: ActivityMainBinding? = null
+    private lateinit var binding: ActivityMainBinding
     private lateinit var onDestinationChangedListener: NavController.OnDestinationChangedListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(_binding!!.root)
-        setSupportActionBar(_binding?.appBarMain?.toolbar)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setSupportActionBar(binding.appBarMain.toolbar)
         setUpNav()
         checkNightMode()
 
@@ -48,37 +49,55 @@ class MainActivity : AppCompatActivity() {
             NavController.OnDestinationChangedListener { _, destination, _ ->
 
                 (destination.id != R.id.nav_search && destination.id != R.id.nav_saved).let {
-                    _binding?.appBarMain?.contentMain?.navBottom?.isVisible = it
+                    binding.appBarMain.contentMain.navBottom.isVisible = it
                     val p =
-                        _binding?.appBarMain?.toolbar?.layoutParams as AppBarLayout.LayoutParams
+                        binding.appBarMain.toolbar.layoutParams as AppBarLayout.LayoutParams
                     if (it) {
                         p.scrollFlags = SCROLL_FLAG_SCROLL
                         // p.scrollFlags = SCROLL_FLAG_ENTER_ALWAYS_COLLAPSED
                     } else p.scrollFlags = SCROLL_FLAG_NO_SCROLL
 
-                    _binding?.appBarMain?.toolbar?.layoutParams = p
+                    binding.appBarMain.toolbar.layoutParams = p
                 }
             }
 
-        val navHeaderView = _binding?.navView?.getHeaderView(0)
+        val navHeaderView = binding.navView.getHeaderView(0)
         navHeaderView?.findViewById<ImageView>(R.id.night_mode_Button)?.setOnClickListener {
-            viewModel.setNightMode(!isNightMode)
+            viewModel.setNightMode(!_isNightMode)
         }
     }
 
     private fun checkNightMode() {
         preferenceRepository.isNightMode.asLiveData().observe(this) {
-            isNightMode = it ?: false
-            if (it == true)
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            else
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+                // Running Android OS version is less than Android 10 i.e. Android Q
+                _isNightMode = it ?: false   // Updating _isNightMode value
+                if (_isNightMode)
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                else
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            } else {
+                // Running Android OS version is >= Android 10 i.e. Android Q
+                _isNightMode = it ?: false
+                // Now check weather preferenceRepository.isNightMode is returning null or not
+                // if it is null -> Follow system mode else follow saved night mode status
+                if (it == null) {
+                    // Follow system mode
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                } else {
+                    if (it)
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    else
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                }
+            }
         }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.nav_bottom_menu, menu)
-        _binding?.appBarMain?.contentMain?.navBottom?.setupWithNavController(menu!!, navController)
+        binding.appBarMain.contentMain.navBottom.setupWithNavController(menu!!, navController)
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -92,11 +111,11 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_category,
                 R.id.nav_sources
             ),
-            _binding?.drawerLayout
+            binding.drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         // _binding?.appBarMain?.contentMain?.navBottom?.setupWithNavController(navController)
-        _binding?.navView?.setupWithNavController(navController)
+        binding.navView.setupWithNavController(navController)
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_16sdp"
-        android:fontFamily="@font/noto_sans"
+        android:fontFamily="@font/montserrat"
         android:text="Oops... Could not load content"
         android:textColor="@color/primary_text"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,18 +18,17 @@
 
     <ProgressBar
         android:id="@+id/progress_bar"
-        style="?android:attr/progressBarStyle"
+        android:indeterminateTint="@color/primary_text"
         android:layout_width="@dimen/_22sdp"
         android:layout_height="@dimen/_22sdp"
-        android:layout_margin="@dimen/_10sdp"
-        android:layout_marginBottom="@dimen/_16sdp"
+        android:layout_marginBottom="@dimen/_26sdp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/load_msg" />
+        app:layout_constraintTop_toBottomOf="@id/load_msg" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/retry_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,8 +36,10 @@
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginBottom="@dimen/_36sdp"
         android:text="Retry"
-        android:fontFamily="@font/noto_sans"
+        android:fontFamily="@font/open_sans"
         android:textAllCaps="false"
+        app:strokeColor="@color/shimmerColor"
+        android:textColor="@color/primary_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/load_msg"
         app:layout_constraintStart_toStartOf="@+id/load_msg"

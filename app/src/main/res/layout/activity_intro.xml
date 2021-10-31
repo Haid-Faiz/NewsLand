@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/primary_background">
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewpager"
@@ -35,6 +36,8 @@
         android:backgroundTint="@color/primary_text"
         android:text="Continue"
         android:textAllCaps="false"
+        android:textColor="@color/primary_background"
+        android:fontFamily="@font/open_sans"
         app:cornerRadius="@dimen/_6sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

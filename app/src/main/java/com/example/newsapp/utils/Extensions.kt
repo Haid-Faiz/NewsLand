@@ -50,7 +50,7 @@ fun View.showSnackBar(message: String, retryFun: (() -> Unit)? = null) {
 
 fun Fragment.handleExceptions(throwable: Throwable) {
     when (throwable) {
-        is HttpException -> requireView().showSnackBar("Oops.. Something went wrong !")
-        is IOException -> requireView().showSnackBar("Please check your internet connection")
+        is HttpException -> view?.showSnackBar("Oops.. Something went wrong !")
+        is IOException -> view?.showSnackBar("Please check your internet connection")
     }
 }

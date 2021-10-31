@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:background="#ffffff">
+    android:background="@color/primary_background">
 
     <TextView
         android:id="@+id/intro_title"
@@ -16,7 +16,7 @@
         android:fontFamily="@font/paytone_one"
         tools:text="Welcome to NewsLand"
         android:textColor="@color/primary_text"
-        android:textSize="@dimen/_16ssp" />
+        android:textSize="@dimen/_18ssp" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/intro_anim"
@@ -29,14 +29,14 @@
         android:id="@+id/intro_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/primary_text"
-        tools:text=" Get latest news as: \n\n - Top headlines \n - Categorised News \n - News from different sources"
-        android:layout_marginStart="@dimen/_24sdp"
-        android:layout_marginEnd="@dimen/_24sdp"
-        android:layout_marginTop="@dimen/_56sdp"
-        android:fontFamily="@font/amiko"
         android:layout_gravity="center_horizontal"
+        android:layout_marginStart="@dimen/_24sdp"
+        android:layout_marginTop="@dimen/_56sdp"
+        android:layout_marginEnd="@dimen/_24sdp"
+        android:fontFamily="@font/montserrat"
         android:lineSpacingExtra="@dimen/_1sdp"
-        android:textSize="@dimen/_14ssp" />
+        android:textColor="@color/primary_text"
+        android:textSize="@dimen/_14ssp"
+        tools:text=" Get latest news as: \n\n - Top headlines \n - Categorised News \n - News from different sources" />
 
 </LinearLayout>
